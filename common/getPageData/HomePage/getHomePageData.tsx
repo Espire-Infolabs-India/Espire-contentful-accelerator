@@ -9,6 +9,6 @@ export const getHomePageStaticProps: GetStaticProps = async () => {
     props: {
       page: homePageData ? homePageData : {},
     },
-    revalidate: 10, 
+    revalidate: 10,
   };
 };

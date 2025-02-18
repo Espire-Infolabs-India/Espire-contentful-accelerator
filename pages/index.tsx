@@ -3,6 +3,7 @@ import {
   HomePageComponentsProps,
   HomePageProps,
 } from "@/common/getPageData/HomePage/HomePageProps";
+import Footer from "@/components/Footer/Footer";
 import HeroBanner from "@/components/HeroBanner/HeroBanner";
 import ImageWithTitleDescription from "@/components/ImageWithTitleDescription/ImageWithTitleDescription";
 import RichText from "@/components/RichText/RichText";
@@ -15,6 +16,7 @@ const HomePageComponents: Record<
   heroBanner: HeroBanner,
   imageWithTitleDescription: ImageWithTitleDescription,
   richText: RichText,
+  componentFooter: Footer,
 };
 
 export default function Home({ page }: HomePageProps) {
