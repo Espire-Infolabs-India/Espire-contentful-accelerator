@@ -2,7 +2,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-1. Clone the repository using git clone <repository_url> and navigate into the project directory.
+1. Clone the repository using git clone https://github.com/Espire-Infolabs-India/Espire-contentful-accelerator.git and navigate into the project directory.
 2. Open the repository folder in Visual Studio Code using "code .".
 3. Install the required dependencies by running npm install.
 4. Ensure you are using Node.js version 20.14.0 before proceeding. Check your version with node -v.
