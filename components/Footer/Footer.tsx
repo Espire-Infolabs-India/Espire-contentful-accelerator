@@ -1,9 +1,19 @@
-import { FooterDataProps } from "./FooterProps";
+import { FooterComponentsProps, FooterDataProps } from "./FooterProps";
 import Image from "next/image";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import RichtextRenderOptions from "@/common/RTE/RichTextRenderOptions";
 import { Document } from "@contentful/rich-text-types";
+import NavigationLinks from "../Navigation Links/NavigationLinks";
+
+const FooterComponents: Record<
+  string,
+  React.FC<{ data: FooterComponentsProps }>
+> = {
+  componentNavigationLinks: NavigationLinks,
+};
+
 const Footer = ({ data }: FooterDataProps) => {
+  const components = data?.fields?.componentContainer ?? [];
   return (
     <div>
       <div className="component-content">
@@ -18,7 +28,7 @@ const Footer = ({ data }: FooterDataProps) => {
       <div className="plain-text-reusable col-12 col-lg-5 d-none d-md-block ">
         <div>
           {documentToReactComponents(
-            data.fields.address as unknown as Document,
+            data?.fields?.address as unknown as Document,
             RichtextRenderOptions
           )}
         </div>
@@ -40,6 +50,15 @@ const Footer = ({ data }: FooterDataProps) => {
           </div>
         </div>
       </div>
+      {components.map((component, index) => {
+        const Component =
+          FooterComponents[component?.sys?.contentType?.sys?.id];
+        return (
+          <div className="px-7" key={index}>
+            <Component key={index} data={component} />
+          </div>
+        );
+      })}
     </div>
   );
 };
