@@ -1,9 +1,10 @@
 import { ContentTypeProps } from "@/utils/lib/CommonProps";
-//import { HomePageProps } from "@/common/getPageData/HomePage/HomePageProps";
-export type NavigationLinksProps = {
+export type NavigationItemsProps = {
   fields: {
     dataSourceName: string;
-    listOfNavigation: NavigationLinksComponentsProps[];
+    itemName: string;
+    itemUrl: string;
+    subLinks: NavigationLinksComponentsProps[];
   };
   sys: ContentTypeProps;
 };
@@ -15,5 +16,5 @@ export type NavigationLinksComponentsProps = {
 };
 
 export type NavigationLinksDataProps = {
-  data: NavigationLinksProps;
+  data: NavigationItemsProps;
 };
