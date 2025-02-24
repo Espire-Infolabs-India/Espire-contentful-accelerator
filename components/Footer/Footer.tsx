@@ -3,15 +3,15 @@ import Image from "next/image";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import RichtextRenderOptions from "@/common/RTE/RichTextRenderOptions";
 import { Document } from "@contentful/rich-text-types";
-import NavigationLinks from "../Navigation Items/NavigationItems";
 import SocialMedia from "../SocialMedia/SocialMedia";
+import LinkList from "../LinkList/LinkList";
 
 const FooterComponents: Record<
   string,
   React.FC<{ data: FooterComponentsProps }>
 > = {
-  componentNavigationItems: NavigationLinks,
-  componentSocialMedia: SocialMedia
+  componentSocialMedia: SocialMedia,
+  componentLinkList: LinkList,
 };
 
 const Footer = ({ data }: FooterDataProps) => {

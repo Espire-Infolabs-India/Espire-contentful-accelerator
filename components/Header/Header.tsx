@@ -1,8 +1,9 @@
 import { NavigationComponentsProps, HeaderDataProps } from "./HeaderProps";
 import Image from "next/image";
-import NavigationLinks from "../Navigation Items/NavigationItems";
+import NavigationLinks from "../NavigationItems/NavigationItems";
 import SearchBox from "../SearchBox/SearchBox";
 import LanguageSelector from "../LanguageSelector/LanguageSelector";
+import LinkList from "../LinkList/LinkList";
 
 const HeaderComponents: Record<
   string,
@@ -10,7 +11,8 @@ const HeaderComponents: Record<
 > = {
   componentNavigationItems: NavigationLinks,
   componentSearchBox: SearchBox,
-  componentLanguageSelector: LanguageSelector
+  componentLanguageSelector: LanguageSelector,
+  componentLinkList: LinkList,
 };
 
 const Header = ({ data }: HeaderDataProps) => {

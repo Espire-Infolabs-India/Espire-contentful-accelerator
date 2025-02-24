@@ -1,6 +1,6 @@
 import { ContentTypeProps, ImageProps } from "@/utils/lib/CommonProps";
-import { NavigationItemsProps } from "../Navigation Items/NavigationItemsProps";
 import { SocialMediaProps } from "../SocialMedia/SocialMediaProps";
+import { LinkListItemsProps } from "../LinkList/LinkListProps";
 
 export type FooterProps = {
   fields: {
@@ -11,7 +11,7 @@ export type FooterProps = {
   };
   sys: ContentTypeProps;
 };
-export type FooterComponentsProps = NavigationItemsProps & SocialMediaProps;
+export type FooterComponentsProps = LinkListItemsProps & SocialMediaProps;
 
 export type FooterDataProps = {
   data: FooterProps;

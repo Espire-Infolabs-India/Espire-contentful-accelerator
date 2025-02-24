@@ -49,10 +49,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div>
       <SEO />
-      <header>
-        <h1>This is Header</h1>
-        {HeaderData && <Header data={HeaderData} />}
-      </header>
+      <header>{HeaderData && <Header data={HeaderData} />}</header>
       <main>{children}</main>
       <footer>{footerData && <Footer data={footerData} />}</footer>
     </div>

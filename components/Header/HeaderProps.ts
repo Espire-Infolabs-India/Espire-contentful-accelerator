@@ -1,7 +1,8 @@
 import { ContentTypeProps, ImageProps } from "@/utils/lib/CommonProps";
-import { NavigationItemsProps } from "../Navigation Items/NavigationItemsProps";
+import { NavigationItemsProps } from "../NavigationItems/NavigationItemsProps";
 import { SearchBoxProps } from "../SearchBox/SearchBoxProps";
 import { LanguageSelectorProps } from "../LanguageSelector/LanguageSelectorProps";
+import { LinkListItemsProps } from "../LinkList/LinkListProps";
 
 export type HeaderProps = {
   fields: {
@@ -11,7 +12,10 @@ export type HeaderProps = {
   };
   sys: ContentTypeProps;
 };
-export type NavigationComponentsProps = NavigationItemsProps & SearchBoxProps & LanguageSelectorProps;
+export type NavigationComponentsProps = NavigationItemsProps &
+  SearchBoxProps &
+  LanguageSelectorProps &
+  LinkListItemsProps;
 
 export type HeaderDataProps = {
   data: HeaderProps;
