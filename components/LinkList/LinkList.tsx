@@ -3,13 +3,17 @@ import { LinkListLinksDataProps } from "./LinkListProps";
 const LinkListItems = ({ data }: LinkListLinksDataProps) => {
   const linkListItems = data?.fields?.url;
   return (
-    <div>
-      <p>Title: {data?.fields?.title}</p>
+    <div className="flex gap-4">
       {linkListItems?.map((linklistitems, index) => {
         return (
-          <div className="px-7" key={index}>
-            <p>Title: {linklistitems?.fields?.title}</p>
-            <p>URL: {linklistitems?.fields?.url}</p>
+          <div key={index}>
+            <ul>
+              <li className="item0 odd first">
+                <a title="" target="" className="" href={linklistitems.fields.url}>
+                  {linklistitems.fields.title}
+                </a>
+              </li>
+            </ul>
           </div>
         );
       })}

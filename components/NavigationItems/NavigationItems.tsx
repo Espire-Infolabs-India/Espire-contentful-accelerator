@@ -3,9 +3,14 @@ import { NavigationLinksDataProps } from "./NavigationItemsProps";
 const NavigationItems = ({ data }: NavigationLinksDataProps) => {
   const navigationItems = data?.fields?.subLinks;
   return (
-    <div>
-      <p>Title: {data?.fields?.itemName}</p>
-      <p>Title: {data?.fields?.itemUrl}</p>
+    <div className="top-menus">
+        <ul>
+      <li className="item0 odd first">
+        <a title="" target="" className="" href={data.fields.itemUrl}>
+          {data.fields.itemName}
+        </a>
+      </li>
+    </ul>
       {navigationItems?.map((navigationitems, index) => {
         return (
           <div className="px-7" key={index}>
@@ -15,6 +20,9 @@ const NavigationItems = ({ data }: NavigationLinksDataProps) => {
         );
       })}
     </div>
+   
+  
+  
   );
 };
 
