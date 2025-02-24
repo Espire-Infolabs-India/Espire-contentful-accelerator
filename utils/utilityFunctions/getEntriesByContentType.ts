@@ -2,7 +2,7 @@ import { contentfulClient } from "../lib/ContentfulClient";
 
 export const getEntriesByContentType = async (
   content_type: string,
-  url: string
+  url?: string
 ) => {
   const client = contentfulClient();
   try {
