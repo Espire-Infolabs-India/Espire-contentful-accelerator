@@ -27,7 +27,7 @@ const Footer = ({ data }: FooterDataProps) => {
           <div className="mb-6 md:mb-0">
             <a href="/" title="Home">
               <img
-                className="mb-5 h-12"
+                className="mb-5 w-24"
                 src={`https://${data?.fields?.image?.fields?.file?.url}`}
                 alt="logo"
                 loading="lazy"
@@ -62,10 +62,9 @@ const Footer = ({ data }: FooterDataProps) => {
         </div>
 
         {/* Copyright */}
-        <p className="text-center text-sm border-t border-gray-500 mt-6 pt-4">
+        <p className="text-left text-sm border-t border-gray-500 mt-6 pt-4">
           {data?.fields?.copyrightText}
         </p>
-
       </div>
     </footer>
   );
