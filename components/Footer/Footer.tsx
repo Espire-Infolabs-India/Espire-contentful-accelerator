@@ -65,15 +65,15 @@ const Footer = ({ data }: FooterDataProps) => {
         </div>
 
         {/* Address Section */}
-        <div className="mt-6 text-center md:text-left">
-          <p className="text-sm text-gray-300">
+        <div className="mt-6 flex justify-between md:text-left">
+          <div className="text-sm text-gray-300">
             {documentToReactComponents(
               data?.fields?.address as unknown as Document,
               RichtextRenderOptions
             )}
-          </p>
-        </div>
-          {/* Social Links */}
+          </div>
+
+              {/* Social Links */}
           <div className=" flex flex-col gap-12">
             {middlelayercomponents.map((middlelayercomponent, index) => {
               const MiddleLayersComponent =
@@ -90,6 +90,9 @@ const Footer = ({ data }: FooterDataProps) => {
               );
             })}
           </div>
+
+        </div>
+        
 
         {/* Copyright */}
         <p className="text-left text-sm border-t border-gray-500 mt-6 pt-4">

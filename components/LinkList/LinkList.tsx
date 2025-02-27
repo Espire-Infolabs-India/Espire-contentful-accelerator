@@ -3,7 +3,7 @@ import { LinkListLinksDataProps } from "./LinkListProps";
 const LinkListItems = ({ data }: LinkListLinksDataProps) => {
   const linkListItems = data?.fields?.url;
   return (
-    <div className="flex gap-4 mt-6">
+    <div className="flex gap-4">
       {linkListItems?.map((linklistitems, index) => {
         return (
           <div key={index}>

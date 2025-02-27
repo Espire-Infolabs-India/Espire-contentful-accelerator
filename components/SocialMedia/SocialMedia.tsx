@@ -4,7 +4,7 @@ import { SocialMediaDataProps } from "./SocialMediaProps";
 const SocialMedia = ({ data }: SocialMediaDataProps) => {
   const SocialMediaData = data.fields.listOfSocialMedia;
   return (
-    <div className="flex items-center gap-4 justify-end w-full mt-4">
+    <div className="flex items-center justify-end w-full">
       {SocialMediaData.map((SocialMediaDatacomponent, index) => {
         const image = SocialMediaDatacomponent?.fields?.image ?? "N/A";
         const url = SocialMediaDatacomponent?.fields?.url ?? "N/A";
