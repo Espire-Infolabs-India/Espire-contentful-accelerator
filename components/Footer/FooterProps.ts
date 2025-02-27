@@ -5,13 +5,15 @@ import { LinkListItemsProps } from "../LinkList/LinkListProps";
 export type FooterProps = {
   fields: {
     copyrightText: string;
-    componentContainer: FooterComponentsProps[];
+    topLayerContainer: FooterComponentsProps[];
+    middleLayerContainer: MiddleLayerFooterComponentsProps[];
     address: Document;
     image: ImageProps;
   };
   sys: ContentTypeProps;
 };
-export type FooterComponentsProps = LinkListItemsProps & SocialMediaProps;
+export type FooterComponentsProps = LinkListItemsProps;
+export type MiddleLayerFooterComponentsProps = SocialMediaProps;
 
 export type FooterDataProps = {
   data: FooterProps;
