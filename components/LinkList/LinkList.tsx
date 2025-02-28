@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { LinkListLinksDataProps } from "./LinkListProps";
 
 const LinkListItems = ({ data }: LinkListLinksDataProps) => {
@@ -9,9 +10,9 @@ const LinkListItems = ({ data }: LinkListLinksDataProps) => {
           <div key={index}>
             <ul>
               <li className="item0 odd first">
-                <a title="" target="" className="" href={linklistitems.fields.url}>
+                <Link href={linklistitems.fields.url} title="" target="" className="text-white">
                   {linklistitems.fields.title}
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

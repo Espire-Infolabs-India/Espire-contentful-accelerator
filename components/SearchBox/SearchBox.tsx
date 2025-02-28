@@ -1,36 +1,16 @@
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
+ 
 
-const SearchBox = ()=> {   
+const SearchBox = () => {
   return (
-    <div className={`search-bar-default`}>
-      <div className="search-bar">
-        <InputGroup>
-          <Button variant="outline-secondary" id="search-btn">
-            <i className="fa fa-search"></i>
-          </Button>
-          <Form.Control
-            aria-label="search bar"
-            aria-describedby="seacrh-bar"
-            placeholder="Search"
-          />
-        </InputGroup>
-      </div>
-    </div>
-  );
-};
-
-export const SearchIcon = ()=> {
-  return (
-    <div className={`footer-search-bar`}>
-      <div className="search-bar">
-        <InputGroup>
-          <Button variant="outline-secondary" id="search-btn">
-            <i className="fa fa-search"></i>
-          </Button>
-        </InputGroup>
-      </div>
+    <div className="relative w-80">
+      {/* Search Input */}
+      <input
+        type="text"
+        placeholder="Type to search..."
+        className="w-full bg-transparent border border-white text-white placeholder-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-white"
+      />
+      {/* Search Icon */}
+      <div className="absolute right-3 top-3 text-white text-lg"></div>
     </div>
   );
 };

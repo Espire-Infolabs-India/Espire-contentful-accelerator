@@ -1,30 +1,16 @@
-import Form from 'react-bootstrap/Form';
+import Form from "react-bootstrap/Form";
 
 const LanguageSelector = () => {
   return (
     <div className="LanguageSelector">
-      <div className="language-selector">
-        <Form.Select aria-label="Default select example">
-          <option>Select Language</option>
-          <option value="1">English</option>
-          <option value="2">French</option>
-          <option value="3">German</option>
-        </Form.Select>
-      </div>
+      <Form.Select className="bg-white text-gray-700 rounded px-4 py-2">
+        <option>Select Language</option>
+        <option value="1">English</option>
+        <option value="2">French</option>
+        <option value="3">German</option>
+      </Form.Select>
     </div>
   );
 };
 
-export const Login = ()=> {
-  return (
-    <div className="Login">
-      <div className="login">
-        <Form.Select aria-label="Login Functionality">
-          <option>Login</option>
-          <option>Register</option>
-        </Form.Select>
-      </div>
-    </div>
-  );
-};
 export default LanguageSelector;
