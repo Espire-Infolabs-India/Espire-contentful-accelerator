@@ -1,13 +1,13 @@
-import { NavigationComponentsProps, HeaderDataProps } from "./HeaderProps";
 import Image from "next/image";
 import NavigationLinks from "../NavigationItems/NavigationItems";
 import SearchBox from "../SearchBox/SearchBox";
 import LanguageSelector from "../LanguageSelector/LanguageSelector";
 import LinkList from "../LinkList/LinkList";
+import { NavigationComponentsProps, HeaderDataProps } from "./HeaderProps";
 
 const HeaderComponents: Record<
   string,
-  React.FC<{ data: NavigationComponentsProps }>
+  React.FC<{ data: NavigationComponentsProps }> | undefined
 > = {
   componentNavigationItems: NavigationLinks,
   componentSearchBox: SearchBox,
@@ -16,66 +16,56 @@ const HeaderComponents: Record<
 };
 
 const Header = ({ data }: HeaderDataProps) => {
-  if (!data || !data.fields) {
-    return null;
-  }
+  if (!data || !data.fields) return null; // Prevents errors if `data` is undefined
 
-  const primarycomponents = Array.isArray(data.fields.primaryNavigation)
-    ? data.fields.primaryNavigation
-    : [];
-
-  const secondarycomponents = Array.isArray(data.fields.secondaryNavigation)
-    ? data.fields.secondaryNavigation
-    : [];
+  const primarycomponents = data.fields.primaryNavigation ?? [];
+  const secondarycomponents = data.fields.secondaryNavigation ?? [];
 
   return (
-    <div>
-      <div className="component-content">
-        {data.fields.image?.fields?.file?.url ? (
-          <Image
-            className="mb-5"
-            src={`https://${data.fields.image.fields.file.url}`}
-            width={600}
-            height={400}
-            alt="Header Image"
-            unoptimized
-          />
-        ) : (
-          <p>No image available</p>
-        )}
-      </div>
+    <div className="bg-[#0A3A6B]">
+      <header className="p-4 container">
+        {/* Right Section - Secondary Navigation & Language Selector */}
+        <div className="flex items-center justify-end mb-5">
+          <div className="flex items-center gap-6">
+            {secondarycomponents.map((component, index) => {
+              if (!component?.sys?.contentType?.sys?.id) return null;
 
-      {primarycomponents.map((component, index) => {
-        const contentTypeId = component?.sys?.contentType?.sys?.id;
+              const Component =
+                HeaderComponents[component.sys.contentType.sys.id];
+              if (!Component) return null;
 
-        if (!contentTypeId || !HeaderComponents[contentTypeId]) {
-          return null;
-        }
-
-        const Component = HeaderComponents[contentTypeId];
-
-        return (
-          <div className="px-7" key={index}>
-            <Component data={component} />
+              return <Component key={index} data={component} />;
+            })}
           </div>
-        );
-      })}
+        </div>
 
-      {secondarycomponents.map((component, index) => {
-        const contentTypeId = component?.sys?.contentType?.sys?.id;
+        {/* Left Section - Logo */}
+        <div className="flex items-center justify-between">
+          {data.fields.image?.fields?.file?.url && (
+            <Image
+              className="mr-4"
+              src={`https://${data.fields.image.fields.file.url}`}
+              width={90}
+              height={70}
+              alt="Logo"
+              unoptimized
+            />
+          )}
 
-        if (!contentTypeId || !HeaderComponents[contentTypeId]) {
-          return null;
-        }
+          {/* Center Section - Search Box & Navigation */}
+          <div className="flex flex-grow items-center justify-evenly gap-8">
+            {primarycomponents.map((component, index) => {
+              if (!component?.sys?.contentType?.sys?.id) return null;
 
-        const Component = HeaderComponents[contentTypeId];
+              const Component =
+                HeaderComponents[component.sys.contentType.sys.id];
+              if (!Component) return null;
 
-        return (
-          <div className="px-7" key={index}>
-            <Component data={component} />
+              return <Component key={index} data={component} />;
+            })}
           </div>
-        );
-      })}
+        </div>
+      </header>
     </div>
   );
 };
