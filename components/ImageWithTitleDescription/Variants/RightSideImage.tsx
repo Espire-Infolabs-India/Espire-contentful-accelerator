@@ -26,6 +26,7 @@ const RightSideImage = ({ data }: ImageWithTitleDescriptionDataProps) => {
           width={600}
           height={400}
           alt={""}
+          unoptimized
         />
       </div>
     </div>
