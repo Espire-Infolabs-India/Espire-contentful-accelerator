@@ -1,30 +1,35 @@
-import Form from 'react-bootstrap/Form';
-
 const LanguageSelector = () => {
   return (
     <div className="LanguageSelector">
       <div className="language-selector">
-        <Form.Select aria-label="Default select example">
+        <select
+          aria-label="Default select example"
+          className="w-full p-2 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
           <option>Select Language</option>
           <option value="1">English</option>
           <option value="2">French</option>
           <option value="3">German</option>
-        </Form.Select>
+        </select>
       </div>
     </div>
   );
 };
 
-export const Login = ()=> {
+export const Login = () => {
   return (
     <div className="Login">
       <div className="login">
-        <Form.Select aria-label="Login Functionality">
+        <select
+          aria-label="Login Functionality"
+          className="w-full p-2 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
           <option>Login</option>
           <option>Register</option>
-        </Form.Select>
+        </select>
       </div>
     </div>
   );
 };
+
 export default LanguageSelector;

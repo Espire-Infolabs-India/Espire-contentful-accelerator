@@ -10,4 +10,4 @@ type SEOItems = {
   pageDescription: string;
   nofollow: boolean;
   noindex: boolean;
-}
+};

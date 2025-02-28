@@ -15,6 +15,7 @@ const LeftSideImage = ({ data }: ImageWithTitleDescriptionDataProps) => {
           width={600}
           height={400}
           alt={""}
+          unoptimized
         />
       </div>
       <div className="md:w-1/2 py-12 px-7">

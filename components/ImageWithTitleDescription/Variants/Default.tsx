@@ -16,6 +16,7 @@ const Default = ({ data }: ImageWithTitleDescriptionDataProps) => {
             width={600}
             height={400}
             alt={""}
+            unoptimized
           />
           <h2 className="text-3xl font-semibold mb-4">{data?.fields?.title}</h2>
           <div className="text-base">

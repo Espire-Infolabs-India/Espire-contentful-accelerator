@@ -9,7 +9,12 @@ const LinkListItems = ({ data }: LinkListLinksDataProps) => {
           <div key={index}>
             <ul>
               <li className="item0 odd first">
-                <a title="" target="" className="" href={linklistitems.fields.url}>
+                <a
+                  title=""
+                  target=""
+                  className=""
+                  href={linklistitems.fields.url}
+                >
                   {linklistitems.fields.title}
                 </a>
               </li>

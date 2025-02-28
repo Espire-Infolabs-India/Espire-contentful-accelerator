@@ -17,6 +17,7 @@ const SocialMedia = ({ data }: SocialMediaDataProps) => {
                 alt={""}
                 width={24}
                 height={24}
+                unoptimized
               />
             </Link>
           </div>
