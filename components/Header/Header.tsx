@@ -32,7 +32,7 @@ const Header = ({ data }: HeaderDataProps) => {
               if (!component?.sys?.contentType?.sys?.id) return null;
 
               const Component =
-                HeaderComponents[component.sys.contentType.sys.id];
+                HeaderComponents[component?.sys?.contentType?.sys?.id];
               if (!Component) return null;
 
               return <Component key={index} data={component} />;
@@ -45,7 +45,7 @@ const Header = ({ data }: HeaderDataProps) => {
           {data.fields.image?.fields?.file?.url && (
             <Image
               className="mr-4"
-              src={`https://${data.fields.image.fields.file.url}`}
+              src={`https://${data?.fields?.image?.fields?.file?.url}`}
               width={90}
               height={70}
               alt="Logo"
@@ -60,13 +60,13 @@ const Header = ({ data }: HeaderDataProps) => {
               if (!component?.sys?.contentType?.sys?.id) return null;
 
               const ComponentType =
-                HeaderComponents[component.sys.contentType.sys.id];
+                HeaderComponents[component?.sys?.contentType?.sys?.id];
 
               if (!ComponentType) return null;
 
               return (
-                <div key={component.sys.contentType.sys.id}>
-                  {component.fields && <NavigationItems data={component} />}
+                <div key={component?.sys?.contentType?.sys?.id}>
+                  {component?.fields && <NavigationItems data={component} />}
                 </div>
               );
             })}

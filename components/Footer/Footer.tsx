@@ -28,8 +28,8 @@ const MiddleLayerFooterComponents: Record<
 const Footer = ({ data }: FooterDataProps) => {
   if (!data || !data.fields) return null; // Prevents errors if `data` is undefined
 
-  const toplayercomponents = data.fields.topLayerContainer ?? [];
-  const middlelayercomponents = data.fields.middleLayerContainer ?? [];
+  const toplayercomponents = data?.fields?.topLayerContainer ?? [];
+  const middlelayercomponents = data?.fields?.middleLayerContainer ?? [];
 
   return (
     <footer className="bg-blue-900 text-white py-10">
@@ -42,7 +42,7 @@ const Footer = ({ data }: FooterDataProps) => {
               <Link href="/" title="Home">
                 <Image
                   className="mb-5 w-24"
-                  src={`https://${data.fields.image.fields.file.url}`}
+                  src={`https://${data?.fields?.image?.fields?.file?.url}`}
                   width={600}
                   height={400}
                   alt="logo"
@@ -59,7 +59,7 @@ const Footer = ({ data }: FooterDataProps) => {
               if (!toplayercomponent?.sys?.contentType?.sys?.id) return null;
 
               const Component =
-                FooterComponents[toplayercomponent.sys.contentType.sys.id];
+                FooterComponents[toplayercomponent?.sys?.contentType?.sys?.id];
               if (!Component) return null;
 
               return (
@@ -74,9 +74,9 @@ const Footer = ({ data }: FooterDataProps) => {
         {/* Address Section */}
         <div className="mt-6 flex justify-between md:text-left">
           <div className="text-sm text-gray-300">
-            {data.fields.address &&
+            {data?.fields?.address &&
               documentToReactComponents(
-                data.fields.address as unknown as Document,
+                data?.fields?.address as unknown as Document,
                 RichtextRenderOptions
               )}
           </div>
@@ -88,7 +88,7 @@ const Footer = ({ data }: FooterDataProps) => {
 
               const MiddleLayersComponent =
                 MiddleLayerFooterComponents[
-                  middlelayercomponent.sys.contentType.sys.id
+                  middlelayercomponent?.sys?.contentType?.sys?.id
                 ];
               if (!MiddleLayersComponent) return null;
 
@@ -105,9 +105,9 @@ const Footer = ({ data }: FooterDataProps) => {
         </div>
 
         {/* Copyright */}
-        {data.fields.copyrightText && (
+        {data?.fields?.copyrightText && (
           <p className="text-left text-sm border-t border-gray-500 mt-6 pt-4">
-            {data.fields.copyrightText}
+            {data?.fields?.copyrightText}
           </p>
         )}
       </div>
