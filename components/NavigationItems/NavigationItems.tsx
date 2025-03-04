@@ -18,7 +18,7 @@ const NavigationItems = ({ data }: NavigationLinksDataProps) => {
           {/* Dropdown Menu */}
           {navigationItems && (
             <ul className="absolute left-0 hidden group-hover:block bg-white shadow-lg rounded-lg mt-2 w-48">
-              {navigationItems.map((navigationItem, index) => (
+              {navigationItems?.map((navigationItem, index) => (
                 <li key={index} className="border-b last:border-none">
                   <Link
                     href={navigationItem.fields.url}

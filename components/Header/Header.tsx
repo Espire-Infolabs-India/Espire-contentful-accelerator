@@ -4,6 +4,7 @@ import SearchBox from "../SearchBox/SearchBox";
 import LanguageSelector from "../LanguageSelector/LanguageSelector";
 import LinkList from "../LinkList/LinkList";
 import { NavigationComponentsProps, HeaderDataProps } from "./HeaderProps";
+import NavigationItems from "../NavigationItems/NavigationItems";
 
 const HeaderComponents: Record<
   string,
@@ -27,11 +28,11 @@ const Header = ({ data }: HeaderDataProps) => {
         {/* Right Section - Secondary Navigation & Language Selector */}
         <div className="flex items-center justify-end mb-5">
           <div className="flex items-center gap-6">
-            {secondarycomponents.map((component, index) => {
+            {secondarycomponents?.map((component, index) => {
               if (!component?.sys?.contentType?.sys?.id) return null;
 
               const Component =
-                HeaderComponents[component.sys.contentType.sys.id];
+                HeaderComponents[component?.sys?.contentType?.sys?.id];
               if (!Component) return null;
 
               return <Component key={index} data={component} />;
@@ -44,7 +45,7 @@ const Header = ({ data }: HeaderDataProps) => {
           {data.fields.image?.fields?.file?.url && (
             <Image
               className="mr-4"
-              src={`https://${data.fields.image.fields.file.url}`}
+              src={`https://${data?.fields?.image?.fields?.file?.url}`}
               width={90}
               height={70}
               alt="Logo"
@@ -54,14 +55,20 @@ const Header = ({ data }: HeaderDataProps) => {
 
           {/* Center Section - Search Box & Navigation */}
           <div className="flex flex-grow items-center justify-evenly gap-8">
-            {primarycomponents.map((component, index) => {
+            <SearchBox />
+            {primarycomponents?.map((component) => {
               if (!component?.sys?.contentType?.sys?.id) return null;
 
-              const Component =
-                HeaderComponents[component.sys.contentType.sys.id];
-              if (!Component) return null;
+              const ComponentType =
+                HeaderComponents[component?.sys?.contentType?.sys?.id];
 
-              return <Component key={index} data={component} />;
+              if (!ComponentType) return null;
+
+              return (
+                <div key={component?.sys?.contentType?.sys?.id}>
+                  {component?.fields && <NavigationItems data={component} />}
+                </div>
+              );
             })}
           </div>
         </div>
