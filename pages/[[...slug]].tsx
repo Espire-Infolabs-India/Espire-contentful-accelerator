@@ -42,7 +42,10 @@ export const getStaticPaths: GetStaticPaths = async () => ({
 });
 
 export const getStaticProps: GetStaticProps<PageProps> = async ({ params }) => {
-  const slug = params?.slug ?? "home";
+  let slug = params?.slug ?? "home";
+   slug = Array.isArray(slug)
+    ? `${slug.map((slug) => slug.toLowerCase())}`
+    : "home";
   const content = (await getEntriesByContentType(
     "landingPage",
     slug as string
