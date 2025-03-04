@@ -5,6 +5,7 @@ import LanguageSelector from "../LanguageSelector/LanguageSelector";
 import LinkList from "../LinkList/LinkList";
 import { NavigationComponentsProps, HeaderDataProps } from "./HeaderProps";
 import NavigationItems from "../NavigationItems/NavigationItems";
+import Link from "next/link";
  
 const HeaderComponents: Record<
   string,
@@ -23,7 +24,7 @@ const Header = ({ data }: HeaderDataProps) => {
   const secondarycomponents = data.fields.secondaryNavigation ?? [];
  
   return (
-    <div className="bg-[#0A3A6B]">
+    <div className="bg-[#203b72]">
       <header className="p-4 container">
         {/* Right Section - Secondary Navigation & Language Selector */}
         <div className="flex items-center justify-end mb-5">
@@ -42,6 +43,7 @@ const Header = ({ data }: HeaderDataProps) => {
  
         {/* Left Section - Logo */}
         <div className="flex items-center justify-between">
+        <Link title="Home" href="/">
           {data.fields.image?.fields?.file?.url && (
             <Image
               className="mr-4"
@@ -52,7 +54,7 @@ const Header = ({ data }: HeaderDataProps) => {
               unoptimized
             />
           )}
- 
+        </Link>
           {/* Center Section - Search Box & Navigation */}
           <div>
           <SearchBox />

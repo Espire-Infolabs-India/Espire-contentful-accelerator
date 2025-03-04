@@ -14,7 +14,7 @@ const LinkListItems = ({ data }: LinkListLinksDataProps) => {
                   href={linklistitems.fields.url}
                   title=""
                   target=""
-                  className="text-white"
+                  className="text-white text-sm"
                 >
                   {linklistitems.fields.title}
                 </Link>

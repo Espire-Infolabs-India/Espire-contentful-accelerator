@@ -32,7 +32,7 @@ const Footer = ({ data }: FooterDataProps) => {
   const middlelayercomponents = data?.fields?.middleLayerContainer ?? [];
 
   return (
-    <footer className="bg-blue-900 text-white py-10">
+    <footer className="bg-[#203b72] text-white py-10">
       <div className="max-w-6xl mx-auto px-6">
         {/* Logo & Navigation */}
         <div className="flex flex-col md:flex-row justify-between items-center">
