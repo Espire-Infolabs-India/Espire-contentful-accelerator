@@ -5,7 +5,7 @@ const SocialMedia = ({ data }: SocialMediaDataProps) => {
   const SocialMediaData = data.fields.listOfSocialMedia;
   return (
     <div className="flex items-center justify-end w-full">
-      {SocialMediaData.map((SocialMediaDatacomponent, index) => {
+      {SocialMediaData?.map((SocialMediaDatacomponent, index) => {
         const image = SocialMediaDatacomponent?.fields?.image ?? "N/A";
         const url = SocialMediaDatacomponent?.fields?.url ?? "N/A";
         return (

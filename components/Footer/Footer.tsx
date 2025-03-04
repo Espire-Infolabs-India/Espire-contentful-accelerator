@@ -55,7 +55,7 @@ const Footer = ({ data }: FooterDataProps) => {
 
           {/* Navigation Links */}
           <div className="flex flex-col gap-12">
-            {toplayercomponents.map((toplayercomponent, index) => {
+            {toplayercomponents?.map((toplayercomponent, index) => {
               if (!toplayercomponent?.sys?.contentType?.sys?.id) return null;
 
               const Component =
@@ -83,7 +83,7 @@ const Footer = ({ data }: FooterDataProps) => {
 
           {/* Social Links */}
           <div className="flex flex-col gap-12">
-            {middlelayercomponents.map((middlelayercomponent, index) => {
+            {middlelayercomponents?.map((middlelayercomponent, index) => {
               if (!middlelayercomponent?.sys?.contentType?.sys?.id) return null;
 
               const MiddleLayersComponent =
