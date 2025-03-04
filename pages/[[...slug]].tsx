@@ -36,13 +36,16 @@ export const getStaticPaths: GetStaticPaths = async () => ({
   paths: [
     { params: { slug: [] } },
     { params: { slug: ["about"] } },
-    { params: { slug: ["blog", "example"] } },
+    { params: { slug: ["blog"] } },
   ],
   fallback: "blocking",
 });
 
 export const getStaticProps: GetStaticProps<PageProps> = async ({ params }) => {
-  const slug = params?.slug ?? "home";
+  let slug = params?.slug ?? "home";
+   slug = Array.isArray(slug)
+    ? `${slug.map((slug) => slug.toLowerCase())}`
+    : "home";
   const content = (await getEntriesByContentType(
     "landingPage",
     slug as string
