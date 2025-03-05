@@ -21,7 +21,7 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family:poppins, Arial, Helvetica, sans-serif;
+  font-family: poppins;
   display: flex;
   justify-content: center;
 }

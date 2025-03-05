@@ -10,16 +10,20 @@ const NavigationItems = ({ data }: NavigationLinksDataProps) => {
         <li className="group relative">
           <Link
             href={data.fields.itemUrl}
-            className="text-white hover:text-gray-300"
+            className="text-white px-4 py-2 rounded-md transition duration-300 
+            hover:bg-white hover:text-gray-800 text-sm"
           >
             {data.fields.itemName}
           </Link>
 
           {/* Dropdown Menu */}
           {navigationItems && (
-            <ul className="absolute left-0 hidden group-hover:block bg-white shadow-lg rounded-lg mt-2 w-48">
-              {navigationItems?.map((navigationItem, index) => (
-                <li key={index} className="border-b last:border-none">
+            <ul className="absolute right-0 flex-wrap hidden group-hover:flex bg-white shadow-lg rounded-lg w-96 z-50 justify-start">
+              {navigationItems.map((navigationItem, index) => (
+                <li
+                  key={index}
+                  className="border-b last:border-none text-center"
+                >
                   <Link
                     href={navigationItem.fields.url}
                     className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
