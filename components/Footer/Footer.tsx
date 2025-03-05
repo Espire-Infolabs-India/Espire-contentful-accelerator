@@ -114,5 +114,4 @@ const Footer = ({ data }: FooterDataProps) => {
     </footer>
   );
 };
-
 export default Footer;

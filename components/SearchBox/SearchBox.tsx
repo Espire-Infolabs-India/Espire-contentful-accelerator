@@ -2,7 +2,6 @@ const SearchBox = () => {
   return (
     <div className="search-bar-default">
       <div className="search-bar flex items-center overflow-hidden">
-        
         <input
           type="text"
           placeholder="Search"

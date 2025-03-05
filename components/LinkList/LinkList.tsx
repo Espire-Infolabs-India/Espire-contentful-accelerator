@@ -26,5 +26,4 @@ const LinkListItems = ({ data }: LinkListLinksDataProps) => {
     </div>
   );
 };
-
 export default LinkListItems;

@@ -19,7 +19,7 @@ const NavigationItems = ({ data, isLast }: NavigationLinksDataProps & { isLast?:
           {/* Dropdown Menu */}
           {navigationItems && (
             <ul
-            className="absolute right-0 hidden group-hover:flex bg-white shadow-lg rounded-lg w-96 z-50 justify-center">
+            className="absolute right-0 flex-wrap hidden group-hover:flex bg-white shadow-lg rounded-lg w-96 z-50 justify-start">
               {navigationItems.map((navigationItem, index) => (
                 <li key={index} className="border-b last:border-none text-center">
                   <Link
