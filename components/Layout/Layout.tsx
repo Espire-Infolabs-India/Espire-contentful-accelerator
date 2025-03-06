@@ -2,14 +2,13 @@ import React, { useEffect, useState } from "react";
 import SEO from "../SEO/SEO";
 import { getFooterData } from "@/common/getFooterData/getFooterData";
 import Footer from "../Footer/Footer";
-import { FooterProps } from "../Footer/FooterProps";
 import Header from "../Header/Header";
-import { HeaderProps } from "../Header/HeaderProps";
 import { getHeaderData } from "@/common/getHeaderData/getHeaderData";
+import { ComponentProps } from "@/utils/lib/CommonProps";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  const [footerData, setFooterData] = useState<FooterProps | null>(null);
-  const [HeaderData, setHeaderData] = useState<HeaderProps | null>(null);
+  const [footerData, setFooterData] = useState<ComponentProps | null>(null);
+  const [HeaderData, setHeaderData] = useState<ComponentProps | null>(null);
   useEffect(() => {
     async function getData() {
       try {

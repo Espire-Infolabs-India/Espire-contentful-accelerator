@@ -1,8 +1,3 @@
-import {
-  FooterComponentsProps,
-  FooterDataProps,
-  MiddleLayerFooterComponentsProps,
-} from "./FooterProps";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import RichtextRenderOptions from "@/common/RTE/RichTextRenderOptions";
 import { Document } from "@contentful/rich-text-types";
@@ -10,22 +5,23 @@ import SocialMedia from "../SocialMedia/SocialMedia";
 import LinkList from "../LinkList/LinkList";
 import Image from "next/image";
 import Link from "next/link";
+import { ComponentDataProps, ComponentProps } from "@/utils/lib/CommonProps";
 
 const FooterComponents: Record<
   string,
-  React.FC<{ data: FooterComponentsProps }> | undefined
+  React.FC<{ data: ComponentProps }> | undefined
 > = {
   componentLinkList: LinkList,
 };
 
 const MiddleLayerFooterComponents: Record<
   string,
-  React.FC<{ data: MiddleLayerFooterComponentsProps }> | undefined
+  React.FC<{ data: ComponentProps }> | undefined
 > = {
   componentSocialMedia: SocialMedia,
 };
 
-const Footer = ({ data }: FooterDataProps) => {
+const Footer = ({ data }: ComponentDataProps) => {
   if (!data || !data.fields) return null; // Prevents errors if `data` is undefined
 
   const toplayercomponents = data?.fields?.topLayerContainer ?? [];
@@ -55,19 +51,23 @@ const Footer = ({ data }: FooterDataProps) => {
 
           {/* Navigation Links */}
           <div className="flex flex-col gap-12">
-            {toplayercomponents?.map((toplayercomponent, index) => {
-              if (!toplayercomponent?.sys?.contentType?.sys?.id) return null;
+            {toplayercomponents?.map(
+              (toplayercomponent: ComponentProps, index: number) => {
+                if (!toplayercomponent?.sys?.contentType?.sys?.id) return null;
 
-              const Component =
-                FooterComponents[toplayercomponent?.sys?.contentType?.sys?.id];
-              if (!Component) return null;
+                const Component =
+                  FooterComponents[
+                    toplayercomponent?.sys?.contentType?.sys?.id
+                  ];
+                if (!Component) return null;
 
-              return (
-                <div className="px-4" key={index}>
-                  <Component key={index} data={toplayercomponent} />
-                </div>
-              );
-            })}
+                return (
+                  <div className="px-4" key={index}>
+                    <Component key={index} data={toplayercomponent} />
+                  </div>
+                );
+              }
+            )}
           </div>
         </div>
 
@@ -83,24 +83,27 @@ const Footer = ({ data }: FooterDataProps) => {
 
           {/* Social Links */}
           <div className="flex flex-col gap-12">
-            {middlelayercomponents?.map((middlelayercomponent, index) => {
-              if (!middlelayercomponent?.sys?.contentType?.sys?.id) return null;
+            {middlelayercomponents?.map(
+              (middlelayercomponent: ComponentProps, index: number) => {
+                if (!middlelayercomponent?.sys?.contentType?.sys?.id)
+                  return null;
 
-              const MiddleLayersComponent =
-                MiddleLayerFooterComponents[
-                  middlelayercomponent?.sys?.contentType?.sys?.id
-                ];
-              if (!MiddleLayersComponent) return null;
+                const MiddleLayersComponent =
+                  MiddleLayerFooterComponents[
+                    middlelayercomponent?.sys?.contentType?.sys?.id
+                  ];
+                if (!MiddleLayersComponent) return null;
 
-              return (
-                <div className="px-4" key={index}>
-                  <MiddleLayersComponent
-                    key={index}
-                    data={middlelayercomponent}
-                  />
-                </div>
-              );
-            })}
+                return (
+                  <div className="px-4" key={index}>
+                    <MiddleLayersComponent
+                      key={index}
+                      data={middlelayercomponent}
+                    />
+                  </div>
+                );
+              }
+            )}
           </div>
         </div>
 

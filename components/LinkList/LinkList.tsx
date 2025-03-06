@@ -1,11 +1,11 @@
 import Link from "next/link";
-import { LinkListLinksDataProps } from "./LinkListProps";
+import { ComponentDataProps, ComponentProps } from "@/utils/lib/CommonProps";
 
-const LinkListItems = ({ data }: LinkListLinksDataProps) => {
+const LinkListItems = ({ data }: ComponentDataProps) => {
   const linkListItems = data?.fields?.url;
   return (
     <div className="flex gap-4">
-      {linkListItems?.map((linklistitems, index) => {
+      {linkListItems?.map((linklistitems: ComponentProps, index: number) => {
         return (
           <div key={index}>
             <ul>
