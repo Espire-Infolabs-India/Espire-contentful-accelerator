@@ -13,34 +13,24 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     async function getData() {
       try {
-        const data = await getFooterData();
-        if (
-          data?.props?.data &&
-          Array.isArray(data.props.data) &&
-          data.props.data.length > 0
-        ) {
-          setFooterData(data.props.data[0]);
-        }
-      } catch (error) {
-        console.error("Error fetching footer data:", error);
-      }
-    }
-    getData();
-  }, []);
-
-  useEffect(() => {
-    async function getData() {
-      try {
+        const footerData = await getFooterData();
         const headData = await getHeaderData();
         if (
-          headData?.props?.data &&
-          Array.isArray(headData.props.data) &&
-          headData.props.data.length > 0
+          footerData?.data &&
+          Array.isArray(footerData?.data) &&
+          footerData?.data?.length > 0
         ) {
-          setHeaderData(headData.props.data[0]);
+          setFooterData(footerData?.data[0]);
+        }
+        if (
+          headData?.data &&
+          Array.isArray(headData?.data) &&
+          headData?.data?.length > 0
+        ) {
+          setHeaderData(headData?.data[0]);
         }
       } catch (error) {
-        console.error("Error fetching footer data:", error);
+        console.error("Error fetching data:", error);
       }
     }
     getData();
