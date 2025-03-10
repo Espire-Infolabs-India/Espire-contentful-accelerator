@@ -24,7 +24,7 @@ const Header = ({ data }: HeaderDataProps) => {
   const secondarycomponents = data.fields.secondaryNavigation ?? [];
 
   return (
-    <div className="bg-[#203b72]">
+    <div className="bg-primaryBlue">
       <header className="p-4 container">
         {/* Right Section - Secondary Navigation & Language Selector */}
         <div className="flex items-center justify-end mb-5">
