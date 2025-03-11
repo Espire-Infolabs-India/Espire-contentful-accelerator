@@ -1,5 +1,5 @@
 import * as React from "react";
-import Accordion from "@mui/material/Accordion";
+import { Accordion as MUIAccordion } from "@mui/material";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
@@ -9,7 +9,7 @@ import RichtextRenderOptions from "@/common/RTE/RichTextRenderOptions";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { Document } from "@contentful/rich-text-types";
 
-const Accordions = ({ data }: AccordionDataProps) => {
+const Accordion = ({ data }: AccordionDataProps) => {
   return (
     <div>
       <Typography
@@ -21,7 +21,7 @@ const Accordions = ({ data }: AccordionDataProps) => {
       </Typography>
 
       {data?.fields?.accordionItemsList?.map((item, index) => (
-        <Accordion key={index} defaultExpanded>
+        <MUIAccordion key={index} defaultExpanded>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls={`panel${index}-content`}
@@ -40,10 +40,10 @@ const Accordions = ({ data }: AccordionDataProps) => {
               RichtextRenderOptions
             )}
           </AccordionDetails>
-        </Accordion>
+        </MUIAccordion>
       ))}
     </div>
   );
 };
 
-export default Accordions;
+export default Accordion;
