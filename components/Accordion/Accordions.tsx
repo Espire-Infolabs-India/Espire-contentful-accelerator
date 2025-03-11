@@ -9,7 +9,7 @@ import RichtextRenderOptions from "@/common/RTE/RichTextRenderOptions";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { Document } from "@contentful/rich-text-types";
 
-const AccordionExpandDefault = ({ data }: AccordionDataProps) => {
+const Accordions = ({ data }: AccordionDataProps) => {
   return (
     <div>
       <Typography
@@ -46,4 +46,4 @@ const AccordionExpandDefault = ({ data }: AccordionDataProps) => {
   );
 };
 
-export default AccordionExpandDefault;
+export default Accordions;
