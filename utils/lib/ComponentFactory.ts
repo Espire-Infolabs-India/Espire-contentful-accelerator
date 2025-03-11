@@ -3,7 +3,7 @@ import ImageWithTitleDescription from "@/components/ImageWithTitleDescription/Im
 import RichText from "@/components/RichText/RichText";
 import { ComponentPropsFactory } from "./ComponentPropsFactory";
 import FeatureBlocks from "@/components/FeatureBlocks/FeatureBlocks";
-import Accordions from "@/components/Accordion/Accordions";
+import Accordion from "@/components/Accordion/Accordion";
 
 export const ComponentFactory: Record<
   string,
@@ -13,5 +13,5 @@ export const ComponentFactory: Record<
   imageWithTitleDescription: ImageWithTitleDescription,
   richText: RichText,
   componentFeatureBlocks: FeatureBlocks,
-  componentAccordion: Accordions,
+  componentAccordion: Accordion,
 };
