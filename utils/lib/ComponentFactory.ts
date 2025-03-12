@@ -3,6 +3,7 @@ import ImageWithTitleDescription from "@/components/ImageWithTitleDescription/Im
 import RichText from "@/components/RichText/RichText";
 import { ComponentPropsFactory } from "./ComponentPropsFactory";
 import FeatureBlocks from "@/components/FeatureBlocks/FeatureBlocks";
+import Tabs from "@/components/Tabs/Tabs";
 
 
 
@@ -11,5 +12,6 @@ export const ComponentFactory: Record<string, React.FC<{data : ComponentPropsFac
   imageWithTitleDescription: ImageWithTitleDescription,
   richText: RichText,
   componentFeatureBlocks:FeatureBlocks,
+  componentTabs:Tabs
  
 };
