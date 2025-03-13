@@ -1,3 +1,4 @@
+import { FieldsType } from "contentful";
 export interface ImageProps {
   fields: {
     title: string;
@@ -9,9 +10,19 @@ export interface ImageProps {
 }
 
 export interface ContentTypeProps {
-  contentType: {
-    sys: {
-      id: string;
+  sys: {
+    contentType: {
+      sys: {
+        id: string;
+      };
     };
   };
 }
+
+export type ComponentProps = ContentTypeProps & {
+  fields: FieldsType;
+};
+
+export type ComponentDataProps = {
+  data: ComponentProps;
+};

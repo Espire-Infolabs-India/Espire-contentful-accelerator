@@ -1,9 +1,9 @@
-import { HeroBannerDataProps } from "./HeroBannerProps";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import RichtextRenderOptions from "@/common/RTE/RichTextRenderOptions";
 import { Document } from "@contentful/rich-text-types";
+import { ComponentDataProps } from "@/utils/lib/CommonProps";
 
-const HeroBanner = ({ data }: HeroBannerDataProps) => {
+const HeroBanner = ({ data }: ComponentDataProps) => {
   return (
     <div
       className="-mx-7 hero-banner relative  bg-cover bg-no-repeat p-12 text-center"

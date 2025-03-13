@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { NavigationLinksDataProps } from "./NavigationItemsProps";
+import { ComponentDataProps, ComponentProps } from "@/utils/lib/CommonProps";
 
-const NavigationItems = ({ data }: NavigationLinksDataProps) => {
+const NavigationItems = ({ data }: ComponentDataProps) => {
   const navigationItems = data?.fields?.subLinks;
 
   return (
@@ -18,16 +18,18 @@ const NavigationItems = ({ data }: NavigationLinksDataProps) => {
           {/* Dropdown Menu */}
           {navigationItems && (
             <ul className="absolute left-0 hidden group-hover:block bg-white shadow-lg rounded-lg mt-2 w-48">
-              {navigationItems?.map((navigationItem, index) => (
-                <li key={index} className="border-b last:border-none">
-                  <Link
-                    href={navigationItem.fields.url}
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                  >
-                    {navigationItem.fields.title}
-                  </Link>
-                </li>
-              ))}
+              {navigationItems?.map(
+                (navigationItem: ComponentProps, index: number) => (
+                  <li key={index} className="border-b last:border-none">
+                    <Link
+                      href={navigationItem.fields.url}
+                      className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+                    >
+                      {navigationItem.fields.title}
+                    </Link>
+                  </li>
+                )
+              )}
             </ul>
           )}
         </li>

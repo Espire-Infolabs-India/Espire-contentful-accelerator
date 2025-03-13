@@ -1,11 +1,11 @@
 import React from "react";
 import Image from "next/image";
-import { ImageWithTitleDescriptionDataProps } from "../ImageWithTitleDescriptionProps";
 import RichtextRenderOptions from "@/common/RTE/RichTextRenderOptions";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { Document } from "@contentful/rich-text-types";
+import { ComponentDataProps } from "@/utils/lib/CommonProps";
 
-const RightSideImage = ({ data }: ImageWithTitleDescriptionDataProps) => {
+const RightSideImage = ({ data }: ComponentDataProps) => {
   return (
     <div className="flex flex-col md:flex-row items-center bg-slate-100 py-2.5 px-8">
       <div className="md:w-1/2 py-12 px-7">

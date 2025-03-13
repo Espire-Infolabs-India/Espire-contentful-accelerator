@@ -1,11 +1,11 @@
 import React from "react";
 import Image from "next/image";
-import { ImageWithTitleDescriptionDataProps } from "../ImageWithTitleDescriptionProps";
 import RichtextRenderOptions from "@/common/RTE/RichTextRenderOptions";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { Document } from "@contentful/rich-text-types";
+import { ComponentDataProps } from "@/utils/lib/CommonProps";
 
-const Default = ({ data }: ImageWithTitleDescriptionDataProps) => {
+const Default = ({ data }: ComponentDataProps) => {
   return (
     <div className="py-16 px-8 font-sans">
       <div className="container mx-auto flex flex-col md:flex-row justify-between items-center gap-x-6 gap-y-8">

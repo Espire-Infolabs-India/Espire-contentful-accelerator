@@ -4,12 +4,12 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { AccordionDataProps } from "./AccordionProps";
 import RichtextRenderOptions from "@/common/RTE/RichTextRenderOptions";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { Document } from "@contentful/rich-text-types";
+import { ComponentDataProps, ComponentProps } from "@/utils/lib/CommonProps";
 
-const Accordion = ({ data }: AccordionDataProps) => {
+const Accordion = ({ data }: ComponentDataProps) => {
   return (
     <div>
       <Typography
@@ -20,28 +20,30 @@ const Accordion = ({ data }: AccordionDataProps) => {
         {data?.fields?.title}
       </Typography>
 
-      {data?.fields?.accordionItemsList?.map((item, index) => (
-        <MUIAccordion key={index} defaultExpanded>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls={`panel${index}-content`}
-            id={`panel${index}-header`}
-          >
-            <Typography component="span">
+      {data?.fields?.accordionItemsList?.map(
+        (item: ComponentProps, index: number) => (
+          <MUIAccordion key={index} defaultExpanded>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls={`panel${index}-content`}
+              id={`panel${index}-header`}
+            >
+              <Typography component="span">
+                {documentToReactComponents(
+                  item?.fields?.heading as unknown as Document,
+                  RichtextRenderOptions
+                )}
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
               {documentToReactComponents(
-                item?.fields?.heading as unknown as Document,
+                item?.fields?.summary as unknown as Document,
                 RichtextRenderOptions
               )}
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            {documentToReactComponents(
-              item?.fields?.summary as unknown as Document,
-              RichtextRenderOptions
-            )}
-          </AccordionDetails>
-        </MUIAccordion>
-      ))}
+            </AccordionDetails>
+          </MUIAccordion>
+        )
+      )}
     </div>
   );
 };

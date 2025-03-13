@@ -2,10 +2,10 @@ import { getEntriesByContentType } from "@/utils/utilityFunctions/getEntriesByCo
 import { GetStaticProps, GetStaticPaths } from "next";
 import { useRouter } from "next/router";
 import { ComponentFactory } from "@/utils/lib/ComponentFactory";
-import { ComponentPropsFactory } from "@/utils/lib/ComponentPropsFactory";
+import { ComponentProps } from "@/utils/lib/CommonProps";
 
 type PageProps = {
-  content: ComponentPropsFactory[];
+  content: ComponentProps[];
 };
 
 const DynamicPage = ({ content }: PageProps) => {
@@ -18,7 +18,7 @@ const DynamicPage = ({ content }: PageProps) => {
   return (
     <div>
       {content?.map((data, index) => {
-        const componentType = data.sys.contentType.sys.id;
+        const componentType = data.sys.contentType.sys.id as string;
         const Component = ComponentFactory[componentType];
 
         if (!Component) {
@@ -49,7 +49,7 @@ export const getStaticProps: GetStaticProps<PageProps> = async ({ params }) => {
   const content = (await getEntriesByContentType(
     "landingPage",
     slug as string
-  )) as unknown as ComponentPropsFactory;
+  )) as unknown as ComponentProps[];
 
   if (!content || !("items" in content) || !Array.isArray(content.items)) {
     return { notFound: true };

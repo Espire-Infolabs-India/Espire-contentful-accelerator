@@ -3,12 +3,12 @@ import NavigationLinks from "../NavigationItems/NavigationItems";
 import SearchBox from "../SearchBox/SearchBox";
 import LanguageSelector from "../LanguageSelector/LanguageSelector";
 import LinkList from "../LinkList/LinkList";
-import { NavigationComponentsProps, HeaderDataProps } from "./HeaderProps";
 import NavigationItems from "../NavigationItems/NavigationItems";
+import { ComponentDataProps, ComponentProps } from "@/utils/lib/CommonProps";
 
 const HeaderComponents: Record<
   string,
-  React.FC<{ data: NavigationComponentsProps }> | undefined
+  React.FC<{ data: ComponentProps }> | undefined
 > = {
   componentNavigationItems: NavigationLinks,
   componentSearchBox: SearchBox,
@@ -16,7 +16,7 @@ const HeaderComponents: Record<
   componentLinkList: LinkList,
 };
 
-const Header = ({ data }: HeaderDataProps) => {
+const Header = ({ data }: ComponentDataProps) => {
   if (!data || !data.fields) return null; // Prevents errors if `data` is undefined
 
   const primarycomponents = data.fields.primaryNavigation ?? [];
@@ -28,15 +28,17 @@ const Header = ({ data }: HeaderDataProps) => {
         {/* Right Section - Secondary Navigation & Language Selector */}
         <div className="flex items-center justify-end mb-5">
           <div className="flex items-center gap-6">
-            {secondarycomponents?.map((component, index) => {
-              if (!component?.sys?.contentType?.sys?.id) return null;
+            {secondarycomponents?.map(
+              (component: ComponentProps, index: number) => {
+                if (!component?.sys?.contentType?.sys?.id) return null;
 
-              const Component =
-                HeaderComponents[component?.sys?.contentType?.sys?.id];
-              if (!Component) return null;
+                const Component =
+                  HeaderComponents[component?.sys?.contentType?.sys?.id];
+                if (!Component) return null;
 
-              return <Component key={index} data={component} />;
-            })}
+                return <Component key={index} data={component} />;
+              }
+            )}
           </div>
         </div>
 
@@ -56,7 +58,7 @@ const Header = ({ data }: HeaderDataProps) => {
           {/* Center Section - Search Box & Navigation */}
           <div className="flex flex-grow items-center justify-evenly gap-8">
             <SearchBox />
-            {primarycomponents?.map((component) => {
+            {primarycomponents?.map((component: ComponentProps) => {
               if (!component?.sys?.contentType?.sys?.id) return null;
 
               const ComponentType =
