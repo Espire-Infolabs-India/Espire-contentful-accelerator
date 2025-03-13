@@ -5,6 +5,7 @@ import FeatureBlocks from "@/components/FeatureBlocks/FeatureBlocks";
 import Carousel from "@/components/Carousel/Carousel";
 import { ComponentProps } from "./CommonProps";
 import Accordion from "@/components/Accordion/Accordion";
+import Tabs from "@/components/Tabs/Tabs";
 
 export const ComponentFactory: Record<string, React.FC<{data : ComponentProps}>> = {
     heroBanner: HeroBanner,
@@ -12,5 +13,6 @@ export const ComponentFactory: Record<string, React.FC<{data : ComponentProps}>>
     richText: RichText,
     componentFeatureBlocks:FeatureBlocks,
     componentCarousel:Carousel,
-    componentAccordion: Accordion
+    componentAccordion: Accordion,
+    componentTabs: Tabs
 };
