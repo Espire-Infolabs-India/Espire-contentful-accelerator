@@ -20,28 +20,30 @@ const Accordion = ({ data }: ComponentDataProps) => {
         {data?.fields?.title}
       </Typography>
 
-      {data?.fields?.accordionItemsList?.map((item : ComponentProps, index : number) => (
-        <MUIAccordion key={index} defaultExpanded>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls={`panel${index}-content`}
-            id={`panel${index}-header`}
-          >
-            <Typography component="span">
+      {data?.fields?.accordionItemsList?.map(
+        (item: ComponentProps, index: number) => (
+          <MUIAccordion key={index} defaultExpanded>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls={`panel${index}-content`}
+              id={`panel${index}-header`}
+            >
+              <Typography component="span">
+                {documentToReactComponents(
+                  item?.fields?.heading as unknown as Document,
+                  RichtextRenderOptions
+                )}
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
               {documentToReactComponents(
-                item?.fields?.heading as unknown as Document,
+                item?.fields?.summary as unknown as Document,
                 RichtextRenderOptions
               )}
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            {documentToReactComponents(
-              item?.fields?.summary as unknown as Document,
-              RichtextRenderOptions
-            )}
-          </AccordionDetails>
-        </MUIAccordion>
-      ))}
+            </AccordionDetails>
+          </MUIAccordion>
+        )
+      )}
     </div>
   );
 };
