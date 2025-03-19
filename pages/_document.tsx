@@ -3,7 +3,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-      <meta name="algolia-site-verification"  content="9290386E1A6A7A09" />
+      <meta name="algolia-site-verification"  content="009BA592012D7ED5" />
       </Head>
       <body className="antialiased">
         <Main />
