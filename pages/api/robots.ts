@@ -4,7 +4,7 @@ const robotsTxt = `
 User-agent: *
 Disallow:/
 Allow: /
-Sitemap: https://espire-contentful/sitemap.xml
+Sitemap: https://espire-contentful-starterkit.netlify.app
 `;
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
