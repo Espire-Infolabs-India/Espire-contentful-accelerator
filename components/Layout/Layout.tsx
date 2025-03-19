@@ -12,21 +12,21 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     async function getData() {
       try {
-        const footerData = await getFooterData();
         const headData = await getHeaderData();
-        if (
-          footerData?.data &&
-          Array.isArray(footerData?.data) &&
-          footerData?.data?.length > 0
-        ) {
-          setFooterData(footerData?.data[0]);
-        }
         if (
           headData?.data &&
           Array.isArray(headData?.data) &&
           headData?.data?.length > 0
         ) {
           setHeaderData(headData?.data[0]);
+        }
+        const footerData = await getFooterData();
+        if (
+          footerData?.data &&
+          Array.isArray(footerData?.data) &&
+          footerData?.data?.length > 0
+        ) {
+          setFooterData(footerData?.data[0]);
         }
       } catch (error) {
         console.error("Error fetching data:", error);
