@@ -16,5 +16,5 @@ export const ComponentFactory: Record<string, React.FC<{data : ComponentProps}>>
     componentCarousel:Carousel,
     componentAccordion: Accordion,
     componentTabs: Tabs,
-    componentSection: Container
+    componentContainer: Container
 };
