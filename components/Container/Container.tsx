@@ -1,7 +1,7 @@
 import { ComponentFactory } from "@/utils/lib/ComponentFactory";
 import { ComponentDataProps, ComponentProps } from "@/utils/lib/CommonProps";
 
-const Section = ({ data }: ComponentDataProps) => {
+const Container = ({ data }: ComponentDataProps) => {
   return (
     <div>
       {data?.fields?.container?.map((data: ComponentProps, index: number) => {
@@ -11,7 +11,7 @@ const Section = ({ data }: ComponentDataProps) => {
         ] as unknown as React.ComponentType<{ data: typeof data }>;
 
         return (
-          <div key={index} className="feature-blocks">
+          <div key={index} className="Container">
             {Component && <Component key={index} data={data} />}
           </div>
         );
@@ -20,4 +20,4 @@ const Section = ({ data }: ComponentDataProps) => {
   );
 };
 
-export default Section;
+export default Container;
