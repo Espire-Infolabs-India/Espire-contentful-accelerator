@@ -27,15 +27,55 @@ const SEO = () => {
   }, [fetchSeoData]);
 
   if (!seoData) return null;
-  const { pageTitle, pageDescription, nofollow, noindex } = seoData;
-
+  const {
+    pageTitle,
+    metaKeyword,
+    metaDescription,
+    canonicalUrl,
+    twitterTitle,
+    twitterDescription,
+    twitterImage,
+    openGraphTitle,
+    openGraphDescription,
+    openGraphImage,
+    openGraphUrl,
+    nofollow,
+    noindex,
+  } = seoData;
+  console.log("SEO DATA", seoData);
   const robotsContent = `${nofollow ? "nofollow" : "follow"} , ${
     noindex ? "noindex" : "index"
   }`;
   return (
     <Head>
       <title>{pageTitle}</title>
-      <meta name="description" content={String(pageDescription)} />
+      <meta name="keywords" content={String(metaKeyword)}></meta>
+      <meta name="description" content={String(metaDescription)} />
+      <link rel="canonical" href={canonicalUrl}></link>
+      <meta name="twitter:card" content="summary"></meta>
+      <meta name="twitter:site" content=""></meta>
+      <meta name="twitter:title" content={String(twitterTitle)}></meta>
+      <meta
+        name="twitter:description"
+        content={String(twitterDescription)}
+      ></meta>
+      <meta
+        name="twitter:image"
+        content={`https://${twitterImage.fields.file.url}`}
+      />
+      <meta property="og:locale" content="en"></meta>
+      <meta property="og:title" content={String(openGraphTitle)}></meta>
+      <meta
+        property="og:description"
+        content={String(openGraphDescription)}
+      ></meta>
+      <meta property="og:type" content="website"></meta>
+      <meta property="og:url" content={openGraphUrl}></meta>
+      <meta
+        property="og:image"
+        content={`https://${openGraphImage.fields.file.url}`}
+      />
+      <meta property="og:site_name" content=""></meta>
       <meta name="robots" content={robotsContent} />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
     </Head>
