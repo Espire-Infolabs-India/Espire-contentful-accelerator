@@ -3,12 +3,17 @@ import { GetStaticProps, GetStaticPaths } from "next";
 import { useRouter } from "next/router";
 import { ComponentFactory } from "@/utils/lib/ComponentFactory";
 import { ComponentProps } from "@/utils/lib/CommonProps";
+import { getHeaderData } from "@/common/getHeaderData/getHeaderData";
+import Layout from "@/components/Layout/Layout";
+import { getFooterData } from "@/common/getFooterData/getFooterData";
 
 type PageProps = {
   content: ComponentProps[];
+  headerData: ComponentProps;
+  footerData: ComponentProps;
 };
 
-const DynamicPage = ({ content }: PageProps) => {
+const DynamicPage = ({ content, headerData, footerData }: PageProps) => {
   const router = useRouter();
 
   if (router.isFallback) {
@@ -16,7 +21,7 @@ const DynamicPage = ({ content }: PageProps) => {
   }
 
   return (
-    <div>
+    <Layout headerData={headerData} footerData={footerData}>
       {content?.map((data, index) => {
         const componentType = data.sys.contentType.sys.id as string;
         const Component = ComponentFactory[componentType];
@@ -28,7 +33,7 @@ const DynamicPage = ({ content }: PageProps) => {
 
         return <Component key={index} data={data} />;
       })}
-    </div>
+    </Layout>
   );
 };
 
@@ -43,7 +48,7 @@ export const getStaticPaths: GetStaticPaths = async () => ({
 
 export const getStaticProps: GetStaticProps<PageProps> = async ({ params }) => {
   let slug = params?.slug ?? "home";
-   slug = Array.isArray(slug)
+  slug = Array.isArray(slug)
     ? `${slug.map((slug) => slug.toLowerCase())}`
     : "home";
   const content = (await getEntriesByContentType(
@@ -58,9 +63,24 @@ export const getStaticProps: GetStaticProps<PageProps> = async ({ params }) => {
   const componentContainer =
     content.items?.[0]?.fields?.componentContainer ?? [];
 
+  const headerResult = await getHeaderData();
+
+  const headerData =
+    Array.isArray(headerResult?.data) && headerResult.data.length > 0
+      ? headerResult.data[0]
+      : null;
+
+  const footerResult = await getFooterData();
+
+  const footerData =
+    Array.isArray(footerResult?.data) && footerResult.data.length > 0
+      ? footerResult.data[0]
+      : null;
   return {
     props: {
       content: Array.isArray(componentContainer) ? componentContainer : [],
+      headerData,
+      footerData,
     },
     revalidate: 10,
   };
