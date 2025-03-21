@@ -37,8 +37,8 @@ const SEO = () => {
     twitterImage,
     openGraphTitle,
     openGraphDescription,
-    openGraphImage,
     openGraphUrl,
+    openGraphImage,
     nofollow,
     noindex,
   } = seoData;
