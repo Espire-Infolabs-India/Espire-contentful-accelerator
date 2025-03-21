@@ -7,6 +7,7 @@ import { ComponentProps } from "./CommonProps";
 import Accordion from "@/components/Accordion/Accordion";
 import Tabs from "@/components/Tabs/Tabs";
 import Map from "@/components/Map/Map";
+import FeatureCard from "@/components/FeatureCard/FeatureCard";
 
 export const ComponentFactory: Record<string, React.FC<{data : ComponentProps}>> = {
     heroBanner: HeroBanner,
@@ -16,5 +17,6 @@ export const ComponentFactory: Record<string, React.FC<{data : ComponentProps}>>
     componentCarousel:Carousel,
     componentAccordion: Accordion,
     componentTabs: Tabs,
-    componentMap : Map
+    componentMap : Map,
+    componentFeatureCard: FeatureCard
 };
