@@ -2,7 +2,7 @@ import { Handler } from "@netlify/functions";
 // import { getEntryByID } from "@/utils/utilityFunctions/getEntryByID";
 import { algoliasearch } from "algoliasearch";
 
-const FeedAloglia: Handler = async (event) => {
+const handler: Handler = async (event) => {
   try {
     if (event.httpMethod !== "POST") {
       return {
@@ -50,4 +50,4 @@ const FeedAloglia: Handler = async (event) => {
   }
 };
 
-export { FeedAloglia };
+export { handler };
