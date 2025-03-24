@@ -19,8 +19,8 @@ const handler: Handler = async (event) => {
     const response = await client.saveObject({
       indexName: process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME as string,
       body: {
-        name: "Black T-shirt",
-        color: "#000000||black",
+        name: "Feeding from Function",
+        color: "#000000||Algolia",
         availableIn: "https://source.unsplash.com/100x100/?paris||Paris",
         objectID: "myID",
       },
