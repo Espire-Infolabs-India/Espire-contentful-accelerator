@@ -12,12 +12,12 @@ const handler: Handler = async (event) => {
     }
 
     const client = algoliasearch(
-      process.env.NEXT_PUBLIC_ALGOLIA_APP_ID as string,
-      process.env.NEXT_PUBLIC_ALGOLIA_ADMIN_KEY as string
+      process.env.ALGOLIA_APP_ID as string,
+      process.env.ALGOLIA_API_KEY as string
     );
 
     const response = await client.saveObject({
-      indexName: process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME as string,
+      indexName: process.env.ALGOLIA_INDEX_NAME as string,
       body: {
         name: "Feeding from Function",
         color: "#000000||Algolia",
