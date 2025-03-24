@@ -2,7 +2,7 @@ import { Handler } from "@netlify/functions";
 // import { getEntryByID } from "@/utils/utilityFunctions/getEntryByID";
 import { algoliasearch } from "algoliasearch";
 
-const FeedAloglia: Handler = async (event) => {
+const handler: Handler = async (event) => {
   try {
     if (event.httpMethod !== "POST") {
       return {
@@ -19,8 +19,8 @@ const FeedAloglia: Handler = async (event) => {
     const response = await client.saveObject({
       indexName: process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME as string,
       body: {
-        name: "Black T-shirt",
-        color: "#000000||black",
+        name: "Feeding from Function",
+        color: "#000000||Algolia",
         availableIn: "https://source.unsplash.com/100x100/?paris||Paris",
         objectID: "myID",
       },
@@ -50,4 +50,4 @@ const FeedAloglia: Handler = async (event) => {
   }
 };
 
-export { FeedAloglia };
+export { handler };
