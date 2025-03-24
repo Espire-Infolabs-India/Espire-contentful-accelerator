@@ -17,8 +17,10 @@
     "@googlemaps/js-api-loader": "^1.16.8",
     "@mui/icons-material": "^6.4.7",
     "@mui/material": "^6.4.7",
+    "@netlify/functions": "^3.0.4",
     "@react-google-maps/api": "^2.20.6",
     "contentful": "^11.4.4",
+    "netlify-cli": "^19.0.3",
     "next": "15.1.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
