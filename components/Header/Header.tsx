@@ -17,7 +17,7 @@ const HeaderComponents: Record<
 };
 
 const Header = ({ data }: ComponentDataProps) => {
-  if (!data || !data.fields) return null; // Prevents errors if `data` is undefined
+  if (!data || !data.fields) return null;
 
   const primarycomponents = data.fields.primaryNavigation ?? [];
   const secondarycomponents = data.fields.secondaryNavigation ?? [];
