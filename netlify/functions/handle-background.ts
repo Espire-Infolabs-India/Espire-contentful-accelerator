@@ -39,11 +39,19 @@ const parseJSONSafely = async (jsonString: string, timeoutMs = 500): Promise<Pay
   ]);
 };
 
-
-const extractPlainText = (rteData: RTEData): string => {
+const extractPlainTextAsync = async (rteData: RTEData): Promise<string> => {
   if (!rteData?.["en-US"]?.content) return "";
-  return rteData["en-US"].content.map(node => node.content.map(textNode => textNode.value).join(" ")).join("\n\n");
+
+  return new Promise((resolve) => {
+    setImmediate(() => {
+      const text = rteData["en-US"]?.content
+        ?.flatMap(node => node.content.map(textNode => textNode.value || ""))
+        .join(" ") || "";
+      resolve(text);
+    });
+  });
 };
+
 
 const handler: Handler = async (event) => {
   try {
@@ -58,7 +66,8 @@ const handler: Handler = async (event) => {
     }
 
     console.log("retuened Payload :::: ",payload);
-    const content = extractPlainText(payload.content as RTEData);
+    const content = await extractPlainTextAsync(payload.content as RTEData);
+
     console.log("📄 Extracted Content:", content);
 
     const client = algoliasearch(process.env.ALGOLIA_APP_ID as string, process.env.ALGOLIA_API_KEY as string);
@@ -79,6 +88,9 @@ const handler: Handler = async (event) => {
     });
 
     console.log("✅ Successfully indexed in Algolia");
+
+    
+    console.log("📄 Extracted Content 2nd time:", content);
 
     return { statusCode: 200, body: JSON.stringify({ message: "Background job completed" }) };
   } catch (error) {
