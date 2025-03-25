@@ -5,19 +5,40 @@ type TextNode = { data: object; marks: unknown[]; value: string; nodeType: strin
 type ContentNode = { data: object; content: TextNode[]; nodeType: string };
 type RTEData = { "en-US"?: { data: object; content: ContentNode[]; nodeType: string } };
 
+type Payload = {
+  title?: string;
+  shortDescription?: string;
+  content?: unknown;
+  image?: string;
+  url?: string;
+  author?: string;
+  publishDate?: string;
+  tags?: string[];
+};
+
 // Safe JSON parsing with timeout
-const parseJSONSafely = async (jsonString: string, timeoutMs = 500) => {
+const parseJSONSafely = async (jsonString: string, timeoutMs = 500): Promise<Payload> => {
   return Promise.race([
-    new Promise((resolve, reject) => {
+    new Promise<Payload>((resolve) => {
       try {
-        resolve(JSON.parse(jsonString));
-      } catch  {
-        reject(new Error("Invalid JSON"));
+        const parsed = JSON.parse(jsonString);
+
+        // Ensure parsed result is an object and cast it to Payload type
+        if (typeof parsed === "object" && parsed !== null) {
+          resolve(parsed as Payload);
+        } else {
+          console.warn("⚠️ Parsed JSON is not an object, returning empty object.");
+          resolve({} as Payload);
+        }
+      } catch (error) {
+        console.error("❌ JSON Parsing Error:", error);
+        resolve({} as Payload); // Return an empty object if parsing fails
       }
     }),
-    new Promise((_, reject) => setTimeout(() => reject(new Error("JSON parse timeout")), timeoutMs)),
+    new Promise<never>((_, reject) => setTimeout(() => reject(new Error("JSON parse timeout")), timeoutMs)),
   ]);
 };
+
 
 const extractPlainText = (rteData: RTEData): string => {
   if (!rteData?.["en-US"]?.content) return "";
@@ -28,7 +49,7 @@ const handler: Handler = async (event) => {
   try {
     console.log("🔍 Processing Background Job...");
 
-    const payload = (await parseJSONSafely(event.body || "{}")) as { [content]?: unknown };
+    const payload = (await parseJSONSafely(event.body || "{}"));
 
 
     if (!payload || !payload?.content) {
@@ -37,7 +58,6 @@ const handler: Handler = async (event) => {
     }
 
     console.log("retuened Payload :::: ",payload);
-    
     const content = extractPlainText(payload.content);
     console.log("📄 Extracted Content:", content);
 
@@ -53,7 +73,7 @@ const handler: Handler = async (event) => {
         image: payload?.image,
         url: payload?.url,
         author: payload?.author,
-        publishDate: payload?.date,
+        publishDate: payload?.publishDate,
         tags: payload?.tags,
       },
     });
