@@ -21,11 +21,11 @@ const handler: Handler = async (event) => {
 
     const content  = extractPlainText(payload?.content);
 
-    const image = await  getEntryByID(payload?.image);
+    const author = await getEntryByID(payload?.author as string);
 
     console.log("Content :::: ",extractPlainText(payload?.content));
 
-    console.log("Image Data get ID :::: ",image);
+    console.log("Author Data get ID :::: ",author);
    
 
     await client.saveObject({
@@ -35,7 +35,7 @@ const handler: Handler = async (event) => {
         shortDescription: payload?.shortDescription,
         blogContent: payload?.content,
         content: content,
-        image: image,
+        image: payload?.image,
         url: payload?.url,
         author: payload?.author,
         publishDate: payload?.date,
