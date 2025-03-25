@@ -1,9 +1,5 @@
-// import { extractPlainText } from "@/common/RTE/ExtractRTEData";
 import { Handler } from "@netlify/functions";
-// import { getEntryByID } from "@/utils/utilityFunctions/getEntryByID";
-import { algoliasearch } from "algoliasearch";
-
-
+import {algoliasearch} from "algoliasearch";
 
 type TextNode = {
   data: object;
@@ -20,19 +16,25 @@ type ContentNode = {
 
 type RTEData = {
   "en-US"?: {
-      data: object;
-      content: ContentNode[];
-      nodeType: string;
+    data: object;
+    content: ContentNode[];
+    nodeType: string;
   };
 };
 
 const extractPlainText = (rteData: RTEData): string => {
-  if (!rteData || !rteData["en-US"] || !rteData["en-US"].content) return "";
+  console.log("🟢 extractPlainText called with:", JSON.stringify(rteData, null, 2));
+
+  if (!rteData?.["en-US"]?.content) {
+    console.log("⚠️ Invalid RTEData format, returning empty string.");
+    return "";
+  }
 
   return rteData["en-US"].content
-      ?.map(node => node.content.map(textNode => textNode.value).join(" "))
-      ?.join("\n\n");
+    .map((node) => node.content.map((textNode) => textNode.value).join(" "))
+    .join("\n\n");
 };
+
 const handler: Handler = async (event) => {
   try {
     if (event.httpMethod !== "POST") {
@@ -42,21 +44,24 @@ const handler: Handler = async (event) => {
       };
     }
 
+    console.log("🔍 Incoming Event Body:", event.body);
+
+    const payload = JSON.parse(event.body || "{}");
+
+    if (!payload?.content) {
+      console.error("❌ Missing 'content' field in payload.");
+      return { statusCode: 400, body: JSON.stringify({ error: "Invalid payload" }) };
+    }
+
+    const content = extractPlainText(payload.content);
+
+    console.log("📦 Extracted Content:", content);
+
+    // Algolia logic remains unchanged
     const client = algoliasearch(
       process.env.ALGOLIA_APP_ID as string,
       process.env.ALGOLIA_API_KEY as string
     );
-
-    const payload = JSON.parse(event.body || "{}");
-
-    const content  = extractPlainText(payload?.content);
-
-    // const author = await getEntryByID(payload?.author as string);
-
-    console.log("Content :::: ",extractPlainText(payload?.content));
-
-    // console.log("Author Data get ID :::: ",author);
-   
 
     await client.saveObject({
       indexName: process.env.ALGOLIA_INDEX_NAME as string,
@@ -73,10 +78,7 @@ const handler: Handler = async (event) => {
       },
     });
 
-    console.log("payload", payload);
-    // const entryData = await getEntryByID("1IIw0nUuEqsm2H2IDps5fv");
-
-    console.log("📦 Payload:", JSON.stringify(payload, null, 2));
+    console.log("✅ Successfully indexed in Algolia");
 
     return {
       statusCode: 200,
