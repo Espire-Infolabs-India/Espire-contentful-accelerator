@@ -22,17 +22,27 @@ type RTEData = {
   };
 };
 
+// Function to extract plain text from RTE content
 const extractPlainText = (rteData: RTEData): string => {
-  console.log("🟢 extractPlainText called with:", JSON.stringify(rteData, null, 2));
-
-  if (!rteData?.["en-US"]?.content) {
-    console.log("⚠️ Invalid RTEData format, returning empty string.");
-    return "";
-  }
+  if (!rteData?.["en-US"]?.content) return "";
 
   return rteData["en-US"].content
     .map((node) => node.content.map((textNode) => textNode.value).join(" "))
     .join("\n\n");
+};
+
+// Utility function to wait for payload content
+const waitForContent = async (payload: { content?: unknown }, maxRetries = 5, delay = 500): Promise<{ content?: unknown }> => {
+  let attempts = 0;
+  while (attempts < maxRetries) {
+    if (payload?.content) {
+      return payload; // Content is now available
+    }
+    console.warn(`⏳ Payload content not available, retrying... (${attempts + 1}/${maxRetries})`);
+    await new Promise((resolve) => setTimeout(resolve, delay)); // Wait before retrying
+    attempts++;
+  }
+  return payload; // Return as is after retries
 };
 
 const handler: Handler = async (event) => {
@@ -46,16 +56,20 @@ const handler: Handler = async (event) => {
 
     console.log("🔍 Incoming Event Body:", event.body);
 
-    const payload = JSON.parse(event.body || "{}");
+    let payload = JSON.parse(event.body || "{}");
+
+    // Wait for content if it's null
+    payload = await waitForContent(payload);
 
     if (!payload?.content) {
-      console.error("❌ Missing 'content' field in payload.");
+      console.error("❌ Payload content is still null after retries.");
       return { statusCode: 400, body: JSON.stringify({ error: "Invalid payload" }) };
     }
 
-    const content = extractPlainText(payload.content);
+    console.log("📦 Final Payload:", JSON.stringify(payload, null, 2));
 
-    console.log("📦 Extracted Content:", content);
+    const content = extractPlainText(payload.content);
+    console.log("📄 Extracted Content:", content);
 
     // Algolia logic remains unchanged
     const client = algoliasearch(
