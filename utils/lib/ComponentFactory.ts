@@ -8,6 +8,7 @@ import Accordion from "@/components/Accordion/Accordion";
 import Tabs from "@/components/Tabs/Tabs";
 import Map from "@/components/Map/Map";
 import FeatureCard from "@/components/FeatureCard/FeatureCard";
+import Container from "@/components/Container/Container";
 
 export const ComponentFactory: Record<string, React.FC<{data : ComponentProps}>> = {
     heroBanner: HeroBanner,
@@ -18,5 +19,6 @@ export const ComponentFactory: Record<string, React.FC<{data : ComponentProps}>>
     componentAccordion: Accordion,
     componentTabs: Tabs,
     componentMap : Map,
-    componentFeatureCard: FeatureCard
+    componentFeatureCard: FeatureCard,
+    componentContainer: Container
 };
