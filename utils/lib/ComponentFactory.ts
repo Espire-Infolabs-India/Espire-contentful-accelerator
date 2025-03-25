@@ -6,7 +6,8 @@ import Carousel from "@/components/Carousel/Carousel";
 import { ComponentProps } from "./CommonProps";
 import Accordion from "@/components/Accordion/Accordion";
 import Tabs from "@/components/Tabs/Tabs";
-import Container  from "@/components/Container/Container";
+import Map from "@/components/Map/Map";
+import FeatureCard from "@/components/FeatureCard/FeatureCard";
 
 export const ComponentFactory: Record<string, React.FC<{data : ComponentProps}>> = {
     heroBanner: HeroBanner,
@@ -16,5 +17,6 @@ export const ComponentFactory: Record<string, React.FC<{data : ComponentProps}>>
     componentCarousel:Carousel,
     componentAccordion: Accordion,
     componentTabs: Tabs,
-    componentContainer: Container
+    componentMap : Map,
+    componentFeatureCard: FeatureCard
 };
