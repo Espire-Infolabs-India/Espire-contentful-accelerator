@@ -1,3 +1,5 @@
+import RichtextRenderOptions from "@/common/RTE/RichTextRenderOptions";
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { Handler } from "@netlify/functions";
 // import { getEntryByID } from "@/utils/utilityFunctions/getEntryByID";
 import { algoliasearch } from "algoliasearch";
@@ -16,20 +18,31 @@ const handler: Handler = async (event) => {
       process.env.ALGOLIA_API_KEY as string
     );
 
-    const response = await client.saveObject({
+    const payload = JSON.parse(event.body || "{}");
+
+    console.log(
+      "Short Description ::: ",
+      documentToReactComponents(
+        payload?.shortDescription,
+        RichtextRenderOptions
+      )
+    );
+
+    await client.saveObject({
       indexName: process.env.ALGOLIA_INDEX_NAME as string,
       body: {
-        name: "Feeding from Function",
-        color: "#000000||Algolia",
-        availableIn: "https://source.unsplash.com/100x100/?paris||Paris",
-        objectID: "myID",
+        name: payload?.title,
+        shortDescription: payload?.shortDescription,
+        blogContent: payload?.content,
+        image: payload?.image,
+        url: payload?.url,
+        author: payload?.author,
+        publishDate: payload?.date,
+        tags: payload?.tags,
       },
     });
 
-    console.log("Aloglia Response:", response);
-
-    const payload = JSON.parse(event.body || "{}");
-
+    console.log("payload", payload);
     // const entryData = await getEntryByID("1IIw0nUuEqsm2H2IDps5fv");
 
     console.log("📦 Payload:", JSON.stringify(payload, null, 2));
