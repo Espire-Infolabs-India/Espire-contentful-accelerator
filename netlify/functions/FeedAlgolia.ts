@@ -1,6 +1,6 @@
 import { extractPlainText } from "@/common/RTE/ExtractRTEData";
 import { Handler } from "@netlify/functions";
-import { getEntryByID } from "@/utils/utilityFunctions/getEntryByID";
+// import { getEntryByID } from "@/utils/utilityFunctions/getEntryByID";
 import { algoliasearch } from "algoliasearch";
 
 const handler: Handler = async (event) => {
@@ -21,11 +21,11 @@ const handler: Handler = async (event) => {
 
     const content  = extractPlainText(payload?.content);
 
-    const author = await getEntryByID(payload?.author as string);
+    // const author = await getEntryByID(payload?.author as string);
 
     console.log("Content :::: ",extractPlainText(payload?.content));
 
-    console.log("Author Data get ID :::: ",author);
+    // console.log("Author Data get ID :::: ",author);
    
 
     await client.saveObject({
