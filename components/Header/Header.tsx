@@ -24,7 +24,7 @@ const Header = ({ data }: ComponentDataProps) => {
 
   return (
     <div className="bg-[#0A3A6B]">
-      <header className="p-4 container">
+      <header className="p-4 container m-auto">
         {/* Right Section - Secondary Navigation & Language Selector */}
         <div className="flex items-center justify-end mb-5">
           <div className="flex items-center gap-6">
