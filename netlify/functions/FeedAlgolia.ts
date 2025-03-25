@@ -1,7 +1,6 @@
-import RichtextRenderOptions from "@/common/RTE/RichTextRenderOptions";
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import { extractPlainText } from "@/common/RTE/ExtractRTEData";
 import { Handler } from "@netlify/functions";
-// import { getEntryByID } from "@/utils/utilityFunctions/getEntryByID";
+import { getEntryByID } from "@/utils/utilityFunctions/getEntryByID";
 import { algoliasearch } from "algoliasearch";
 
 const handler: Handler = async (event) => {
@@ -20,13 +19,14 @@ const handler: Handler = async (event) => {
 
     const payload = JSON.parse(event.body || "{}");
 
-    console.log(
-      "Short Description ::: ",
-      documentToReactComponents(
-        payload?.shortDescription,
-        RichtextRenderOptions
-      )
-    );
+    const content  = extractPlainText(payload?.content);
+
+    const image = await  getEntryByID(payload?.image);
+
+    console.log("Content :::: ",extractPlainText(payload?.content));
+
+    console.log("Image Data get ID :::: ",image);
+   
 
     await client.saveObject({
       indexName: process.env.ALGOLIA_INDEX_NAME as string,
@@ -34,7 +34,8 @@ const handler: Handler = async (event) => {
         name: payload?.title,
         shortDescription: payload?.shortDescription,
         blogContent: payload?.content,
-        image: payload?.image,
+        content: content,
+        image: image,
         url: payload?.url,
         author: payload?.author,
         publishDate: payload?.date,
