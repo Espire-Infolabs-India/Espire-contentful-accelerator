@@ -52,13 +52,13 @@ const handler: Handler = async (event) => {
     const payload = (await parseJSONSafely(event.body || "{}"));
 
 
-    if (!payload || !payload?.content) {
+    if (!payload) {
       console.error("❌ Payload content is missing.");
       return { statusCode: 400, body: JSON.stringify({ error: "Invalid payload" }) };
     }
 
     console.log("retuened Payload :::: ",payload);
-    const content = extractPlainText(payload.content);
+    const content = extractPlainText(payload.content as RTEData);
     console.log("📄 Extracted Content:", content);
 
     const client = algoliasearch(process.env.ALGOLIA_APP_ID as string, process.env.ALGOLIA_API_KEY as string);
