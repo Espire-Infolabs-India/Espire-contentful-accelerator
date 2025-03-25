@@ -32,7 +32,7 @@ const extractPlainText = (rteData: RTEData): string => {
 };
 
 // Utility function to wait for payload content
-const waitForContent = async (payload: { content?: unknown }, maxRetries = 5, delay = 1000): Promise<{ content?: unknown }> => {
+const waitForContent = async (payload: { content?: unknown }, maxRetries = 20, delay = 1000): Promise<{ content?: unknown }> => {
   let attempts = 0;
   while (attempts < maxRetries) {
     if (payload?.content) {
