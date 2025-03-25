@@ -1,8 +1,38 @@
-import { extractPlainText } from "@/common/RTE/ExtractRTEData";
+// import { extractPlainText } from "@/common/RTE/ExtractRTEData";
 import { Handler } from "@netlify/functions";
 // import { getEntryByID } from "@/utils/utilityFunctions/getEntryByID";
 import { algoliasearch } from "algoliasearch";
 
+
+
+type TextNode = {
+  data: object;
+  marks: unknown[];
+  value: string;
+  nodeType: string;
+};
+
+type ContentNode = {
+  data: object;
+  content: TextNode[];
+  nodeType: string;
+};
+
+type RTEData = {
+  "en-US"?: {
+      data: object;
+      content: ContentNode[];
+      nodeType: string;
+  };
+};
+
+const extractPlainText = (rteData: RTEData): string => {
+  if (!rteData || !rteData["en-US"] || !rteData["en-US"].content) return "";
+
+  return rteData["en-US"].content
+      ?.map(node => node.content.map(textNode => textNode.value).join(" "))
+      ?.join("\n\n");
+};
 const handler: Handler = async (event) => {
   try {
     if (event.httpMethod !== "POST") {
