@@ -8,6 +8,7 @@ import { PushDataToAlgolia } from "@/utils/lib/PushDataToAlgolia";
 const handler: Handler = async (event) => {
   try {
     const payload = await parseJSONSafely(event.body || "{}");
+    console.log("🔍 Incoming Event Body:", payload);
 
     if (!payload) {
       console.error("❌ Payload content is missing.");
