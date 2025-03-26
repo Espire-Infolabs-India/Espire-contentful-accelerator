@@ -25,30 +25,44 @@ export const ProcessPayload = async (
 
   for (const key in input) {
     const value = input[key];
+
     if (Array.isArray(value)) {
-      output[key] = value.join(", "); // Flatten arrays to string
+      output[key] = value.join(", "); // Flatten arrays to a string
     } else if (typeof value === "object" && value !== null) {
       if (
         "content" in (value as { content?: unknown[] }) &&
         Array.isArray((value as { content?: unknown[] }).content)
       ) {
-        output[key] = await extractPlainTextAsync(
-          value as { content?: unknown[] } as unknown as RTEData
-        );
+        output[key] = await extractPlainTextAsync(value as unknown as RTEData);
       } else if (
         "sys" in (value as { sys?: SysLink["sys"] }) &&
         (value as { sys?: SysLink["sys"] }).sys
       ) {
         const sysValue = (value as { sys: SysLink["sys"] }).sys;
+
         if (sysValue.linkType === "Asset") {
           output[key] = await getAssetByID(sysValue.id);
         } else if (sysValue.linkType === "Entry") {
           const entryData = await getEntryByID(sysValue.id);
 
-          console.log(entryData, "Entyrdatatatatat");
+          console.log("Entry Data Response:", JSON.stringify(entryData, null, 2));
 
-          const authorFields = (entryData as EntryWithAuthor).author?.fields;
-          output[key] = await ProcessPayload(authorFields as ContentfulPayload);
+          if (entryData && typeof entryData === "object" && "fields" in entryData) {
+            const authorFields = entryData.fields as Record<string, EntryWithAuthor>;
+
+            if (authorFields) {
+              console.log("Extracted Author Fields:", authorFields);
+
+              // Keep the original keys unchanged
+              output[key] = await ProcessPayload(authorFields);
+            } else {
+              console.warn(`No fields found for entry with ID: ${sysValue.id}`);
+              output[key] = null;
+            }
+          } else {
+            console.warn(`Invalid entry structure for ID: ${sysValue.id}`);
+            output[key] = null;
+          }
         }
       } else {
         output[key] = value; // Keep other objects as is
