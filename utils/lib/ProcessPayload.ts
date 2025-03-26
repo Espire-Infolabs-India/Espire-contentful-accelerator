@@ -1,6 +1,7 @@
 import { extractPlainTextAsync, RTEData } from "@/common/RTE/ExtractRTEData";
 import { getAssetByID } from "../utilityFunctions/getAssetByID";
 import { getEntryByID } from "../utilityFunctions/getEntryByID";
+import { FlattenObject } from "./FlattenObject";
 
 type ContentfulPayload = Record<string, unknown>;
 
@@ -15,29 +16,6 @@ type SysLink = {
 interface EntryWithFields {
   fields?: ContentfulPayload;
 }
-
-// Utility function to flatten nested objects
-const flattenObject = <T extends Record<string, unknown>>(
-  obj: T,
-  prefix = ""
-): Record<string, unknown> => {
-  const flattened: Record<string, unknown> = {};
-
-  for (const key in obj) {
-    if (Object.prototype.hasOwnProperty.call(obj, key)) {
-      const newKey = prefix ? `${prefix}_${key}` : key;
-      const value = obj[key];
-
-      if (typeof value === "object" && value !== null) {
-        Object.assign(flattened, flattenObject(value as Record<string, unknown>, newKey));
-      } else {
-        flattened[newKey] = value;
-      }
-    }
-  }
-
-  return flattened;
-};
 
 // Main function to process payload
 export const ProcessPayload = async (
@@ -57,13 +35,27 @@ export const ProcessPayload = async (
         const sysValue = (value as SysLink).sys;
 
         if (sysValue.linkType === "Asset") {
-          output[key] = await getAssetByID(sysValue.id);
+          const imageData = await getAssetByID(sysValue.id);
+          const imageFields = (imageData as unknown as EntryWithFields).fields;
+
+          const processedImageFields = await ProcessPayload(
+            imageFields as ContentfulPayload
+          );
+          const flattenedImageFields = FlattenObject(
+            processedImageFields,
+            "image"
+          );
+
+          // Instead of nesting under `author`, spread the properties into `output`
+          Object.assign(output, flattenedImageFields);
         } else if (sysValue.linkType === "Entry") {
           const entryData = await getEntryByID(sysValue.id);
 
-          console.log("Entry Data Response:", JSON.stringify(entryData, null, 2));
-
-          if (entryData && typeof entryData === "object" && "fields" in entryData) {
+          if (
+            entryData &&
+            typeof entryData === "object" &&
+            "fields" in entryData
+          ) {
             const entryFields = (entryData as EntryWithFields).fields;
 
             if (entryFields) {
@@ -71,7 +63,7 @@ export const ProcessPayload = async (
 
               // Process and flatten the entry fields
               const processedFields = await ProcessPayload(entryFields);
-              const flattenedFields = flattenObject(processedFields, "author");
+              const flattenedFields = FlattenObject(processedFields, "author");
 
               // Instead of nesting under `author`, spread the properties into `output`
               Object.assign(output, flattenedFields);
