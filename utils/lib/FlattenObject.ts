@@ -1,7 +1,8 @@
-// Utility function to flatten nested objects
+// Utility function to flatten nested objects up to a given depth level
 export const FlattenObject = <T extends Record<string, unknown>>(
   obj: T,
-  prefix = ""
+  prefix = "",
+  level: number = 1
 ): Record<string, unknown> => {
   const flattened: Record<string, unknown> = {};
 
@@ -10,10 +11,11 @@ export const FlattenObject = <T extends Record<string, unknown>>(
       const newKey = prefix ? `${prefix}_${key}` : key;
       const value = obj[key];
 
-      if (typeof value === "object" && value !== null) {
+      if (typeof value === "object" && value !== null && level > 1) {
+        // Recursively flatten the object until the given depth level is reached
         Object.assign(
           flattened,
-          FlattenObject(value as Record<string, unknown>, newKey)
+          FlattenObject(value as Record<string, unknown>, newKey, level - 1)
         );
       } else {
         flattened[newKey] = value;

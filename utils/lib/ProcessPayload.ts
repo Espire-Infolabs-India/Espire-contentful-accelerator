@@ -63,7 +63,7 @@ export const ProcessPayload = async (
 
               // Process and flatten the entry fields
               const processedFields = await ProcessPayload(entryFields);
-              const flattenedFields = FlattenObject(processedFields, "author");
+              const flattenedFields = FlattenObject(processedFields, "author" , 2);
 
               // Instead of nesting under `author`, spread the properties into `output`
               Object.assign(output, flattenedFields);
