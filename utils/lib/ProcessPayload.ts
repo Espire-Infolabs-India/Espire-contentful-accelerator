@@ -71,14 +71,15 @@ export const ProcessPayload = async (
 
               // Process and flatten the entry fields
               const processedFields = await ProcessPayload(entryFields);
-              output[key] = flattenObject(processedFields, "author");
+              const flattenedFields = flattenObject(processedFields, "author");
+
+              // Instead of nesting under `author`, spread the properties into `output`
+              Object.assign(output, flattenedFields);
             } else {
               console.warn(`No fields found for entry with ID: ${sysValue.id}`);
-              output[key] = null;
             }
           } else {
             console.warn(`Invalid entry structure for ID: ${sysValue.id}`);
-            output[key] = null;
           }
         }
       } else {
