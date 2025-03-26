@@ -1,101 +1,38 @@
+import { extractPlainTextAsync } from "@/common/RTE/ExtractRTEData";
 import { Handler } from "@netlify/functions";
-import { algoliasearch } from "algoliasearch";
-
-type TextNode = { data: object; marks: unknown[]; value: string; nodeType: string };
-type ContentNode = { data: object; content: TextNode[]; nodeType: string };
-type RTEData = { "en-US"?: { data: object; content: ContentNode[]; nodeType: string } };
-
-type Payload = {
-  title?: string;
-  shortDescription?: string;
-  content?: unknown;
-  image?: string;
-  url?: string;
-  author?: string;
-  publishDate?: string;
-  tags?: string[];
-};
-
-// Safe JSON parsing with timeout
-const parseJSONSafely = async (jsonString: string, timeoutMs = 500): Promise<Payload> => {
-  return Promise.race([
-    new Promise<Payload>((resolve) => {
-      try {
-        const parsed = JSON.parse(jsonString);
-
-        // Ensure parsed result is an object and cast it to Payload type
-        if (typeof parsed === "object" && parsed !== null) {
-          resolve(parsed as Payload);
-        } else {
-          console.warn("⚠️ Parsed JSON is not an object, returning empty object.");
-          resolve({} as Payload);
-        }
-      } catch (error) {
-        console.error("❌ JSON Parsing Error:", error);
-        resolve({} as Payload); // Return an empty object if parsing fails
-      }
-    }),
-    new Promise<never>((_, reject) => setTimeout(() => reject(new Error("JSON parse timeout")), timeoutMs)),
-  ]);
-};
-
-const extractPlainTextAsync = async (rteData: RTEData): Promise<string> => {
-  if (!rteData?.["en-US"]?.content) return "";
-
-  return new Promise((resolve) => {
-    setImmediate(() => {
-      const text = rteData["en-US"]?.content
-        ?.flatMap(node => node.content.map(textNode => textNode.value || ""))
-        .join(" ") || "";
-      resolve(text);
-    });
-  });
-};
+import { RTEData } from "@/common/RTE/ExtractRTEData";
+import { parseJSONSafely } from "@/utils/lib/ParseJSONData";
+import { PushDataToAlgolia } from "@/utils/lib/PushDataToAlgolia";
 
 
 const handler: Handler = async (event) => {
   try {
-    console.log("🔍 Processing Background Job...");
-
-    const payload = (await parseJSONSafely(event.body || "{}"));
-
+    const payload = await parseJSONSafely(event.body || "{}");
 
     if (!payload) {
       console.error("❌ Payload content is missing.");
-      return { statusCode: 400, body: JSON.stringify({ error: "Invalid payload" }) };
+      return {
+        statusCode: 400,
+        body: JSON.stringify({ error: "Invalid payload" }),
+      };
     }
 
-    console.log("retuened Payload :::: ",payload);
-    const content = await extractPlainTextAsync(payload.content as RTEData);
+    // const content = await extractPlainTextAsync(
+    //   payload.shortDescription as unknown as RTEData
+    // );
 
-    console.log("📄 Extracted Content:", content);
+   await PushDataToAlgolia(payload);
 
-    const client = algoliasearch(process.env.ALGOLIA_APP_ID as string, process.env.ALGOLIA_API_KEY as string);
-
-    await client.saveObject({
-      indexName: process.env.ALGOLIA_INDEX_NAME as string,
-      body: {
-        name: payload?.title,
-        shortDescription: payload?.shortDescription,
-        blogContent: payload?.content,
-        content: content,
-        image: payload?.image,
-        url: payload?.url,
-        author: payload?.author,
-        publishDate: payload?.publishDate,
-        tags: payload?.tags,
-      },
-    });
-
-    console.log("✅ Successfully indexed in Algolia");
-
-    
-    console.log("📄 Extracted Content 2nd time:", content);
-
-    return { statusCode: 200, body: JSON.stringify({ message: "Background job completed" }) };
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ message: "Background job completed" }),
+    };
   } catch (error) {
     console.error("❌ Error in background processing:", error);
-    return { statusCode: 500, body: JSON.stringify({ error: "Internal Server Error" }) };
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: "Internal Server Error" }),
+    };
   }
 };
 
