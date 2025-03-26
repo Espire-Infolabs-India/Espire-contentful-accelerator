@@ -2,7 +2,6 @@ import { contentfulClient } from "../lib/ContentfulClient";
 
 export const getAssetByID = (id: string) => {
 
-    console.log("🔍 getAsset :: id :: ", id);
     const client = contentfulClient();
     try {
         if (client) {
