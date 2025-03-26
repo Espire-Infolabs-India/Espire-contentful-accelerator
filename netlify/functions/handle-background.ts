@@ -1,14 +1,11 @@
-import { extractPlainTextAsync } from "@/common/RTE/ExtractRTEData";
 import { Handler } from "@netlify/functions";
-import { RTEData } from "@/common/RTE/ExtractRTEData";
 import { parseJSONSafely } from "@/utils/lib/ParseJSONData";
 import { PushDataToAlgolia } from "@/utils/lib/PushDataToAlgolia";
-
+import { ProcessPayload } from "@/utils/lib/ProcessPayload";
 
 const handler: Handler = async (event) => {
   try {
     const payload = await parseJSONSafely(event.body || "{}");
-    console.log("🔍 Incoming Event Body:", payload);
 
     if (!payload) {
       console.error("❌ Payload content is missing.");
@@ -18,11 +15,9 @@ const handler: Handler = async (event) => {
       };
     }
 
-    // const content = await extractPlainTextAsync(
-    //   payload.shortDescription as unknown as RTEData
-    // );
+    const formattedPayload = await ProcessPayload(payload);
 
-   await PushDataToAlgolia(payload);
+    await PushDataToAlgolia(formattedPayload);
 
     return {
       statusCode: 200,
