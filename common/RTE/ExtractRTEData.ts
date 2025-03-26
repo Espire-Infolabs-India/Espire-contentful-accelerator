@@ -13,7 +13,6 @@ export type RTEData = {
 export const extractPlainTextAsync = async (
   rteData: RTEData
 ): Promise<string> => {
-  console.log("I am getting called 🔊");
 
   if (!rteData?.content || !Array.isArray(rteData.content)) {
     console.warn("⚠️ Invalid or missing RTE content.");

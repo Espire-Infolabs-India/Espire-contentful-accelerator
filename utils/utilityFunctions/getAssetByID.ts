@@ -1,12 +1,12 @@
 import { contentfulClient } from "../lib/ContentfulClient";
 
-export const getEntryByID = (id: string) => {
+export const getAssetByID = (id: string) => {
 
-    console.log("🔍 getEntryByID :: id :: ", id);
+    console.log("🔍 getAsset :: id :: ", id);
     const client = contentfulClient();
     try {
         if (client) {
-        return client.getEntry(id);
+        return client.getAsset(id);
         } else {
         console.log("No Data available");
         return false;
