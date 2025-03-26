@@ -12,6 +12,13 @@ type SysLink = {
   };
 };
 
+interface EntryWithAuthor {
+  author?: {
+    fields: ContentfulPayload;
+  };
+}
+
+
 export const ProcessPayload = async (
   input: ContentfulPayload
 ): Promise<ContentfulPayload> => {
@@ -37,7 +44,11 @@ export const ProcessPayload = async (
         if (sysValue.linkType === "Asset") {
           output[key] = await getAssetByID(sysValue.id);
         } else if (sysValue.linkType === "Entry") {
-          output[key] = await getEntryByID(sysValue.id); // Process the returned entry fields
+          const entryData = await getEntryByID(sysValue.id);
+          if (entryData && (entryData as EntryWithAuthor).author?.fields) {
+            const authorFields = (entryData as EntryWithAuthor).author?.fields;
+            output[key] = await ProcessPayload(authorFields as ContentfulPayload);
+          }
         }
       } else {
         output[key] = value; // Keep other objects as is
