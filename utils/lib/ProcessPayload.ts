@@ -12,12 +12,34 @@ type SysLink = {
   };
 };
 
-interface EntryWithAuthor {
-  author?: {
-    fields: ContentfulPayload;
-  };
+interface EntryWithFields {
+  fields?: ContentfulPayload;
 }
 
+// Utility function to flatten nested objects
+const flattenObject = <T extends Record<string, unknown>>(
+  obj: T,
+  prefix = ""
+): Record<string, unknown> => {
+  const flattened: Record<string, unknown> = {};
+
+  for (const key in obj) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
+      const newKey = prefix ? `${prefix}_${key}` : key;
+      const value = obj[key];
+
+      if (typeof value === "object" && value !== null) {
+        Object.assign(flattened, flattenObject(value as Record<string, unknown>, newKey));
+      } else {
+        flattened[newKey] = value;
+      }
+    }
+  }
+
+  return flattened;
+};
+
+// Main function to process payload
 export const ProcessPayload = async (
   input: ContentfulPayload
 ): Promise<ContentfulPayload> => {
@@ -27,18 +49,12 @@ export const ProcessPayload = async (
     const value = input[key];
 
     if (Array.isArray(value)) {
-      output[key] = value.join(", "); // Flatten arrays to a string
+      output[key] = value.join(", "); // Flatten arrays to string
     } else if (typeof value === "object" && value !== null) {
-      if (
-        "content" in (value as { content?: unknown[] }) &&
-        Array.isArray((value as { content?: unknown[] }).content)
-      ) {
-        output[key] = await extractPlainTextAsync(value as unknown as RTEData);
-      } else if (
-        "sys" in (value as { sys?: SysLink["sys"] }) &&
-        (value as { sys?: SysLink["sys"] }).sys
-      ) {
-        const sysValue = (value as { sys: SysLink["sys"] }).sys;
+      if ("content" in value && Array.isArray(value.content)) {
+        output[key] = await extractPlainTextAsync(value as RTEData);
+      } else if ("sys" in value && value.sys) {
+        const sysValue = (value as SysLink).sys;
 
         if (sysValue.linkType === "Asset") {
           output[key] = await getAssetByID(sysValue.id);
@@ -48,32 +64,14 @@ export const ProcessPayload = async (
           console.log("Entry Data Response:", JSON.stringify(entryData, null, 2));
 
           if (entryData && typeof entryData === "object" && "fields" in entryData) {
-            const authorFields = entryData.fields as Record<string, EntryWithAuthor>;
+            const entryFields = (entryData as EntryWithFields).fields;
 
-            if (authorFields) {
-              console.log("Extracted Author Fields:", authorFields);
+            if (entryFields) {
+              console.log("Extracted Entry Fields:", entryFields);
 
-              // Keep the original keys unchanged
-              const authorData = await ProcessPayload(authorFields);
-
-              const flattenObject = (obj: Record<string, unknown>, prefix = ""): Record<string, string> => {
-                const flattened: Record<string, string> = {};
-              
-                for (const key in obj) {
-                  if (Object.prototype.hasOwnProperty.call(obj, key)) {
-                    const newKey = prefix ? `${prefix}_${key}` : key;
-              
-                    if (typeof obj[key] === "object" && obj[key] !== null) {
-                      Object.assign(flattened, flattenObject(obj[key] as Record<string, unknown>, newKey));
-                    } else {
-                      flattened[newKey] = String(obj[key]);
-                    }
-                  }
-                }
-              
-                return flattened;
-              };
-              output[key] = flattenObject(authorData as unknown as ContentfulPayload, "author");
+              // Process and flatten the entry fields
+              const processedFields = await ProcessPayload(entryFields);
+              output[key] = flattenObject(processedFields, "author");
             } else {
               console.warn(`No fields found for entry with ID: ${sysValue.id}`);
               output[key] = null;
