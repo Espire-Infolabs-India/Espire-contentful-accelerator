@@ -1,28 +1,40 @@
 type TextNode = {
-    data: object;
-    marks: unknown[];
-    value: string;
-    nodeType: string;
+  data: object;
+  marks: unknown[];
+  value: string;
+  nodeType: string;
+};
+type ContentNode = { data: object; content: TextNode[]; nodeType: string };
+export type RTEData = {
+  [x: string]: (ContentNode | TextNode)[];
 };
 
-type ContentNode = {
-    data: object;
-    content: TextNode[];
-    nodeType: string;
-};
 
-type RTEData = {
-    "en-US"?: {
-        data: object;
-        content: ContentNode[];
-        nodeType: string;
-    };
-};
+export const extractPlainTextAsync = async (
+  rteData: RTEData
+): Promise<string> => {
+  console.log("I am getting called 🔊");
 
-export const extractPlainText = (rteData: RTEData): string => {
-    if (!rteData || !rteData["en-US"] || !rteData["en-US"].content) return "";
+  if (!rteData?.content || !Array.isArray(rteData.content)) {
+    console.warn("⚠️ Invalid or missing RTE content.");
+    return "";
+  }
 
-    return rteData["en-US"].content
-        ?.map(node => node.content.map(textNode => textNode.value).join(" "))
-        ?.join("\n\n");
+  const extractText = (nodes: Array<ContentNode | TextNode>): string => {
+    return nodes
+      .map((node) => {
+        if ("value" in node && typeof node.value === "string") {
+          return node.value.trim(); // Extract text values
+        }
+        if ("content" in node && Array.isArray(node.content)) {
+          return extractText(node.content); // Recursively extract from child nodes
+        }
+        return "";
+      })
+      .join(" ")
+      .replace(/\s+/g, " ") // Normalize spaces
+      .trim();
+  };
+
+  return extractText(rteData.content);
 };
