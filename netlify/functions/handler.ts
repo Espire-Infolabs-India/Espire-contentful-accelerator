@@ -9,7 +9,7 @@ const handler: Handler = async (event) => {
     console.log("🔍 Incoming Event Body:", event.body);
 
     // Trigger the background function with the payload
-    await fetch(`http://localhost:8888/.netlify/functions/handler-background`, {
+    await fetch(`${process?.env.PUBLIC_URL}/.netlify/functions/handler-background`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: event.body, // Send the same payload
