@@ -8,8 +8,10 @@ const handler: Handler = async (event) => {
 
     console.log("🔍 Incoming Event Body:", event.body);
 
+    console.log('✉ process.env.PUBLIC_URL' , process.env.PUBLIC_URL);
+
     // Trigger the background function with the payload
-    await fetch(`${process?.env.PUBLIC_URL}/.netlify/functions/handler-background`, {
+    await fetch(`https://espire-contentful-starterkit.netlify.app/.netlify/functions/handler-background`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: event.body, // Send the same payload
