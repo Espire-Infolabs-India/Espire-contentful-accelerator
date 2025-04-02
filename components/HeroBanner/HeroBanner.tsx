@@ -6,7 +6,7 @@ import { ComponentDataProps } from "@/utils/lib/CommonProps";
 const HeroBanner = ({ data }: ComponentDataProps) => {
   return (
     <div
-      className="-mx-7 hero-banner relative  bg-cover bg-no-repeat p-12 text-center"
+      className="hero-banner relative  bg-cover bg-no-repeat p-12 text-center"
       style={{
         backgroundImage: `url(${data?.fields?.image?.fields?.file?.url})`,
         height: "400px",
