@@ -103,7 +103,7 @@ const Header = ({ data }: ComponentDataProps) => {
 
               <div className="flex lg:hidden relative">
                 <Button onClick={HumbargarOpen}>
-                  <Image src={HumbargarBG} className="w-[20] h-[20]" />
+                  <Image src={HumbargarBG} className="w-[20] h-[20]" alt="" />
                 </Button>
                 {anchorEl == true ? (
                   <div className="bg-[#203b72] w-full h-full shadow fixed top-0 right-0 z-30 p-4 overflow-y-auto">
