@@ -5,36 +5,30 @@ const NavigationItems = ({ data }: ComponentDataProps) => {
   const navigationItems = data?.fields?.subLinks;
 
   return (
-    <nav className="relative">
-      <ul className="flex space-x-6">
-        <li className="group relative">
-          <Link
-            href={data.fields.itemUrl}
-            className="text-white hover:text-gray-300"
-          >
-            {data.fields.itemName}
-          </Link>
+    <>
+      <Link href={data.fields.itemUrl}>{data.fields.itemName}</Link>
 
-          {/* Dropdown Menu */}
-          {navigationItems && (
-            <ul className="absolute left-0 hidden group-hover:block bg-white shadow-lg rounded-lg mt-2 w-48">
-              {navigationItems?.map(
-                (navigationItem: ComponentProps, index: number) => (
-                  <li key={index} className="border-b last:border-none">
-                    <Link
-                      href={navigationItem.fields.url}
-                      className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                    >
-                      {navigationItem.fields.title}
-                    </Link>
-                  </li>
-                )
-              )}
-            </ul>
+      {/* Dropdown Menu */}
+      {navigationItems && (
+        <ul
+          className="flex flex-col lg:flex-row lg:flex-wrap static lg:absolute z-10 left-0 lg:invisible lg:group-hover:visible rounded bg-white shadow-lg px-2 lg:px-0 mt-2 w-full
+          "
+        >
+          {navigationItems?.map(
+            (navigationItem: ComponentProps, index: number) => (
+              <li key={index} className="last:border-none">
+                <Link
+                  href={navigationItem.fields.url}
+                  className="block p-2 text-black lg:px-10 lg:py-4"
+                >
+                  {navigationItem.fields.title}
+                </Link>
+              </li>
+            )
           )}
-        </li>
-      </ul>
-    </nav>
+        </ul>
+      )}
+    </>
   );
 };
 

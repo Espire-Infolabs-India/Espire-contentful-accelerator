@@ -4,7 +4,7 @@ import { ComponentDataProps, ComponentProps } from "@/utils/lib/CommonProps";
 const LinkListItems = ({ data }: ComponentDataProps) => {
   const linkListItems = data?.fields?.url;
   return (
-    <div className="flex gap-4">
+    <div className="flex flex-col lg:flex-row gap-10">
       {linkListItems?.map((linklistitems: ComponentProps, index: number) => {
         return (
           <div key={index}>

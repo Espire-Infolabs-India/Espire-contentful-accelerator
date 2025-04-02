@@ -3,9 +3,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
-
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -22,6 +19,7 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family:poppins, Arial, Helvetica, sans-serif;
-  display: flex;
-  justify-content: center;
+  /* display: flex;
+  justify-content: center; */
 }
+

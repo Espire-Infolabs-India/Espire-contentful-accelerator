@@ -4,7 +4,7 @@ const LanguageSelector = () => {
       <div className="language-selector">
         <select
           aria-label="Default select example"
-          className="w-full p-2 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-[200] p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           <option>Select Language</option>
           <option value="1">English</option>
