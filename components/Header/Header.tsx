@@ -8,7 +8,7 @@ import NavigationItems from "../NavigationItems/NavigationItems";
 import { ComponentDataProps, ComponentProps } from "@/utils/lib/CommonProps";
 import { Button } from "@mui/material";
 import HumbargarBG from "../../public/menu-mobile.svg";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const HeaderComponents: Record<
   string,
@@ -21,24 +21,19 @@ const HeaderComponents: Record<
 };
 
 const Header = ({ data }: ComponentDataProps) => {
+  const [anchorEl, setAnchorEl] = useState(false);
   if (!data || !data.fields) return null; // Prevents errors if `data` is undefined
 
   const primarycomponents = data.fields.primaryNavigation ?? [];
   const secondarycomponents = data.fields.secondaryNavigation ?? [];
 
-  const [anchorEl, setAnchorEl] = useState(false);
-
-  const HumbargarOpen = (event: any) => {
+  const HumbargarOpen = () => {
     setAnchorEl(true);
   };
 
-  const HumbargarClose = (event: any) => {
+  const HumbargarClose = () => {
     setAnchorEl(false);
   };
-
-  useEffect(() => {
-    console.log(anchorEl);
-  }, [anchorEl]);
 
   return (
     <div className="bg-[#203b72]">
