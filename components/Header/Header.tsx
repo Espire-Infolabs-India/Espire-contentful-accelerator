@@ -9,6 +9,7 @@ import { ComponentDataProps, ComponentProps } from "@/utils/lib/CommonProps";
 import { Button } from "@mui/material";
 import HumbargarBG from "../../public/menu-mobile.svg";
 import { useState } from "react";
+import Link from "next/link";
 
 const HeaderComponents: Record<
   string,
@@ -59,13 +60,15 @@ const Header = ({ data }: ComponentDataProps) => {
           {/* Left Section - Logo */}
           <div className="flex items-center justify-between">
             {data.fields.image?.fields?.file?.url && (
-              <Image
-                className="mr-4 pl-4"
+              <Link href={'/'}><Image
+                className="mr-4"
                 src={`https://${data?.fields?.image?.fields?.file?.url}`}
                 width={100}
                 height={70}
                 alt="Logo"
+                unoptimized
               />
+              </Link>
             )}
 
             {/* Center Section - Search Box & Navigation */}
@@ -148,6 +151,8 @@ const Header = ({ data }: ComponentDataProps) => {
                   ""
                 )}
               </div>
+
+              
             </div>
           </div>
         </div>
