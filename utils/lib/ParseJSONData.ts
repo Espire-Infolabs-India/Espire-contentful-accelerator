@@ -1,14 +1,15 @@
-type Payload = {
+export type Payload = {
     title?: string;
     shortDescription?: string;
     blogContent?: unknown;
-    image?: string;
+    image_file?: {
+      url: string;
+    };
     url?: string;
     author?: string;
     publishDate?: string;
-    tags?: string[];
+    tags?: string[] | string;
   };
-  
 export const parseJSONSafely = async (
     jsonString: string,
     timeoutMs = 500
