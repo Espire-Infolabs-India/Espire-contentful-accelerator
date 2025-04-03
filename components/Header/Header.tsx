@@ -9,6 +9,7 @@ import { ComponentDataProps, ComponentProps } from "@/utils/lib/CommonProps";
 import { Button } from "@mui/material";
 import HumbargarBG from "../../public/menu-mobile.svg";
 import { useState } from "react";
+import Link from "next/link";
 
 const HeaderComponents: Record<
   string,
@@ -21,27 +22,27 @@ const HeaderComponents: Record<
 };
 
 const Header = ({ data }: ComponentDataProps) => {
-  const [anchorEl, setAnchorEl] = useState(false);
+  const [ActiveValue, setActiveValue] = useState(false);
   if (!data || !data.fields) return null; // Prevents errors if `data` is undefined
 
   const primarycomponents = data.fields.primaryNavigation ?? [];
   const secondarycomponents = data.fields.secondaryNavigation ?? [];
 
   const HumbargarOpen = () => {
-    setAnchorEl(true);
+    setActiveValue(true);
   };
 
   const HumbargarClose = () => {
-    setAnchorEl(false);
+    setActiveValue(false);
   };
 
   return (
-    <div className="bg-[#203b72]">
-      <header className="pt-[20] pl-2 pr-2 pb-2 container m-auto">
+    <div className="header-bg">
+      <header className="pt-4 pl-2 pr-2 pb-2 container m-auto">
         {/* Right Section - Secondary Navigation & Language Selector */}
         <div className="flex justify-center lg:block">
           <div className="hidden lg:flex items-center lg:justify-end mb-1">
-            <div className="flex items-center gap-6">
+            <div className="flex items-center gap-6 header-menu-font-size">
               {secondarycomponents?.map(
                 (component: ComponentProps, index: number) => {
                   if (!component?.sys?.contentType?.sys?.id) return null;
@@ -59,20 +60,23 @@ const Header = ({ data }: ComponentDataProps) => {
           {/* Left Section - Logo */}
           <div className="flex items-center justify-between">
             {data.fields.image?.fields?.file?.url && (
-              <Image
-                className="mr-4"
-                src={`https://${data?.fields?.image?.fields?.file?.url}`}
-                width={100}
-                height={70}
-                alt="Logo"
-              />
+              <Link href={"/"}>
+                <Image
+                  className="mr-4"
+                  src={`https://${data?.fields?.image?.fields?.file?.url}`}
+                  width={100}
+                  height={70}
+                  alt="Logo"
+                  unoptimized
+                />
+              </Link>
             )}
 
             {/* Center Section - Search Box & Navigation */}
             <div className="flex items-center justify-evenly gap-8">
               <SearchBox />
 
-              <nav className="hidden relative lg:block">
+              <nav className={`hidden relative lg:block header-menu-font-size`}>
                 <ul className="flex [&_a]:px-6">
                   {primarycomponents?.map((component: ComponentProps) => {
                     if (!component?.sys?.contentType?.sys?.id) return null;
@@ -100,7 +104,7 @@ const Header = ({ data }: ComponentDataProps) => {
                 <Button onClick={HumbargarOpen}>
                   <Image src={HumbargarBG} className="w-[20] h-[20]" alt="" />
                 </Button>
-                {anchorEl == true ? (
+                {ActiveValue == true ? (
                   <div className="bg-[#203b72] w-full h-full shadow fixed top-0 right-0 z-30 p-4 overflow-y-auto">
                     <div className="flex justify-end">
                       <Button onClick={HumbargarClose}>

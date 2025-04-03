@@ -1,4 +1,4 @@
-@import '@fontsource/poppins/index.css';
+@import "@fontsource/poppins/index.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -18,8 +18,16 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family:poppins, Arial, Helvetica, sans-serif;
+  font-family: "poppins", Arial, Helvetica, sans-serif;
   /* display: flex;
   justify-content: center; */
 }
 
+@layer components {
+  .header-bg {
+    background-color: #203b72;
+  }
+  .header-menu-font-size {
+    font-size: 14px;
+  }
+}

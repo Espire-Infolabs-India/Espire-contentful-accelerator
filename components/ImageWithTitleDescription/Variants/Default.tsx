@@ -7,18 +7,18 @@ import { ComponentDataProps } from "@/utils/lib/CommonProps";
 
 const Default = ({ data }: ComponentDataProps) => {
   return (
-    <div className="py-16 px-8 font-sans">
+    <div className="py-10 font-sans">
       <div className="container mx-auto flex flex-col md:flex-row justify-between items-center gap-x-6 gap-y-8">
         <div className="md:w-full">
           <Image
             className="mb-5"
             src={`https://${data?.fields?.image?.fields?.file?.url}`}
-            width={600}
-            height={400}
+            width={400}
+            height={101}
             alt={""}
             unoptimized
           />
-          <h2 className="text-3xl font-semibold mb-4">{data?.fields?.title}</h2>
+          <h2 className={`text-5xl mb-4`}>{data?.fields?.title}</h2>
           <div className="text-base">
             {documentToReactComponents(
               data.fields.description as unknown as Document,
