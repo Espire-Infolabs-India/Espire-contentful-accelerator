@@ -28,8 +28,8 @@ const Footer = ({ data }: ComponentDataProps) => {
   const middlelayercomponents = data?.fields?.middleLayerContainer ?? [];
 
   return (
-    <footer className="bg-blue-900 text-white py-10">
-      <div className="max-w-6xl mx-auto px-6">
+    <footer className="bg-[var(--royalblue)] text-white py-[20px]">
+      <div className="container mx-auto px-6">
         {/* Logo & Navigation */}
         <div className="flex flex-col md:flex-row justify-between items-center">
           {/* Logo */}
@@ -50,7 +50,7 @@ const Footer = ({ data }: ComponentDataProps) => {
           </div>
 
           {/* Navigation Links */}
-          <div className="flex flex-col gap-12">
+          <div className="flex flex-col gap-12 text-[16px]">
             {toplayercomponents?.map(
               (toplayercomponent: ComponentProps, index: number) => {
                 if (!toplayercomponent?.sys?.contentType?.sys?.id) return null;

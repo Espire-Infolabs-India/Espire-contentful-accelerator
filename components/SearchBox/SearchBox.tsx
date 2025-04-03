@@ -4,7 +4,7 @@ const SearchBox = () => {
       <input
         type="text"
         placeholder="Search"
-        className="w-[150px] sm:w-[250px] lg:w-[35cqw] p-[7px] bg-[#0A3A6B] border-white border-solid border-[1px]"
+        className="w-[150px] sm:w-[250px] lg:w-[35cqw] p-[7px] bg-[var(--royalblue)] border-white border-solid border-[1px]"
       />
     </div>
   );
