@@ -6,6 +6,10 @@ import LinkList from "../LinkList/LinkList";
 import Image from "next/image";
 import Link from "next/link";
 import { ComponentDataProps, ComponentProps } from "@/utils/lib/CommonProps";
+import SearchIcon from "@mui/icons-material/Search";
+import IconButton from "@mui/material/IconButton";
+
+
 
 const FooterComponents: Record<
   string,
@@ -28,7 +32,7 @@ const Footer = ({ data }: ComponentDataProps) => {
   const middlelayercomponents = data?.fields?.middleLayerContainer ?? [];
 
   return (
-    <footer className="bg-[var(--royalblue)] text-white py-[20px]">
+    <footer className="bg-[var(--royalblue)] text-white pt-[20px] pb-[80px] mt-10">
       <div className="container mx-auto px-6">
         {/* Logo & Navigation */}
         <div className="flex flex-col md:flex-row justify-between items-center">
@@ -37,10 +41,10 @@ const Footer = ({ data }: ComponentDataProps) => {
             {data.fields.image?.fields?.file?.url && (
               <Link href="/" title="Home">
                 <Image
-                  className="mb-5 w-24"
+                  className="w-24"
                   src={`https://${data?.fields?.image?.fields?.file?.url}`}
-                  width={600}
-                  height={400}
+                  width={90}
+                  height={69}
                   alt="logo"
                   loading="lazy"
                   unoptimized
@@ -50,7 +54,7 @@ const Footer = ({ data }: ComponentDataProps) => {
           </div>
 
           {/* Navigation Links */}
-          <div className="flex flex-col gap-12 text-[16px]">
+          <div className="flex flex-col lg:flex-row items-center gap-12 text-[16px]">
             {toplayercomponents?.map(
               (toplayercomponent: ComponentProps, index: number) => {
                 if (!toplayercomponent?.sys?.contentType?.sys?.id) return null;
@@ -68,12 +72,18 @@ const Footer = ({ data }: ComponentDataProps) => {
                 );
               }
             )}
+            <span className="hidden lg:block">
+            <IconButton size="large">
+              <SearchIcon className="text-white" />
+            </IconButton>
+            </span>
           </div>
+          
         </div>
 
         {/* Address Section */}
-        <div className="mt-6 flex justify-between md:text-left">
-          <div className="text-sm text-gray-300">
+        <div className="mt-12 flex flex-col lg:flex-row justify-between md:text-left t">
+          <div className="text-sm text-white text-center lg:text-left mb-5 lg:mb-0">
             {data?.fields?.address &&
               documentToReactComponents(
                 data?.fields?.address as unknown as Document,
@@ -82,7 +92,7 @@ const Footer = ({ data }: ComponentDataProps) => {
           </div>
 
           {/* Social Links */}
-          <div className="flex flex-col gap-12">
+          <div className="flex flex-col gap-12 mb-5 lg:mb-0">
             {middlelayercomponents?.map(
               (middlelayercomponent: ComponentProps, index: number) => {
                 if (!middlelayercomponent?.sys?.contentType?.sys?.id)
@@ -95,7 +105,7 @@ const Footer = ({ data }: ComponentDataProps) => {
                 if (!MiddleLayersComponent) return null;
 
                 return (
-                  <div className="px-4" key={index}>
+                  <div key={index}>
                     <MiddleLayersComponent
                       key={index}
                       data={middlelayercomponent}
@@ -109,7 +119,7 @@ const Footer = ({ data }: ComponentDataProps) => {
 
         {/* Copyright */}
         {data?.fields?.copyrightText && (
-          <p className="text-left text-sm border-t border-gray-500 mt-6 pt-4">
+          <p className="text-center lg:text-left text-sm border-t border-gray-500 mt-4 pt-2">
             {data?.fields?.copyrightText}
           </p>
         )}

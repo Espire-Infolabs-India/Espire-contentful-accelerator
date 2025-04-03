@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { ComponentDataProps, ComponentProps } from "@/utils/lib/CommonProps";
+import { PoppinFont } from '../../utils/fonts'
+
 
 const LinkListItems = ({ data }: ComponentDataProps) => {
   const linkListItems = data?.fields?.url;
@@ -14,7 +16,7 @@ const LinkListItems = ({ data }: ComponentDataProps) => {
                   href={linklistitems.fields.url}
                   title=""
                   target=""
-                  className="text-white"
+                  className={`text-white  footer-menu ${PoppinFont.className}`}
                 >
                   {linklistitems.fields.title}
                 </Link>
