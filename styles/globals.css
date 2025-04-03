@@ -6,6 +6,7 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --royalblue: #203b72;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -25,9 +26,10 @@ body {
 
 @layer components {
   .header-bg {
-    background-color: #203b72;
+    background-color: var(--royalblue);
   }
   .header-menu-font-size {
     font-size: 14px;
   }
+ 
 }

@@ -105,7 +105,7 @@ const Header = ({ data }: ComponentDataProps) => {
                   <Image src={HumbargarBG} className="w-[20] h-[20]" alt="" />
                 </Button>
                 {ActiveValue == true ? (
-                  <div className="bg-[#203b72] w-full h-full shadow fixed top-0 right-0 z-30 p-4 overflow-y-auto">
+                  <div className="bg-[var(--royalblue)] w-full h-full shadow fixed top-0 right-0 z-30 p-4 overflow-y-auto">
                     <div className="flex justify-end">
                       <Button onClick={HumbargarClose}>
                         <svg
