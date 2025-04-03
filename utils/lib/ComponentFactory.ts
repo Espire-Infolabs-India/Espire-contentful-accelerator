@@ -9,6 +9,7 @@ import Tabs from "@/components/Tabs/Tabs";
 import Map from "@/components/Map/Map";
 import FeatureCard from "@/components/FeatureCard/FeatureCard";
 import Container from "@/components/Container/Container";
+import ListingComponent from "@/components/Lisiting/Lisitng";
 
 export const ComponentFactory: Record<string, React.FC<{data : ComponentProps}>> = {
     heroBanner: HeroBanner,
@@ -20,5 +21,6 @@ export const ComponentFactory: Record<string, React.FC<{data : ComponentProps}>>
     componentTabs: Tabs,
     componentMap : Map,
     componentFeatureCard: FeatureCard,
-    componentContainer: Container
+    componentContainer: Container,
+    componentLisiting: ListingComponent
 };

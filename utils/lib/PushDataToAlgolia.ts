@@ -8,10 +8,6 @@ export const PushDataToAlgolia = async (payload: {
     process.env.ALGOLIA_API_KEY as string
   );
 
-  // await client.clearObjects({
-  //   indexName: process.env.ALGOLIA_INDEX_NAME as string,
-  // });
-
   await client.saveObject({
     indexName: process.env.ALGOLIA_INDEX_NAME as string,
     body: payload,
