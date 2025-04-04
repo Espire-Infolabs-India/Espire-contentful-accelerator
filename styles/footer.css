@@ -6,13 +6,25 @@
   footer .footer-menu {
     @apply relative inline-block;
   }
+
   footer .footer-menu::after {
-    @apply absolute left-0 bottom-[-1px] w-[100%] h-[0.5px] bg-white content-[''] opacity-0;
+    /* Tailwind doesn't support @apply for pseudo-elements — use raw CSS */
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 100%;
+    height: 0.5px;
+    background-color: white;
+    content: "";
+    opacity: 0;
   }
+
   footer .footer-menu:hover::after {
-    @apply opacity-95;
+    /* Use raw CSS here as well */
+    opacity: 0.95;
   }
-  footer .footer-link-center{
-    @apply text-center md:text-left
+
+  footer .footer-link-center {
+    @apply text-center md:text-left;
   }
 }
