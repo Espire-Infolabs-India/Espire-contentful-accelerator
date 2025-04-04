@@ -51,7 +51,7 @@ const RichtextRenderOptions: Options = {
     [BLOCKS.HEADING_2]: (node, children) => <Heading2>{children}</Heading2>,
     [BLOCKS.EMBEDDED_ASSET]: (node) => {
       const { file, title } = node.data.target.fields;
-      return <Image src={file.url} alt={title} width={600} height={400} />;
+      return <Image src={file.url} alt={title} width={600} height={400} unoptimized />;
     },
     [INLINES.HYPERLINK]: (node, children) => (
       <HyperLNK node={node}> {children} </HyperLNK>

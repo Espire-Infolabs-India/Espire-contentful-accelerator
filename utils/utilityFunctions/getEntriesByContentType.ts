@@ -13,7 +13,7 @@ export const getEntriesByContentType = async (
         [key: string]: unknown;
       } = {
         content_type,
-        include: 3,
+        include: 8,
       };
 
       if (url) {
