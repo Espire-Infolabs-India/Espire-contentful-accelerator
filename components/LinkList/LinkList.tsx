@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { ComponentDataProps, ComponentProps } from "@/utils/lib/CommonProps";
-import { PoppinFont } from '../../utils/fonts'
-
+import { PoppinFont } from "../../utils/fonts";
 
 const LinkListItems = ({ data }: ComponentDataProps) => {
   const linkListItems = data?.fields?.url;
@@ -11,7 +10,7 @@ const LinkListItems = ({ data }: ComponentDataProps) => {
         return (
           <div key={index}>
             <ul>
-              <li className="item0 odd first">
+              <li className="item0 odd first footer-link-center">
                 <Link
                   href={linklistitems.fields.url}
                   title=""

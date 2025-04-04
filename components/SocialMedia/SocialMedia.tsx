@@ -4,7 +4,7 @@ import { ComponentDataProps, ComponentProps } from "@/utils/lib/CommonProps";
 const SocialMedia = ({ data }: ComponentDataProps) => {
   const SocialMediaData = data.fields.listOfSocialMedia;
   return (
-    <div className="flex items-center justify-end w-full">
+    <div className="flex items-center justify-center md:justify-end w-full">
       {SocialMediaData?.map(
         (SocialMediaDatacomponent: ComponentProps, index: number) => {
           const image = SocialMediaDatacomponent?.fields?.image ?? "";

@@ -11,6 +11,7 @@ import HumbargarBG from "../../public/menu-mobile.svg";
 import { useState } from "react";
 import Link from "next/link";
 import { PoppinFont } from '../../utils/fonts'
+import '../../styles/header.css'
 
 const HeaderComponents: Record<
   string,

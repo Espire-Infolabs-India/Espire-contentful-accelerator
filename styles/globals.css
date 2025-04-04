@@ -20,27 +20,4 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: "poppins", Arial, Helvetica, sans-serif;
-  /* display: flex;
-  justify-content: center; */
-}
-
-@layer components {
-  .header-bg {
-    background-color: var(--royalblue);
-  }
-  .header-menu-font-size {
-    font-size: 14px;
-  }
-   
-  footer .footer-menu{
-    @apply relative inline-block;
-  }
-  footer .footer-menu::after{
-    @apply absolute left-0 bottom-[-1px] w-[100%] h-[0.5px] bg-white content-[''] opacity-0;
-  }
-  footer .footer-menu:hover::after {
-    @apply opacity-95;
-  }
- 
-
 }
