@@ -1,17 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   InstantSearch,
   Hits,
-  SearchBox,
   Highlight,
   RefinementList,
   Pagination,
   Configure,
+  useSearchBox,
 } from "react-instantsearch";
 import alogoliaClient from "@/utils/lib/algoliaClient";
 import Image from "next/image";
 import type { Payload } from "@/utils/lib/ParseJSONData";
 import type { Hit } from "instantsearch.js/es/types";
+import { useRouter } from "next/router";
 
 type BaseHit = Record<string, unknown>;
 
@@ -69,28 +70,28 @@ const Hit = ({ hit }: { hit: Payload }) => {
     </div>
   );
 };
+const SearchWithUrlSync = () => {
+  const router = useRouter();
+  const { refine } = useSearchBox();
 
+  const queryFromUrl =
+    typeof router.query.search === "string" ? router.query.search : "";
+
+  useEffect(() => {
+    refine(queryFromUrl);
+  }, [queryFromUrl, refine]);
+
+  return null;
+};
 const ListingComponent = () => {
   const indexname = process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME as string;
-
   return (
     <InstantSearch searchClient={alogoliaClient} indexName={indexname} insights>
       <div className="bg-gray-50 min-h-screen py-6 px-4">
         <div className="max-w-7xl mx-auto space-y-10">
           <div className="flex justify-center mb-6 mt-2">
             <div className="relative w-full max-w-2xl">
-              <SearchBox
-                placeholder="Search blog posts..."
-                classNames={{
-                  root: "w-full",
-                  form: "relative",
-                  input:
-                    "w-full border border-gray-300 rounded-md px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-blue-400",
-                  submit: "hidden",
-                  reset: "hidden",
-                  loadingIndicator: "hidden",
-                }}
-              />
+              <SearchWithUrlSync />
               <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none text-gray-400">
                 <svg
                   className="w-5 h-5"
