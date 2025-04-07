@@ -10,6 +10,8 @@ import { Button } from "@mui/material";
 import HumbargarBG from "../../public/menu-mobile.svg";
 import { useState } from "react";
 import Link from "next/link";
+import { PoppinFont } from '../../utils/fonts'
+import '../Header/header.css'
 
 const HeaderComponents: Record<
   string,
@@ -77,7 +79,7 @@ const Header = ({ data }: ComponentDataProps) => {
               <SearchBox />
 
               <nav className={`hidden relative lg:block header-menu-font-size`}>
-                <ul className="flex [&_a]:px-6">
+                <ul className={`flex [&_a]:px-6 ${PoppinFont.className}`}>
                   {primarycomponents?.map((component: ComponentProps) => {
                     if (!component?.sys?.contentType?.sys?.id) return null;
 
