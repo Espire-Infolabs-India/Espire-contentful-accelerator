@@ -11,6 +11,8 @@ import FeatureCard from "@/components/FeatureCard/FeatureCard";
 import Container from "@/components/Container/Container";
 import ListingComponent from "@/components/Lisiting/Lisitng";
 import SocialMediaFeeds from "@/components/SocialMedia/SocialMediaFeeds";
+import SocialMedia from "@/components/SocialMedia/SocialMedia";
+import LinkListItems from "@/components/LinkList/LinkList";
 
 export const ComponentFactory: Record<string, React.FC<{data : ComponentProps}>> = {
     heroBanner: HeroBanner,
@@ -25,5 +27,7 @@ export const ComponentFactory: Record<string, React.FC<{data : ComponentProps}>>
     componentContainer: Container,
     componentLisiting: ListingComponent,
     componentSocialMediaFeeds:SocialMediaFeeds,
+    componentSocialMedia:SocialMedia,
+    componentLinkList:LinkListItems
     // Add more components as needed
 };
