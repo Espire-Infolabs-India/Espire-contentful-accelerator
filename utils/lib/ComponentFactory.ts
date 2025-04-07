@@ -10,6 +10,7 @@ import Map from "@/components/Map/Map";
 import FeatureCard from "@/components/FeatureCard/FeatureCard";
 import Container from "@/components/Container/Container";
 import ListingComponent from "@/components/Lisiting/Lisitng";
+import SocialMediaFeeds from "@/components/SocialMedia/SocialMediaFeeds";
 
 export const ComponentFactory: Record<string, React.FC<{data : ComponentProps}>> = {
     heroBanner: HeroBanner,
@@ -22,5 +23,7 @@ export const ComponentFactory: Record<string, React.FC<{data : ComponentProps}>>
     componentMap : Map,
     componentFeatureCard: FeatureCard,
     componentContainer: Container,
-    componentLisiting: ListingComponent
+    componentLisiting: ListingComponent,
+    componentSocialMediaFeeds:SocialMediaFeeds,
+    // Add more components as needed
 };
