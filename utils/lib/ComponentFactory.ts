@@ -13,6 +13,7 @@ import ListingComponent from "@/components/Lisiting/Lisitng";
 import SocialMediaFeeds from "@/components/SocialMedia/SocialMediaFeeds";
 import SocialMedia from "@/components/SocialMedia/SocialMedia";
 import LinkListItems from "@/components/LinkList/LinkList";
+import CTA from "@/components/CTA/CTA";
 
 export const ComponentFactory: Record<string, React.FC<{data : ComponentProps}>> = {
     heroBanner: HeroBanner,
@@ -28,6 +29,7 @@ export const ComponentFactory: Record<string, React.FC<{data : ComponentProps}>>
     componentLisiting: ListingComponent,
     componentSocialMediaFeeds:SocialMediaFeeds,
     componentSocialMedia:SocialMedia,
-    componentLinkList:LinkListItems
+    componentLinkList:LinkListItems,
+    cta:CTA
     // Add more components as needed
 };
