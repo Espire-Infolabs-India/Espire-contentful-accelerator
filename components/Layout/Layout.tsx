@@ -5,7 +5,7 @@ import Header from "../Header/Header";
 import { ComponentProps } from "@/utils/lib/CommonProps";
 import { PoppinFont } from "@/utils/fonts";
 import CookieConfig from "@/utils/lib/CookieConfig";
-import Script from "next/script";
+import Script from "next/script"; 
 export default function Layout({
   children,
   headerData,
