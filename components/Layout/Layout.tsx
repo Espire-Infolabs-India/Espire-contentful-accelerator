@@ -3,6 +3,8 @@ import SEO from "../SEO/SEO";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import { ComponentProps } from "@/utils/lib/CommonProps";
+import { PoppinFont } from "@/utils/fonts";
+
 export default function Layout({
   children,
   headerData,
@@ -13,7 +15,7 @@ export default function Layout({
   footerData: ComponentProps;
 }) {
   return (
-    <div>
+    <div className={`${PoppinFont.className}`}>
       <SEO />
       <header>
         <Header data={headerData} />

@@ -2,11 +2,7 @@
 
 @layer components {
   footer .sub-menu {
-    @apply relative inline-block;
-  }
-
-  footer .sub-menu {
-    @apply text-white;
+    @apply relative inline-block text-white;
   }
 
   footer .sub-menu::after {
@@ -26,7 +22,7 @@
     opacity: 0.95;
   }
 
-  footer .footer-link-center {
+  footer .link-list {
     @apply text-center md:text-left;
   }
 
