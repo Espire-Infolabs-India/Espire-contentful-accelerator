@@ -8,7 +8,6 @@ import Link from "next/link";
 import { ComponentDataProps, ComponentProps } from "@/utils/lib/CommonProps";
 import SearchIcon from "@mui/icons-material/Search";
 import IconButton from "@mui/material/IconButton";
-import "../Footer/footer.css";
 
 const FooterComponents: Record<
   string,

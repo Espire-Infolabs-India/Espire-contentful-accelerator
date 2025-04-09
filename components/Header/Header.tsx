@@ -10,7 +10,6 @@ import { Button } from "@mui/material";
 import HumbargarBG from "../../public/menu-mobile.svg";
 import { useState } from "react";
 import Link from "next/link";
-import '../Header/header.css'
 
 const HeaderComponents: Record<
   string,
