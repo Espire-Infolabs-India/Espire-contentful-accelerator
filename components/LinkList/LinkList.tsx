@@ -9,12 +9,12 @@ const LinkListItems = ({ data }: ComponentDataProps) => {
         return (
           <div key={index}>
             <ul>
-              <li className="item0 odd first">
+              <li className="item0 odd first link-list">
                 <Link
                   href={linklistitems.fields.url}
                   title=""
                   target=""
-                  className="text-white"
+                  className={`sub-menu`}
                 >
                   {linklistitems.fields.title}
                 </Link>

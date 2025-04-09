@@ -77,7 +77,7 @@ const Header = ({ data }: ComponentDataProps) => {
               <SearchBox />
 
               <nav className={`hidden relative lg:block header-menu-font-size`}>
-                <ul className="flex [&_a]:px-6">
+                <ul className={`flex [&_a]:px-6`}>
                   {primarycomponents?.map((component: ComponentProps) => {
                     if (!component?.sys?.contentType?.sys?.id) return null;
 
