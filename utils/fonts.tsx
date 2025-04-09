@@ -3,5 +3,6 @@ export const PoppinFont = Poppins({
   weight: "400",
   subsets: ["latin"],
   display: "swap",
+  variable: '--font-Poppins',
 });
 

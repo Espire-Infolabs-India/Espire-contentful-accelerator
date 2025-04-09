@@ -5,7 +5,7 @@ import Header from "../Header/Header";
 import { ComponentProps } from "@/utils/lib/CommonProps";
 import { PoppinFont } from "@/utils/fonts";
 import CookieConfig from "@/utils/lib/CookieConfig";
-import Script from "next/script"; 
+import Script from "next/script";
 export default function Layout({
   children,
   headerData,
@@ -16,12 +16,12 @@ export default function Layout({
   footerData: ComponentProps;
 }) {
   return (
-    <div className={`${PoppinFont.className}`}>
+    <div className={`${PoppinFont.variable} font-poppin`}>
       <SEO />
-      <header>
+      <header >
         <Header data={headerData} />
       </header>
-      <main>{children}</main>
+      <main >{children}</main>
       <footer>
         <Footer data={footerData} />
       </footer>

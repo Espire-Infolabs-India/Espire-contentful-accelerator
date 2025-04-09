@@ -8,12 +8,14 @@ const RichText = ({ data }: ComponentDataProps) => {
   const richTextContent = useMemo(() => {
     if (!data?.fields?.content) return null;
     return (
-      <div className="rich-text">
+      <section className="mt-10">
+      <div className="rich-text container m-auto">
         {documentToReactComponents(
           data.fields.content as unknown as Document,
           RichtextRenderOptions
         )}
       </div>
+      </section>
     );
   }, [data?.fields?.content]);
   return <>{richTextContent}</>;

@@ -15,67 +15,70 @@ const FeatureCard = ({ data }: ComponentDataProps) => {
 
   return (
     <>
-      <Typography
-        variant="h4"
-        component="h2"
-        sx={{ textAlign: "center", fontWeight: "bold", mb: 3 }}
-      >
-        {data?.fields?.title}
-      </Typography>
-      <Box
-        sx={{
-          width: "100%",
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
-          gap: 3,
-        }}
-      >
-        {cardList.map((item, index) => {
-          const key = `card-${index}`;
-          return (
-            <Card
-              key={key}
-              sx={{
-                backgroundColor: index % 2 === 0 ? "rgb(30, 58, 138)" : "#f5f5f5",
-                color: index % 2 === 0 ? "white" : "black",
-                borderRadius: 2,
-                boxShadow: 3,
-              }}
-            >
-              <CardActionArea
-                onClick={() => setSelectedCard(index)}
-                data-active={selectedCard === index ? "" : undefined}
+      <div className="container m-auto my-10">
+        <Typography
+          variant="h4"
+          component="h2"
+          sx={{ textAlign: "center", fontWeight: "bold", mb: 3 }}
+        >
+          {data?.fields?.title}
+        </Typography>
+        <Box
+          sx={{
+            width: "100%",
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+            gap: 3,
+          }}
+        >
+          {cardList.map((item, index) => {
+            const key = `card-${index}`;
+            return (
+              <Card
+                key={key}
                 sx={{
-                  height: "100%",
-                  p: 2,
-                  "&[data-active]": {
-                    backgroundColor: "action.selected",
-                    "&:hover": {
-                      backgroundColor: "action.selectedHover",
-                    },
-                  },
+                  backgroundColor:
+                    index % 2 === 0 ? "rgb(30, 58, 138)" : "#f5f5f5",
+                  color: index % 2 === 0 ? "white" : "black",
+                  borderRadius: 2,
+                  boxShadow: 3,
                 }}
               >
-                <CardContent sx={{ height: "100%" }}>
-                  <Typography
-                    variant="h5"
-                    component="h3"
-                    sx={{ fontWeight: "bold", mb: 1 }}
-                  >
-                    {item.fields?.title?.trim() || "Untitled"}
-                  </Typography>
-                  <Typography variant="body2" component="div">
-                    {documentToReactComponents(
-                      item.fields?.description as unknown as Document,
-                      RichtextRenderOptions
-                    ) || "No description available."}
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
-          );
-        })}
-      </Box>
+                <CardActionArea
+                  onClick={() => setSelectedCard(index)}
+                  data-active={selectedCard === index ? "" : undefined}
+                  sx={{
+                    height: "100%",
+                    p: 2,
+                    "&[data-active]": {
+                      backgroundColor: "action.selected",
+                      "&:hover": {
+                        backgroundColor: "action.selectedHover",
+                      },
+                    },
+                  }}
+                >
+                  <CardContent sx={{ height: "100%" }}>
+                    <Typography
+                      variant="h5"
+                      component="h3"
+                      sx={{ fontWeight: "bold", mb: 1 }}
+                    >
+                      {item.fields?.title?.trim() || "Untitled"}
+                    </Typography>
+                    <Typography variant="body2" component="div">
+                      {documentToReactComponents(
+                        item.fields?.description as unknown as Document,
+                        RichtextRenderOptions
+                      ) || "No description available."}
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+              </Card>
+            );
+          })}
+        </Box>
+      </div>
     </>
   );
 };

@@ -36,4 +36,31 @@ body {
   h5 {
     @apply text-2xl font-bold;
   }
+  main ul {
+    @apply list-disc pl-5;
+  }
+  main ol {
+    @apply list-decimal pl-5;
+  }
+  main p {
+    @apply text-[16px];
+  }
+  main a {
+    @apply text-[var(--royalblue)] hover:underline;
+  }
+}
+
+@layer components {
+  main aside ul,
+  main .ais-Pagination ul {
+    @apply list-none;
+  }
+
+  main aside ul li input {
+    @apply mx-2;
+  }
+
+  main ul:has(.link-list) {
+    @apply list-none p-0;
+  }
 }
