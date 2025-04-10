@@ -18,8 +18,8 @@ const Default = ({ data }: ComponentDataProps) => {
             alt={""}
             unoptimized
           />
-          <h2 className={`text-5xl mb-4`}>{data?.fields?.title}</h2>
-          <div className="text-base">
+          <h2 className={`text-5xl mb-4 font-poppin`}>{data?.fields?.title}</h2>
+          <div className="text-base font-poppin">
             {documentToReactComponents(
               data.fields.description as unknown as Document,
               RichtextRenderOptions

@@ -30,7 +30,7 @@ const Footer = ({ data }: ComponentDataProps) => {
   const middlelayercomponents = data?.fields?.middleLayerContainer ?? [];
 
   return (
-    <footer className="bg-[var(--royalblue)] text-white pt-[20px] pb-[80px] mt-10">
+    <footer className="bg-[var(--royalblue)] text-white pt-[20px] pb-[80px]">
       <div className="container mx-auto px-6">
         {/* Logo & Navigation */}
         <div className="flex flex-col md:flex-row justify-between items-center">

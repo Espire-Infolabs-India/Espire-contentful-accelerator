@@ -8,6 +8,7 @@ const Container = ({ data }: ComponentDataProps) => {
   return (
     <React.Fragment>
       <CssBaseline />
+      <div className="container m-auto my-10">
       <MuiContainer maxWidth="lg">
         {data?.fields?.container?.map((item: ComponentProps, index: number) => {
           const componentType = item.sys.contentType.sys.id;
@@ -22,6 +23,7 @@ const Container = ({ data }: ComponentDataProps) => {
           );
         })}
       </MuiContainer>
+      </div>
     </React.Fragment>
   );
 };

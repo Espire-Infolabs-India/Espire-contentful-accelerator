@@ -95,6 +95,7 @@ export default function Horizontal({ data }: ComponentDataProps) {
     });
 
   return (
+    <div className="container m-auto my-10">
     <Box sx={{ width: "100%" }}>
       <Typography
         variant="h5"
@@ -112,5 +113,6 @@ export default function Horizontal({ data }: ComponentDataProps) {
 
       {renderTabPanels()}
     </Box>
+    </div>
   );
 }
