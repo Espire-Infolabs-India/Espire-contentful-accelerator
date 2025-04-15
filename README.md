@@ -13,3 +13,15 @@
 npm run dev
 
 Open [http://localhost:3000] with your browser to see the result.
+
+## Developer Guidelines
+
+When creating a new component, always:
+
+Create a folder inside the components directory named exactly after the component.
+
+Inside that folder, create the component file as ComponentName.tsx.
+
+Register the component and its corresponding content type inside the ComponentFactory located under the lib directory.
+
+This ensures consistency, proper component resolution, and maintainability across the codebase.
