@@ -25,3 +25,11 @@ Inside that folder, create the component file as ComponentName.tsx.
 Register the component and its corresponding content type inside the ComponentFactory located under the lib directory.
 
 This ensures consistency, proper component resolution, and maintainability across the codebase.
+
+## Deployment
+
+Use the Merge App for deployment operations. Make sure your branch is properly tested and reviewed 
+before merging to main or release branches.
+Keep this README updated with any project-level or process-level changes via pull requests.
+
+![Merge App Screenshot](images/MergeAPPImage.png)
