@@ -1,5 +1,5 @@
-import Head from 'next/head';
-import React from 'react';
+import Head from "next/head";
+import React from "react";
 /**
  * Rendered in case if we have a 500 error
  */
@@ -8,18 +8,17 @@ const NotFound500 = (): JSX.Element => (
     <Head>
       <title>Espire</title>
     </Head>
-    <a href="/" className="navbar-brand">
-    </a>
+    <a href="/" className="navbar-brand"></a>
     <div
       style={{
         padding: 10,
-        textAlign: 'center',
-        fontFamily: 'Roboto, sans-serif',
+        textAlign: "center",
+        fontFamily: "Roboto, sans-serif",
         fontWeight: 100,
       }}
     >
       <div className="construction-message">
-        <h1 style={{ color: '#E43', fontWeight: 100, fontSize: '3em' }}>
+        <h1 style={{ color: "#E43", fontWeight: 100, fontSize: "3em" }}>
           Our website is under maintenance currently
         </h1>
         <svg
@@ -102,17 +101,26 @@ const NotFound500 = (): JSX.Element => (
             </g>
           </svg>
         </svg>
-        <h2 style={{ color: '#333333', fontWeight: 300, fontSize: '1.5em' }}>
-          Sorry for the inconvenience. <br /> To contact us in the meantime, please email{' '}
+        <h2 style={{ color: "#333333", fontWeight: 300, fontSize: "1.5em" }}>
+          Sorry for the inconvenience. <br /> To contact us in the meantime,
+          please email{" "}
           <a
             href="mailto:inquiry@espire.com"
-            style={{ fontWeight: 300, color: '#E43', textDecoration: 'none', fontSize: '1.5em' }}
+            style={{
+              fontWeight: 300,
+              color: "#E43",
+              textDecoration: "none",
+              fontSize: "1.5em",
+            }}
           >
             inquiry@espire.com
-          </a>{' '}
+          </a>{" "}
         </h2>
       </div>
-      <div className="footer" style={{ position: 'absolute', bottom: 0, marginLeft: 10 }}>
+      <div
+        className="footer"
+        style={{ position: "absolute", bottom: 0, marginLeft: 10 }}
+      >
         {/* Your footer content */}
       </div>
     </div>
