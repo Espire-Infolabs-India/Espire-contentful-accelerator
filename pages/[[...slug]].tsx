@@ -1,11 +1,21 @@
-import { getEntriesByContentType } from "@/utils/utilityFunctions/getEntriesByContentType";
 import { GetStaticProps, GetStaticPaths } from "next";
 import { useRouter } from "next/router";
+import Layout from "@/components/Layout/Layout";
+import { getEntriesByContentType } from "@/utils/utilityFunctions/getEntriesByContentType";
+import { getHeaderData } from "@/common/getHeaderData/getHeaderData";
+import { getFooterData } from "@/common/getFooterData/getFooterData";
 import { ComponentFactory } from "@/utils/lib/ComponentFactory";
 import { ComponentProps } from "@/utils/lib/CommonProps";
-import { getHeaderData } from "@/common/getHeaderData/getHeaderData";
-import Layout from "@/components/Layout/Layout";
-import { getFooterData } from "@/common/getFooterData/getFooterData";
+
+type ContentfulItem = {
+  fields: {
+    componentContainer: ComponentProps[];
+  };
+};
+
+type ContentfulEntryResponse = {
+  items: ContentfulItem[];
+};
 
 type PageProps = {
   content: ComponentProps[];
@@ -16,14 +26,12 @@ type PageProps = {
 const DynamicPage = ({ content, headerData, footerData }: PageProps) => {
   const router = useRouter();
 
-  if (router.isFallback) {
-    return <div>Loading...</div>;
-  }
+  if (router.isFallback) return <div>Loading...</div>;
 
   return (
     <Layout headerData={headerData} footerData={footerData}>
-      {content?.map((data, index) => {
-        const componentType = data.sys.contentType.sys.id as string;
+      {content.map((data, index) => {
+        const componentType = data.sys?.contentType?.sys?.id as string;
         const Component = ComponentFactory[componentType];
 
         if (!Component) {
@@ -49,33 +57,38 @@ export const getStaticPaths: GetStaticPaths = async () => ({
 export const getStaticProps: GetStaticProps<PageProps> = async ({ params }) => {
   let slug = params?.slug ?? "home";
   slug = Array.isArray(slug)
-    ? `${slug.map((slug) => slug.toLowerCase())}`
+    ? slug.map((s) => s.toLowerCase()).join("/")
     : "home";
-  const content = (await getEntriesByContentType(
-    "landingPage",
-    slug as string
-  )) as unknown as ComponentProps[];
 
-  if (!content || !("items" in content) || !Array.isArray(content.items)) {
+  const contentResponse = (await getEntriesByContentType(
+    "landingPage",
+    slug
+  )) as unknown as ContentfulEntryResponse;
+
+  if (
+    !contentResponse ||
+    !Array.isArray(contentResponse.items) ||
+    contentResponse.items.length === 0
+  ) {
     return { notFound: true };
   }
 
   const componentContainer =
-    content.items?.[0]?.fields?.componentContainer ?? [];
+    contentResponse.items[0].fields?.componentContainer ?? [];
 
   const headerResult = await getHeaderData();
+  const footerResult = await getFooterData();
 
   const headerData =
     Array.isArray(headerResult?.data) && headerResult.data.length > 0
       ? headerResult.data[0]
-      : null;
-
-  const footerResult = await getFooterData();
+      : ({} as ComponentProps);
 
   const footerData =
     Array.isArray(footerResult?.data) && footerResult.data.length > 0
       ? footerResult.data[0]
-      : null;
+      : ({} as ComponentProps);
+
   return {
     props: {
       content: Array.isArray(componentContainer) ? componentContainer : [],
