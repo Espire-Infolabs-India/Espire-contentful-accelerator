@@ -1,7 +1,19 @@
 const LanguageSelector = () => {
   const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    localStorage.setItem("lang", e.target.value);
-    window.location.reload();
+    const selectedLang = e.target.value;
+    localStorage.setItem("lang", selectedLang);
+
+    const currentPath = window.location.pathname;
+    const pathSegments = currentPath.split("/").filter(Boolean);
+
+    const supportedLocales = ["de", "fr", "en-US"];
+    if (supportedLocales.includes(pathSegments[0])) {
+      pathSegments.shift();
+    }
+    const newPath = `/${selectedLang}${
+      pathSegments.length ? "/" + pathSegments.join("/") : ""
+    }`;
+    window.location.href = newPath;
   };
 
   return (
