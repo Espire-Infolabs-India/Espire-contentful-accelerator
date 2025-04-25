@@ -3,10 +3,10 @@ import { contentfulClient } from "../lib/ContentfulClient";
 export const getEntriesByContentType = async (
   content_type: string,
   url?: string,
-  passedLocale?: string
+  Locale?: string
 ) => {
   const client = contentfulClient();
-  const locale = passedLocale || "en-US";
+  const locale = Locale || "en-US";
 
   try {
     if (client) {
@@ -33,7 +33,7 @@ export const getEntriesByContentType = async (
       return false;
     }
   } catch (error) {
-    console.error("Error occurred while fetching data :: ", error);
+    console.log("Error occurred while fetching data :: ", error);
     return false;
   }
 };
