@@ -3,7 +3,7 @@ import { contentfulClient } from "../lib/ContentfulClient";
 export const getEntriesByContentType = async (
   content_type: string,
   url?: string,
-  passedLocale?: string // optional override if needed (like SSR fallback)
+  passedLocale?: string
 ) => {
   const client = contentfulClient();
   const locale = passedLocale || "en-US";

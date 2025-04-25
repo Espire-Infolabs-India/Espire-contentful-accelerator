@@ -32,7 +32,6 @@ const DynamicPage = ({ content, headerData, footerData }: PageProps) => {
     <Layout headerData={headerData} footerData={footerData}>
       {content.map((data, index) => {
         const componentType = data.sys?.contentType?.sys?.id as string;
-        console.log("componentType", componentType);
         const Component = ComponentFactory[componentType];
 
         if (!Component) {
