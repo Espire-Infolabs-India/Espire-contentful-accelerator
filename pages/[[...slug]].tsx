@@ -1,4 +1,5 @@
 import { GetStaticProps, GetStaticPaths } from "next";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Layout from "@/components/Layout/Layout";
 import { getEntriesByContentType } from "@/utils/utilityFunctions/getEntriesByContentType";
@@ -7,24 +8,43 @@ import { getFooterData } from "@/common/getFooterData/getFooterData";
 import { ComponentFactory } from "@/utils/lib/ComponentFactory";
 import { ComponentProps } from "@/utils/lib/CommonProps";
 
-type ContentfulItem = {
-  fields: {
-    componentContainer: ComponentProps[];
-  };
-};
-
-type ContentfulEntryResponse = {
-  items: ContentfulItem[];
-};
-
 type PageProps = {
-  content: ComponentProps[];
   headerData: ComponentProps;
   footerData: ComponentProps;
 };
 
-const DynamicPage = ({ content, headerData, footerData }: PageProps) => {
+const DynamicPage = ({ headerData, footerData }: PageProps) => {
   const router = useRouter();
+  const [content, setContent] = useState<ComponentProps[]>([]);
+
+  useEffect(() => {
+    const fetchContent = async () => {
+      const lang =
+        typeof window !== "undefined"
+          ? localStorage.getItem("lang") || "en-US"
+          : "en-US";
+      const slugPath = router.asPath.replace(/^\/+/, "") || "home";
+
+      const result = await getEntriesByContentType(
+        "landingPage",
+        slugPath,
+        lang
+      );
+
+      if (result && typeof result === "object" && "items" in result) {
+        const container = result.items?.[0]?.fields?.componentContainer;
+        const componentContainer = Array.isArray(container)
+          ? (container as ComponentProps[])
+          : [];
+
+        setContent(componentContainer);
+      } else {
+        setContent([]);
+      }
+    };
+
+    fetchContent();
+  }, [router.asPath]);
 
   if (router.isFallback) return <div>Loading...</div>;
 
@@ -54,28 +74,7 @@ export const getStaticPaths: GetStaticPaths = async () => ({
   fallback: "blocking",
 });
 
-export const getStaticProps: GetStaticProps<PageProps> = async ({ params }) => {
-  let slug = params?.slug ?? "home";
-  slug = Array.isArray(slug)
-    ? slug.map((s) => s.toLowerCase()).join("/")
-    : "home";
-
-  const contentResponse = (await getEntriesByContentType(
-    "landingPage",
-    slug
-  )) as unknown as ContentfulEntryResponse;
-
-  if (
-    !contentResponse ||
-    !Array.isArray(contentResponse.items) ||
-    contentResponse.items.length === 0
-  ) {
-    return { notFound: true };
-  }
-
-  const componentContainer =
-    contentResponse.items[0].fields?.componentContainer ?? [];
-
+export const getStaticProps: GetStaticProps<PageProps> = async () => {
   const headerResult = await getHeaderData();
   const footerResult = await getFooterData();
 
@@ -91,7 +90,6 @@ export const getStaticProps: GetStaticProps<PageProps> = async ({ params }) => {
 
   return {
     props: {
-      content: Array.isArray(componentContainer) ? componentContainer : [],
       headerData,
       footerData,
     },

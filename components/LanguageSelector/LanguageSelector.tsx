@@ -1,15 +1,26 @@
 const LanguageSelector = () => {
+  const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    localStorage.setItem("lang", e.target.value);
+    window.location.reload();
+  };
+
   return (
     <div className="LanguageSelector">
       <div className="language-selector">
         <select
           aria-label="Default select example"
           className="w-[200] p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+          onChange={handleLanguageChange}
+          value={
+            typeof window !== "undefined"
+              ? localStorage.getItem("lang") || "en-US"
+              : "en-US"
+          }
         >
-          <option>Select Language</option>
-          <option value="1">English</option>
-          <option value="2">French</option>
-          <option value="3">German</option>
+          <option value="en-US">Select Language</option>
+          <option value="en-US">English</option>
+          <option value="fr">French</option>
+          <option value="de">German</option>
         </select>
       </div>
     </div>
