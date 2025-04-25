@@ -6,11 +6,7 @@ export const getEntriesByContentType = async (
   passedLocale?: string // optional override if needed (like SSR fallback)
 ) => {
   const client = contentfulClient();
-  const locale =
-    passedLocale ||
-    (typeof window !== "undefined"
-      ? localStorage.getItem("lang") || "en-US"
-      : "en-US");
+  const locale = passedLocale || "en-US";
 
   try {
     if (client) {
