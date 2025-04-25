@@ -46,14 +46,20 @@ export const getStaticPaths: GetStaticPaths = async () => ({
   fallback: "blocking",
 });
 
-export const getStaticProps: GetStaticProps<PageProps> = async ({ params }) => {
-  let slug = params?.slug ?? "home";
+export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
+  let slug = context.params?.slug ?? "home";
+
+
+  // const host = context.req?.headers?.host 
+
+  // console.log("Hpost", host);
   slug = Array.isArray(slug)
     ? `${slug.map((slug) => slug.toLowerCase())}`
     : "home";
   const content = (await getEntriesByContentType(
     "landingPage",
-    slug as string
+    slug as string,
+    "site1"
   )) as unknown as ComponentProps[];
 
   if (!content || !("items" in content) || !Array.isArray(content.items)) {

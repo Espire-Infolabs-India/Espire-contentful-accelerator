@@ -2,7 +2,8 @@ import { contentfulClient } from "../lib/ContentfulClient";
 
 export const getEntriesByContentType = async (
   content_type: string,
-  url?: string
+  url?: string,
+  site?: string
 ) => {
   const client = contentfulClient();
   try {
@@ -18,11 +19,17 @@ export const getEntriesByContentType = async (
 
       if (url) {
         params["fields.url"] = url;
+        params["fields.site"] = site;
       }
 
       const entries = await client.getEntries(params);
+      // console.log("Entries fetched successfully", entries);
+      // console.log("Entries fields.site",  params["fields.site"]);
+      // console.log("Entries fields.urk", params["fields.url"]);
 
       const items = entries?.items;
+
+      // console.log("Data fetched successfully", items);
 
       return { items };
     } else {
