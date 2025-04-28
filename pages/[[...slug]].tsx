@@ -15,6 +15,9 @@ type PageProps = {
 
 const DynamicPage = ({ content, headerData, footerData }: PageProps) => {
   const router = useRouter();
+  // const { publicRuntimeConfig: { sites } } = getConfig()
+
+  // console.log("Sites Checkkkkkkkkkkkkk:", sites); // Debugging line to check the sites object
 
   if (router.isFallback) {
     return <div>Loading...</div>;
@@ -39,28 +42,34 @@ const DynamicPage = ({ content, headerData, footerData }: PageProps) => {
 
 export const getStaticPaths: GetStaticPaths = async () => ({
   paths: [
-    { params: { slug: [] } },
-    { params: { slug: ["about"] } },
-    { params: { slug: ["blog"] } },
+    { params: { slug: [] }, locale: "site1"},
+    { params: { slug: ["about"] }, locale: "site1"},
+    { params: { slug: ["blog"] }, locale: "site1"},
   ],
   fallback: "blocking",
 });
 
 export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
-  let slug = context.params?.slug ?? "home";
+  const { locale, params } = context; 
+  console.log("Locale based on domain:", locale); 
 
+  let slug = params?.slug ?? `${locale}-home`;
 
-  // const host = context.req?.headers?.host 
-
-  // console.log("Hpost", host);
+// Debugging line to check the slug
   slug = Array.isArray(slug)
     ? `${slug.map((slug) => slug.toLowerCase())}`
-    : "home";
+    : `${locale}-home`;
+
+    console.log("Slug:", slug); 
+
+  // Fetch data based on the locale (which is tied to the domain)
   const content = (await getEntriesByContentType(
     "landingPage",
     slug as string,
-    "site1"
+    locale 
   )) as unknown as ComponentProps[];
+
+  console.log("content ",content)
 
   if (!content || !("items" in content) || !Array.isArray(content.items)) {
     return { notFound: true };
@@ -70,18 +79,17 @@ export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
     content.items?.[0]?.fields?.componentContainer ?? [];
 
   const headerResult = await getHeaderData();
-
   const headerData =
     Array.isArray(headerResult?.data) && headerResult.data.length > 0
       ? headerResult.data[0]
       : null;
 
   const footerResult = await getFooterData();
-
   const footerData =
     Array.isArray(footerResult?.data) && footerResult.data.length > 0
       ? footerResult.data[0]
       : null;
+
   return {
     props: {
       content: Array.isArray(componentContainer) ? componentContainer : [],

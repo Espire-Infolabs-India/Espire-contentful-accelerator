@@ -5,6 +5,8 @@ export const getEntriesByContentType = async (
   url?: string,
   site?: string
 ) => {
+
+  console.log(content_type, url, site); // Debugging line to check the parameters
   const client = contentfulClient();
   try {
     if (client) {
