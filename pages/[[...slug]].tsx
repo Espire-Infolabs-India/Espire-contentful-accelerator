@@ -1,11 +1,11 @@
 import { GetStaticProps, GetStaticPaths } from "next";
-import { useRouter } from "next/router";
 import Layout from "@/components/Layout/Layout";
 import { getEntriesByContentType } from "@/utils/utilityFunctions/getEntriesByContentType";
 import { getHeaderData } from "@/common/getHeaderData/getHeaderData";
 import { getFooterData } from "@/common/getFooterData/getFooterData";
 import { ComponentFactory } from "@/utils/lib/ComponentFactory";
 import { ComponentProps } from "@/utils/lib/CommonProps";
+import { useRouter } from "next/router";
 
 type ContentfulItem = {
   fields: {
@@ -54,17 +54,19 @@ export const getStaticPaths: GetStaticPaths = async () => ({
   fallback: "blocking",
 });
 
-export const getStaticProps: GetStaticProps<PageProps> = async ({ params }) => {
+export const getStaticProps: GetStaticProps<PageProps> = async ({
+  params,
+  locale,
+}) => {
   let slug = params?.slug ?? "home";
   slug = Array.isArray(slug)
     ? slug.map((s) => s.toLowerCase()).join("/")
     : "home";
-
   const contentResponse = (await getEntriesByContentType(
     "landingPage",
-    slug
+    slug,
+    locale
   )) as unknown as ContentfulEntryResponse;
-
   if (
     !contentResponse ||
     !Array.isArray(contentResponse.items) ||

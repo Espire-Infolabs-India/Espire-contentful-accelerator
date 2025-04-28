@@ -12,6 +12,11 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  i18n: {
+    locales: ["en-US", "fr", "de"],
+    defaultLocale: "en-US",
+    localeDetection: false,
+  },
   async headers() {
     return secuityHeadersConfig();
   },
