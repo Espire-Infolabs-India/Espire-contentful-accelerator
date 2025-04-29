@@ -29,7 +29,6 @@ const LanguageSelector = () => {
               : "en-US"
           }
         >
-          <option value="en-US">Select Language</option>
           <option value="en-US">English</option>
           <option value="fr">French</option>
           <option value="de">German</option>

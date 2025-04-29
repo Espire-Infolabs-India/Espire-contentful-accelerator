@@ -45,14 +45,23 @@ const DynamicPage = ({ content, headerData, footerData }: PageProps) => {
   );
 };
 
-export const getStaticPaths: GetStaticPaths = async () => ({
-  paths: [
-    { params: { slug: [] } },
-    { params: { slug: ["about"] } },
-    { params: { slug: ["blog"] } },
-  ],
-  fallback: "blocking",
-});
+export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
+  const paths: { params: { slug: string[] }; locale: string }[] = [];
+
+  const staticSlugs = ["about", "blog"];
+
+  locales?.forEach((locale) => {
+    paths.push({ params: { slug: [] }, locale });
+    staticSlugs.forEach((slug) => {
+      paths.push({ params: { slug: [slug] }, locale });
+    });
+  });
+
+  return {
+    paths,
+    fallback: "blocking",
+  };
+};
 
 export const getStaticProps: GetStaticProps<PageProps> = async ({
   params,
