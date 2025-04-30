@@ -12,7 +12,11 @@ const Default = ({ data }: ComponentDataProps) => {
         <div className="md:w-full">
           <Image
             className="mb-5"
-            src={`https://${data?.fields?.image?.fields?.file?.url}`}
+            src={`${
+              data?.fields?.images?.[0]?.original_secure_url?.startsWith("http")
+                ? data.fields.images[0].original_secure_url
+                : `https://${data?.fields?.image?.fields?.file?.url}`
+            }`}
             width={400}
             height={101}
             alt={""}

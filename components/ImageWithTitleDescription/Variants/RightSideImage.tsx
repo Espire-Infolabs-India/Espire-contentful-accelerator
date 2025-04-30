@@ -22,7 +22,11 @@ const RightSideImage = ({ data }: ComponentDataProps) => {
       <div className="md:w-1/2 flex justify-center">
         <Image
           className="mb-5"
-          src={`https://${data?.fields?.image?.fields?.file?.url}`}
+          src={`${
+            data?.fields?.images?.[0]?.original_secure_url?.startsWith("http")
+              ? data.fields.images[0].original_secure_url
+              : `https://${data?.fields?.image?.fields?.file?.url}`
+          }`}
           width={600}
           height={400}
           alt={""}

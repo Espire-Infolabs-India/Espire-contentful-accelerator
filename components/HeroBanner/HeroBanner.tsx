@@ -8,7 +8,10 @@ const HeroBanner = ({ data }: ComponentDataProps) => {
     <div
       className="hero-banner relative  bg-cover bg-no-repeat p-12 text-center"
       style={{
-        backgroundImage: `url(${data?.fields?.image?.fields?.file?.url})`,
+        backgroundImage: `url(${
+          data?.fields?.images?.[0]?.original_secure_url ||
+          data?.fields?.image?.fields?.file?.url
+        })`,
         height: "400px",
       }}
     >
