@@ -1,8 +1,28 @@
 import type { NextConfig } from "next";
 import secuityHeadersConfig from "./config/headers";
 
+const sites = {
+  site1: {
+    domain: "site1.local",
+  },
+  site2: {
+    domain: "site2.local",
+  },
+};
+const siteKeys = Object.keys(sites);
+
+console.log("SiteKeys:", siteKeys); // Debugging line to check the site keys
+
 const nextConfig: NextConfig = {
-  /* config options here */
+  i18n: {
+    locales: siteKeys,
+    defaultLocale: siteKeys[0],
+    domains: siteKeys.map((siteKey) => ({
+      domain: sites[siteKey as keyof typeof sites].domain,
+      defaultLocale: siteKey,
+    })),
+  },
+
   reactStrictMode: true,
   images: {
     remotePatterns: [
@@ -11,11 +31,6 @@ const nextConfig: NextConfig = {
         hostname: "images.ctfassets.net",
       },
     ],
-  },
-  i18n: {
-    locales: ["en-US", "fr", "de"],
-    defaultLocale: "en-US",
-    localeDetection: false,
   },
   async headers() {
     return secuityHeadersConfig();

@@ -3,31 +3,30 @@ import { contentfulClient } from "../lib/ContentfulClient";
 export const getEntriesByContentType = async (
   content_type: string,
   url?: string,
-  Locale?: string
+  site?: string
 ) => {
   const client = contentfulClient();
-  const locale = Locale || "en-US";
-
   try {
     if (client) {
       const params: {
         content_type: string;
         include: number;
-        locale: string;
         [key: string]: unknown;
       } = {
         content_type,
         include: 8,
-        locale,
       };
 
       if (url) {
         params["fields.url"] = url;
+        params["fields.site"] = site;
       }
 
       const entries = await client.getEntries(params);
 
-      return { items: entries?.items };
+      const items = entries?.items;
+
+      return { items };
     } else {
       console.log("No Data available");
       return false;

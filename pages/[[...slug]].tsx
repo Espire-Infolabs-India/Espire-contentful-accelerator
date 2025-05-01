@@ -1,21 +1,11 @@
-import { GetStaticProps, GetStaticPaths } from "next";
-import Layout from "@/components/Layout/Layout";
 import { getEntriesByContentType } from "@/utils/utilityFunctions/getEntriesByContentType";
-import { getHeaderData } from "@/common/getHeaderData/getHeaderData";
-import { getFooterData } from "@/common/getFooterData/getFooterData";
+import { GetStaticProps, GetStaticPaths } from "next";
+import { useRouter } from "next/router";
 import { ComponentFactory } from "@/utils/lib/ComponentFactory";
 import { ComponentProps } from "@/utils/lib/CommonProps";
-import { useRouter } from "next/router";
-
-type ContentfulItem = {
-  fields: {
-    componentContainer: ComponentProps[];
-  };
-};
-
-type ContentfulEntryResponse = {
-  items: ContentfulItem[];
-};
+import { getHeaderData } from "@/common/getHeaderData/getHeaderData";
+import Layout from "@/components/Layout/Layout";
+import { getFooterData } from "@/common/getFooterData/getFooterData";
 
 type PageProps = {
   content: ComponentProps[];
@@ -25,13 +15,18 @@ type PageProps = {
 
 const DynamicPage = ({ content, headerData, footerData }: PageProps) => {
   const router = useRouter();
+  // const { publicRuntimeConfig: { sites } } = getConfig()
 
-  if (router.isFallback) return <div>Loading...</div>;
+  // console.log("Sites Checkkkkkkkkkkkkk:", sites); // Debugging line to check the sites object
+
+  if (router.isFallback) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <Layout headerData={headerData} footerData={footerData}>
-      {content.map((data, index) => {
-        const componentType = data.sys?.contentType?.sys?.id as string;
+      {content?.map((data, index) => {
+        const componentType = data.sys.contentType.sys.id as string;
         const Component = ComponentFactory[componentType];
 
         if (!Component) {
@@ -45,60 +40,55 @@ const DynamicPage = ({ content, headerData, footerData }: PageProps) => {
   );
 };
 
-export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
-  const paths: { params: { slug: string[] }; locale: string }[] = [];
+export const getStaticPaths: GetStaticPaths = async () => ({
+  paths: [
+    { params: { slug: [] }, locale: "site1"},
+    { params: { slug: ["about"] }, locale: "site1"},
+    { params: { slug: ["blog"] }, locale: "site1"},
+  ],
+  fallback: "blocking",
+});
 
-  const staticSlugs = ["about", "blog"];
+export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
+  const { locale, params } = context; 
+  console.log("Locale based on domain:", locale); 
 
-  locales?.forEach((locale) => {
-    paths.push({ params: { slug: [] }, locale });
-    staticSlugs.forEach((slug) => {
-      paths.push({ params: { slug: [slug] }, locale });
-    });
-  });
+  let slug = params?.slug ?? `${locale}-home`;
 
-  return {
-    paths,
-    fallback: "blocking",
-  };
-};
-
-export const getStaticProps: GetStaticProps<PageProps> = async ({
-  params,
-  locale,
-}) => {
-  let slug = params?.slug ?? "home";
+// Debugging line to check the slug
   slug = Array.isArray(slug)
-    ? slug.map((s) => s.toLowerCase()).join("/")
-    : "home";
-  const contentResponse = (await getEntriesByContentType(
+    ? `${slug.map((slug) => slug.toLowerCase())}`
+    : `${locale}-home`;
+
+    console.log("Slug:", slug); 
+
+  // Fetch data based on the locale (which is tied to the domain)
+  const content = (await getEntriesByContentType(
     "landingPage",
-    slug,
-    locale
-  )) as unknown as ContentfulEntryResponse;
-  if (
-    !contentResponse ||
-    !Array.isArray(contentResponse.items) ||
-    contentResponse.items.length === 0
-  ) {
+    slug as string,
+    locale 
+  )) as unknown as ComponentProps[];
+
+  console.log("content ",content)
+
+  if (!content || !("items" in content) || !Array.isArray(content.items)) {
     return { notFound: true };
   }
 
   const componentContainer =
-    contentResponse.items[0].fields?.componentContainer ?? [];
+    content.items?.[0]?.fields?.componentContainer ?? [];
 
   const headerResult = await getHeaderData();
-  const footerResult = await getFooterData();
-
   const headerData =
     Array.isArray(headerResult?.data) && headerResult.data.length > 0
       ? headerResult.data[0]
-      : ({} as ComponentProps);
+      : null;
 
+  const footerResult = await getFooterData();
   const footerData =
     Array.isArray(footerResult?.data) && footerResult.data.length > 0
       ? footerResult.data[0]
-      : ({} as ComponentProps);
+      : null;
 
   return {
     props: {
