@@ -3,7 +3,7 @@ import secuityHeadersConfig from "./config/headers";
 
 const sites = {
   site1: {
-    domain: "espire-contentful-starterkit.netlify.app",
+    domain: "espire-starterkit-multisite-domain2",
   },
   site2: {
     domain: "espire-contentful-one-space-multisite.netlify.app",
