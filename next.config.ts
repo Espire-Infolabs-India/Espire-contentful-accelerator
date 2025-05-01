@@ -3,10 +3,10 @@ import secuityHeadersConfig from "./config/headers";
 
 const sites = {
   site1: {
-    domain: "site1.local",
+    domain: "espire-contentful-starterkit.netlify.app",
   },
   site2: {
-    domain: "site2.local",
+    domain: "espire-contentful-one-space-multisite.netlify.app",
   },
 };
 const siteKeys = Object.keys(sites);
