@@ -3,10 +3,10 @@ import secuityHeadersConfig from "./config/headers";
 
 const sites = {
   site1: {
-    domain: "espire-starterkit-multisite-domain1",
+    domain: "espire-starterkit-multisite-domain1.netlify.app",
   },
   site2: {
-    domain: "espire-starterkit-multisite-domain2",
+    domain: "espire-starterkit-multisite-domain2.netlify.app",
   },
 };
 const siteKeys = Object.keys(sites);
