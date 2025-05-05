@@ -13,8 +13,10 @@ type PageProps = {
   footerData: ComponentProps;
 };
 
-const DynamicPage = ({ content, headerData, footerData }: PageProps) => {
+const DynamicPage = ({ content, headerData, footerData,publicURL }: PageProps) => {
   const router = useRouter();
+
+ 
   // const { publicRuntimeConfig: { sites } } = getConfig()
 
   // console.log("Sites Checkkkkkkkkkkkkk:", sites); // Debugging line to check the sites object
@@ -25,6 +27,7 @@ const DynamicPage = ({ content, headerData, footerData }: PageProps) => {
 
   return (
     <Layout headerData={headerData} footerData={footerData}>
+       <h1>PUBLIC URL :::: {publicURL}</h1>
       {content?.map((data, index) => {
         const componentType = data.sys.contentType.sys.id as string;
         const Component = ComponentFactory[componentType];
@@ -52,7 +55,9 @@ export const getStaticPaths: GetStaticPaths = async () => ({
 export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
   const { locale, params } = context; 
   console.log("Locale based on domain:", locale); 
+  const publicURL = process.env.PUBLIC_URL
 
+  console.log("Publick IRL",process.env.PUBLIC_URL); // Debugging line to check the environment variable
   let slug = params?.slug ?? `${locale}-home`;
 
 // Debugging line to check the slug
@@ -95,6 +100,7 @@ export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
       content: Array.isArray(componentContainer) ? componentContainer : [],
       headerData,
       footerData,
+      publicURL
     },
     revalidate: 10,
   };
