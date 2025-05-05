@@ -11,16 +11,20 @@ export async function middleware(req: NextRequest) {
   ) {
     return NextResponse.next();
   }
-
+  const normalizedPath = pathname.replace(/^\/|\/$/g, "");
   const redirects = await getRedirects();
+  const match = redirects.find((r) => r.source === `/${normalizedPath}`);
 
-  const match = redirects.find((r) => r.source === pathname);
   if (match) {
     const target = new URL(match.destination, req.url);
     if (target.toString() === req.url) return NextResponse.next();
-    const response = NextResponse.redirect(target, 301);
-    response.headers.set("Cache-Control", "no-store, no-cache, must-revalidate");
-    return response;    
+
+    const response = NextResponse.redirect(target, match.permanent ? 308 : 307);
+    response.headers.set(
+      "Cache-Control",
+      "no-store, no-cache, must-revalidate"
+    );
+    return response;
   }
 
   return NextResponse.next();
