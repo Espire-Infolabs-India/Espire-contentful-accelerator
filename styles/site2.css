@@ -5,7 +5,7 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --royalblue: #203b72;
+  --black: #000000;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -17,7 +17,7 @@
 
 body {
   color: var(--foreground);
-  background: var(--background);
+  background: var(--black);
 }
 
 @layer base {
@@ -63,9 +63,4 @@ body {
   main ul:has(.link-list) {
     @apply list-none p-0;
   }
-}
-
-
-*{
-  border : 10px solid green;
 }
