@@ -2,9 +2,9 @@ import { contentfulClient } from "../lib/ContentfulClient";
 
 export const getEntriesByContentType = async (
   content_type: string,
+  domain: string,
   url?: string,
-  lang?: string,
-  domain?: string
+  lang?: string
 ) => {
   const client = contentfulClient();
   const locale = lang || "en-US";
@@ -28,6 +28,8 @@ export const getEntriesByContentType = async (
       if (url && domain) {
         params["fields.url"] = url;
         params["fields.site"] = domain;
+        // console.log("Domain value:", domain);
+        // console.log("fields.title:", params["fields.title"]);
       }
 
       const entries = await client.getEntries(params);
