@@ -31,7 +31,9 @@ export default function App({ Component, pageProps }: AppProps) {
 
   const { headerData, footerData, ...restProps } = pageProps;
 
-  if (!cssLoaded) return <h1>Wait Untill Loading Complets</h1>; 
+
+  console.log(cssLoaded, "CSS Loaded"); // Debugging line to check if CSS is loaded
+  // if (!cssLoaded) return <h1>Wait Untill Loading Complets</h1>; 
 
   return (
     <Layout headerData={headerData} footerData={footerData}>
