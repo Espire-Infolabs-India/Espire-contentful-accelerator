@@ -31,7 +31,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
   const { headerData, footerData, ...restProps } = pageProps;
 
-  if (!cssLoaded) return null; 
+  if (!cssLoaded) return <h1>Wait Untill Loading Complets</h1>; 
 
   return (
     <Layout headerData={headerData} footerData={footerData}>
