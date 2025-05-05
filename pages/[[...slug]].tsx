@@ -69,6 +69,8 @@ export const getStaticProps: GetStaticProps<PageProps> = async ({
   locale,
 }) => {
   const domain = process.env?.DOMAIN ?? 'site1';
+
+  console.log("Domain :::: ", domain);
   let slug = params?.slug ?? `${domain}-home`;
   slug = Array.isArray(slug)
     ? slug.map((s) => s.toLowerCase()).join("/")
@@ -76,9 +78,9 @@ export const getStaticProps: GetStaticProps<PageProps> = async ({
  
   const contentResponse = (await getEntriesByContentType(
     "landingPage",
-    domain as string,
     slug,
     locale,
+    domain
     )) as unknown as ContentfulEntryResponse;
   if (
     !contentResponse ||
