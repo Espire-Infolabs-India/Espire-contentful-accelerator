@@ -33,7 +33,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
   console.log("cssLoaded" , cssLoaded)
 
-  if (!cssLoaded) return <h1>Wait Untill Loading Complets</h1>;
+  // if (!cssLoaded) return <h1>Wait Untill Loading Complets</h1>;
 
   return (
     <Layout headerData={headerData} footerData={footerData}>
