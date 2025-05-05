@@ -29,6 +29,7 @@ const DynamicPage = ({ content, headerData, footerData,publicURL }: PageProps) =
   return (
     <Layout headerData={headerData} footerData={footerData}>
        <h1>PUBLIC URL :::: {publicURL}</h1>
+       <h1>LOCALE :::: {router.locale}</h1>
       {content?.map((data, index) => {
         const componentType = data.sys.contentType.sys.id as string;
         const Component = ComponentFactory[componentType];
@@ -101,7 +102,7 @@ export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
       content: Array.isArray(componentContainer) ? componentContainer : [],
       headerData,
       footerData,
-      publicURL: publicURL || ''
+      publicURL: publicURL || '',
     },
     revalidate: 10,
   };
