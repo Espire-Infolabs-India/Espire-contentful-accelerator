@@ -11,6 +11,7 @@ type PageProps = {
   content: ComponentProps[];
   headerData: ComponentProps;
   footerData: ComponentProps;
+  publicURL: string;
 };
 
 const DynamicPage = ({ content, headerData, footerData,publicURL }: PageProps) => {
@@ -100,7 +101,7 @@ export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
       content: Array.isArray(componentContainer) ? componentContainer : [],
       headerData,
       footerData,
-      publicURL
+      publicURL: publicURL || ''
     },
     revalidate: 10,
   };
