@@ -72,6 +72,7 @@ export const getStaticProps: GetStaticProps<PageProps> = async ({
   slug = Array.isArray(slug)
     ? slug.map((s) => s.toLowerCase()).join("/")
     : "home";
+
   const contentResponse = (await getEntriesByContentType(
     "landingPage",
     slug,
