@@ -13,10 +13,10 @@ export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
     const loadLocaleStyles = async () => {
       try {
-        if (locale === "espire-starterkit-multisite-domain1.netlify.app") {
+        if (locale === "site1") {
           await import("@/styles/site1.css"); 
           setCssLoaded(true)
-        } else if (locale === "espire-starterkit-multisite-domain2.netlify.app") {
+        } else if (locale === "site2") {
           await import("@/styles/site2.css"); 
           setCssLoaded(true)
         }
@@ -26,14 +26,14 @@ export default function App({ Component, pageProps }: AppProps) {
     };
 
     loadLocaleStyles();
-  }, [locale]); 
+  }, [locale]); // Re-run the effect when the locale changes
 
 
   const { headerData, footerData, ...restProps } = pageProps;
 
+  console.log("cssLoaded" , cssLoaded)
 
-  console.log(cssLoaded, "CSS Loaded"); // Debugging line to check if CSS is loaded
-  // if (!cssLoaded) return <h1>Wait Untill Loading Complets</h1>; 
+  if (!cssLoaded) return <h1>Wait Untill Loading Complets</h1>;
 
   return (
     <Layout headerData={headerData} footerData={footerData}>
