@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --royalblue: #203b72;
+  --black: #000000;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--black);
+}
+
+@layer base {
+  h1 {
+    @apply text-6xl font-bold;
+  }
+  h2 {
+    @apply text-5xl font-bold;
+  }
+  h3 {
+    @apply text-4xl font-bold;
+  }
+  h4 {
+    @apply text-3xl font-bold;
+  }
+  h5 {
+    @apply text-2xl font-bold;
+  }
+  main ul {
+    @apply list-disc pl-5;
+  }
+  main ol {
+    @apply list-decimal pl-5;
+  }
+  main p {
+    @apply text-[16px];
+  }
+  main a {
+    @apply text-[var(--royalblue)] hover:underline;
+  }
+}
+
+@layer components {
+  main aside ul,
+  main .ais-Pagination ul {
+    @apply list-none;
+  }
+
+  main aside ul li input {
+    @apply mx-2;
+  }
+
+  main ul:has(.link-list) {
+    @apply list-none p-0;
+  }
+}

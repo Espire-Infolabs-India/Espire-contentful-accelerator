@@ -4,12 +4,10 @@ export const getEntriesByContentType = async (
   content_type: string,
   url?: string,
   lang?: string,
-  domain?: string,
+  domain?: string
 ) => {
   const client = contentfulClient();
   const locale = lang || "en-US";
-
-  console.log("Current Site :::: ", domain);
 
   try {
     if (client) {
@@ -27,7 +25,6 @@ export const getEntriesByContentType = async (
       if (url && domain) {
         params["fields.url"] = url;
         params["fields.site"] = domain;
-     
       }
 
       const entries = await client.getEntries(params);
