@@ -7,10 +7,7 @@ import { useEffect, useState } from "react";
 
 export default function App({ Component, pageProps }: AppProps) {
   const [cssLoaded, setCssLoaded] = useState(false);
-  useEffect(() => {
-    console.log("process:", typeof process, process);
-  }, []);
-  
+ 
   useEffect(() => {
     const domain = process.env.NEXT_PUBLIC_DOMAIN || 'site1';
     const loadLocaleStyles = async () => {
