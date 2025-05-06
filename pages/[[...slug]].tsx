@@ -6,7 +6,6 @@ import { getFooterData } from "@/common/getFooterData/getFooterData";
 import { ComponentFactory } from "@/utils/lib/ComponentFactory";
 import { ComponentProps } from "@/utils/lib/CommonProps";
 import { useRouter } from "next/router";
-import getRedirects from "@/utils/lib/getRedirects";
 
 type ContentfulItem = {
   fields: {
@@ -68,10 +67,10 @@ export const getStaticProps: GetStaticProps<PageProps> = async ({
   params,
   locale,
 }) => {
-  let slug = params?.slug ?? "home";
+  let slug = params?.slug ?? "site1-home";
   slug = Array.isArray(slug)
     ? slug.map((s) => s.toLowerCase()).join("/")
-    : "home";
+    : "site1-home";
 
   const contentResponse = (await getEntriesByContentType(
     "landingPage",
@@ -85,19 +84,7 @@ export const getStaticProps: GetStaticProps<PageProps> = async ({
   ) {
     return { notFound: true };
   }
-  const redirects = await getRedirects();
-  const redirectMatch = redirects.find(
-    (r) => r.source.toLowerCase() === `/${slug}`
-  );
 
-  if (redirectMatch) {
-    return {
-      redirect: {
-        destination: redirectMatch.destination,
-        permanent: redirectMatch.permanent,
-      },
-    };
-  }
   const componentContainer =
     contentResponse.items[0].fields?.componentContainer ?? [];
 
