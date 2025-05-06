@@ -14,7 +14,7 @@ const Default = ({ data }: ComponentDataProps) => {
             className="mb-5"
             src={`${
               data?.fields?.images?.[0]?.original_secure_url?.startsWith("http")
-                ? data.fields.images[0].original_secure_url
+                ? data?.fields?.images[0]?.original_secure_url
                 : `https://${data?.fields?.image?.fields?.file?.url}`
             }`}
             width={400}
