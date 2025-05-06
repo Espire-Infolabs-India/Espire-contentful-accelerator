@@ -68,7 +68,7 @@ export const getStaticProps: GetStaticProps<PageProps> = async ({
   params,
   locale,
 }) => {
-  const domain = process.env?.NEXT_PUBLIC_DOMAIN ?? 'site1'; 
+  const domain = process.env?.DOMAIN ?? 'site1';
   let slug = params?.slug ?? `${domain}-home`;
   slug = Array.isArray(slug)
     ? slug.map((s) => s.toLowerCase()).join("/")
