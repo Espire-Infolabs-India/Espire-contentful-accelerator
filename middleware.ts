@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export async function middleware(req: NextRequest) {
-  const { pathname, locale } = req.nextUrl;
+  const { pathname, locale, hostname } = req.nextUrl;
 
   if (
     pathname.startsWith("/_next") ||
@@ -18,9 +18,9 @@ export async function middleware(req: NextRequest) {
     siteKey: string;
     permanent: boolean;
   }[] = [];
-
   try {
-    const res = await fetch(`http://localhost:3000/api/redirects`, {
+    const apiUrl = `http://${hostname}/api/redirects`;
+    const res = await fetch(apiUrl, {
       headers: { "Content-Type": "application/json" },
       cache: "no-store",
     });
