@@ -3,10 +3,13 @@ import { contentfulClient } from "../lib/ContentfulClient";
 export const getEntriesByContentType = async (
   content_type: string,
   url?: string,
-  Locale?: string
+  lang?: string,
+  domain?: string,
 ) => {
   const client = contentfulClient();
-  const locale = Locale || "en-US";
+  const locale = lang || "en-US";
+
+  console.log("Current Site :::: ", domain);
 
   try {
     if (client) {
@@ -21,8 +24,10 @@ export const getEntriesByContentType = async (
         locale,
       };
 
-      if (url) {
+      if (url && domain) {
         params["fields.url"] = url;
+        params["fields.site"] = domain;
+     
       }
 
       const entries = await client.getEntries(params);
