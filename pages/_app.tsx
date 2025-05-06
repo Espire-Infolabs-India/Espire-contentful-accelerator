@@ -9,7 +9,7 @@ export default function App({ Component, pageProps }: AppProps) {
   const [cssLoaded, setCssLoaded] = useState(false);
 
   useEffect(() => {
-    const domain = process.env?.NEXT_PUBLIC_DOMAIN ?? 'site1'; 
+    const domain = process.env?.DOMAIN ?? 'site1';
     const loadLocaleStyles = async () => {
       try {
         if (domain === "site1") {
