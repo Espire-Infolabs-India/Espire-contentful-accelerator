@@ -19,7 +19,7 @@ export async function middleware(req: NextRequest) {
     permanent: boolean;
   }[] = [];
   try {
-    const apiUrl = `http://${hostname}/api/redirects`;
+    const apiUrl = `https://${hostname}/api/redirects`;
     const res = await fetch(apiUrl, {
       headers: { "Content-Type": "application/json" },
       cache: "no-store",
