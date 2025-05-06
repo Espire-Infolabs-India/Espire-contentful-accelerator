@@ -67,10 +67,10 @@ export const getStaticProps: GetStaticProps<PageProps> = async ({
   params,
   locale,
 }) => {
-  let slug = params?.slug ?? "site1-home";
+  let slug = params?.slug ?? "home";
   slug = Array.isArray(slug)
     ? slug.map((s) => s.toLowerCase()).join("/")
-    : "site1-home";
+    : "home";
 
   const contentResponse = (await getEntriesByContentType(
     "landingPage",
