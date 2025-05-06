@@ -10,8 +10,6 @@ export default function App({ Component, pageProps }: AppProps) {
 
   useEffect(() => {
     const domain = process.env.NEXT_PUBLIC_DOMAIN;
-    console.log("Domain in useEffect:", domain);
-  
     const loadLocaleStyles = async () => {
       try {
         if (domain === "site1") {
