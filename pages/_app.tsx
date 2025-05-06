@@ -9,7 +9,7 @@ export default function App({ Component, pageProps }: AppProps) {
   const [cssLoaded, setCssLoaded] = useState(false);
 
   useEffect(() => {
-    const domain = process?.env.NEXT_PUBLIC_DOMAIN;
+    const domain = process.env?.NEXT_PUBLIC_DOMAIN ?? 'site1';
     const loadLocaleStyles = async () => {
       try {
         if (domain == "site1") {
@@ -24,10 +24,10 @@ export default function App({ Component, pageProps }: AppProps) {
       }
     };
     loadLocaleStyles();
-  });
+  }, []);
 
   const { headerData, footerData, ...restProps } = pageProps;
-  if (!cssLoaded) return <h1>Loading.....</h1>;
+  if (!cssLoaded) return <h1>Loading...</h1>;
 
   return (
     <Layout headerData={headerData} footerData={footerData}>
