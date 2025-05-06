@@ -7,25 +7,28 @@ import { useEffect, useState } from "react";
 
 export default function App({ Component, pageProps }: AppProps) {
   const [cssLoaded, setCssLoaded] = useState(false);
-
   useEffect(() => {
-    const domain = process.env?.NEXT_PUBLIC_DOMAIN ?? 'site1';
+    console.log("process:", typeof process, process);
+  }, []);
+  
+  useEffect(() => {
+    const domain = process.env.NEXT_PUBLIC_DOMAIN || 'site1';
     const loadLocaleStyles = async () => {
       try {
-        if (domain == "site1") {
-          await import("@/styles/site1.css");
+        if (domain === 'site1') {
+          await import('@/styles/site1.css');
           setCssLoaded(true);
-        } else if (domain == "site2") {
-          await import("@/styles/site2.css");
+        } else if (domain === 'site2') {
+          await import('@/styles/site2.css');
           setCssLoaded(true);
         }
       } catch (error) {
-        console.error("Error loading locale-specific styles:", error);
+        console.error('Error loading locale-specific styles:', error);
       }
     };
     loadLocaleStyles();
   }, []);
-
+  
   const { headerData, footerData, ...restProps } = pageProps;
   if (!cssLoaded) return null; // Prevent rendering until styles are loaded
 
