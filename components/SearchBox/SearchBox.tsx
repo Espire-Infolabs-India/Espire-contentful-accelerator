@@ -11,9 +11,9 @@ const SearchBox = () => {
     const trimmedQuery = query.trim();
 
     if (!trimmedQuery) {
-      router.push("/blog");
+      router.push("/search-results");
     } else {
-      router.push(`/blog?search=${encodeURIComponent(trimmedQuery)}`);
+      router.push(`/search-results?search=${encodeURIComponent(trimmedQuery)}`);
     }
   };
 
