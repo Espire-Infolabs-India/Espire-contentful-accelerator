@@ -14,22 +14,27 @@ import SocialMediaFeeds from "@/components/SocialMedia/SocialMediaFeeds";
 import SocialMedia from "@/components/SocialMedia/SocialMedia";
 import LinkListItems from "@/components/LinkList/LinkList";
 import CTA from "@/components/CTA/CTA";
+import HeadScriptComponent from "@/components/HeadScript/HeadScript";
 
-export const ComponentFactory: Record<string, React.FC<{data : ComponentProps}>> = {
-    heroBanner: HeroBanner,
-    imageWithTitleDescription: ImageWithTitleDescription,
-    richText: RichText,
-    componentFeatureBlocks:FeatureBlocks,
-    componentCarousel:Carousel,
-    componentAccordion: Accordion,
-    componentTabs: Tabs,
-    componentMap : Map,
-    componentFeatureCard: FeatureCard,
-    componentContainer: Container,
-    componentLisiting: ListingComponent,
-    componentSocialMediaFeeds:SocialMediaFeeds,
-    componentSocialMedia:SocialMedia,
-    componentLinkList:LinkListItems,
-    cta:CTA
-    // Add more components as needed
+export const ComponentFactory: Record<
+  string,
+  React.FC<{ data: ComponentProps }>
+> = {
+  heroBanner: HeroBanner,
+  imageWithTitleDescription: ImageWithTitleDescription,
+  richText: RichText,
+  componentFeatureBlocks: FeatureBlocks,
+  componentCarousel: Carousel,
+  componentAccordion: Accordion,
+  componentTabs: Tabs,
+  componentMap: Map,
+  componentFeatureCard: FeatureCard,
+  componentContainer: Container,
+  componentLisiting: ListingComponent,
+  componentSocialMediaFeeds: SocialMediaFeeds,
+  componentSocialMedia: SocialMedia,
+  componentLinkList: LinkListItems,
+  cta: CTA,
+  componentHeadScript: HeadScriptComponent,
+  // Add more components as needed
 };
