@@ -1,12 +1,10 @@
 import Link from "next/link";
 import { ComponentDataProps, ComponentProps } from "@/utils/lib/CommonProps";
-
-const makeAbsolute = (url: string): string =>
-  url?.startsWith("/") ? url : `/${url}`;
+import { makeRelativeURL } from "@/utils/utilityFunctions/makeRelativeURL";
 
 const LinkListItems = ({ data }: ComponentDataProps) => {
   const linkListItems = data?.fields?.url;
-
+  console.log(linkListItems);
   return (
     <div className="flex flex-col lg:flex-row gap-10">
       {linkListItems?.map((linklistitems: ComponentProps, index: number) => {
@@ -15,12 +13,12 @@ const LinkListItems = ({ data }: ComponentDataProps) => {
             <ul>
               <li className="item0 odd first link-list">
                 <Link
-                  href={makeAbsolute(linklistitems.fields.url)}
+                  href={makeRelativeURL(linklistitems?.fields?.url)}
                   title=""
                   target=""
                   className="sub-menu"
                 >
-                  {linklistitems.fields.title}
+                  {linklistitems?.fields?.title}
                 </Link>
               </li>
             </ul>

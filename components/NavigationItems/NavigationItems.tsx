@@ -1,15 +1,13 @@
 import Link from "next/link";
 import { ComponentDataProps, ComponentProps } from "@/utils/lib/CommonProps";
-
-const makeAbsolute = (url: string): string =>
-  url?.startsWith("/") ? url : `/${url}`;
+import { makeRelativeURL } from "@/utils/utilityFunctions/makeRelativeURL";
 
 const NavigationItems = ({ data }: ComponentDataProps) => {
   const navigationItems = data?.fields?.subLinks;
 
   return (
     <>
-      <Link href={makeAbsolute(data.fields.itemUrl)}>
+      <Link href={makeRelativeURL(data?.fields?.itemUrl)}>
         {data.fields.itemName}
       </Link>
 
@@ -19,7 +17,7 @@ const NavigationItems = ({ data }: ComponentDataProps) => {
             (navigationItem: ComponentProps, index: number) => (
               <li key={index} className="last:border-none">
                 <Link
-                  href={makeAbsolute(navigationItem.fields.url)}
+                  href={makeRelativeURL(navigationItem?.fields?.url)}
                   className="block p-2 text-black lg:px-10 lg:py-4"
                 >
                   {navigationItem.fields.title}

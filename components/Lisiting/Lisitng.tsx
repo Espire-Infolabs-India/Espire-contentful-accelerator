@@ -41,8 +41,6 @@ const Hit = ({ hit }: { hit: Payload }) => {
   const imageUrl = hit.image_file?.url || "";
   const altTitle = hit.title || "";
 
-  console.log("hit", hit.url);
-
   if (
     !(
       imageUrl ||
