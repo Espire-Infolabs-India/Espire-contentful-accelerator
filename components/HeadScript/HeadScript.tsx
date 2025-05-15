@@ -12,7 +12,7 @@ const HeadScriptComponent = ({ data }: ComponentDataProps) => {
   if (!scriptsrc && !content) {
     return null;
   }
-console.log(scriptsrc, content);
+  console.log(scriptsrc, content);
   return (
     <>
       <Script id={scriptId} src={scriptsrc} strategy="afterInteractive">
