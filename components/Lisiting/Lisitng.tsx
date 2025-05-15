@@ -13,6 +13,7 @@ import Image from "next/image";
 import type { Payload } from "@/utils/lib/ParseJSONData";
 import type { Hit } from "instantsearch.js/es/types";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 type BaseHit = Record<string, unknown>;
 
@@ -35,41 +36,70 @@ const Hit = ({ hit }: { hit: Payload }) => {
         day: "numeric",
         year: "numeric",
       })
-    : "No Date";
+    : "";
 
   const imageUrl = hit.image_file?.url || "";
   const altTitle = hit.title || "";
 
+  if (
+    !(
+      imageUrl ||
+      hit?.title ||
+      hit?.shortDescription ||
+      formattedDate ||
+      (tags && tags.length > 0)
+    )
+  ) {
+    return null;
+  }
+
   return (
-    <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col h-full min-h-[450px] border border-gray-100">
-      {imageUrl && (
-        <div className="relative w-full h-48">
-          <Image
-            src={imageUrl}
-            alt={altTitle}
-            fill
-            className="object-cover object-center"
-            unoptimized
-          />
-        </div>
-      )}
-      <div className="p-5 flex flex-col flex-grow">
-        <h2 className="text-lg font-semibold mb-2 text-gray-900">
-          <Highlight attribute="title" hit={hit as unknown as Hit<BaseHit>} />
-        </h2>
-        <p className="text-sm text-gray-600 mb-3 line-clamp-2">
-          {hit.shortDescription}
-        </p>
-        <p className="text-xs text-gray-500 mb-4">{formattedDate}</p>
-        <div className="flex flex-wrap gap-2 mt-auto">
-          {tags.map((tag, index) => (
-            <Tag key={index} label={tag} />
-          ))}
+    <Link href={hit?.url ? `/blog/${hit.url}` : "#"}>
+      <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col h-full min-h-[450px] border border-gray-100 cursor-pointer">
+        {imageUrl && (
+          <div className="relative w-full h-48 check1222Atul">
+            <Image
+              src={imageUrl}
+              alt={altTitle}
+              fill
+              className="object-cover object-center"
+              unoptimized
+            />
+          </div>
+        )}
+        <div className="p-5 flex flex-col flex-grow">
+          {hit?.title && (
+            <h2 className="text-lg font-semibold mb-2 text-gray-900">
+              <Highlight
+                attribute="title"
+                hit={hit as unknown as Hit<BaseHit>}
+              />
+            </h2>
+          )}
+
+          {hit?.shortDescription && (
+            <p className="text-sm text-gray-600 mb-3 line-clamp-2">
+              {hit.shortDescription}
+            </p>
+          )}
+
+          {formattedDate && (
+            <p className="text-xs text-gray-500 mb-4">{formattedDate}</p>
+          )}
+
+          {tags.length > 0 && (
+            <div className="flex flex-wrap gap-2 mt-auto">
+              {tags.map((tag, index) => (
+                <Tag key={index} label={tag} />
+              ))}
+            </div>
+          )}
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
+
 const SearchWithUrlSync = () => {
   const router = useRouter();
   const { refine } = useSearchBox();
