@@ -1,24 +1,24 @@
 import { ComponentDataProps } from "@/utils/lib/CommonProps";
-import Head from "next/head";
+import Script from "next/script";
 
 const HeadScriptComponent = ({ data }: ComponentDataProps) => {
-  const { scriptId, scriptSrc, enabled } = data?.fields || {};
+  const { scriptId, scriptSrc, enabled, scriptContent } = data?.fields || {};
 
   if (!enabled) return null;
 
-  let src = "";
-  if (typeof scriptSrc === "string") {
-    src = scriptSrc;
-  } else if (scriptSrc?.content?.[0]?.content?.[0]?.value) {
-    src = scriptSrc.content[0].content[0].value;
+  const scriptsrc = scriptSrc?.content?.[0]?.content?.[0]?.value || "";
+  const content = scriptContent?.content?.[0]?.content?.[0]?.value || "";
+
+  if (!scriptsrc && !content) {
+    return null;
   }
-
-  if (!src) return null;
-
+console.log(scriptsrc, content);
   return (
-    <Head>
-      <script id={scriptId || "external-script"} src={src} async></script>
-    </Head>
+    <>
+      <Script id={scriptId} src={scriptsrc} strategy="afterInteractive">
+        {content}
+      </Script>
+    </>
   );
 };
 
