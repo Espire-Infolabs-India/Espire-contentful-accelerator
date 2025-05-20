@@ -4,6 +4,7 @@ import "@/components/Footer/footer.css";
 import type { AppProps } from "next/app";
 import Layout from "@/components/Layout/Layout";
 import { useEffect, useState } from "react";
+import { NinetailedProvider } from '@ninetailed/experience.js-next';
 
 export default function App({ Component, pageProps }: AppProps) {
   const [cssLoaded, setCssLoaded] = useState(false);
@@ -30,8 +31,19 @@ export default function App({ Component, pageProps }: AppProps) {
   if (!cssLoaded) return null; // Prevent rendering until styles are loaded
 
   return (
+    <NinetailedProvider 
+    clientId={process.env.NEXT_PUBLIC_NINETAILED_CLIENT_ID || ''}
+    environment={process.env.NEXT_PUBLIC_NINETAILED_ENVIRONMENT || ''}
+    plugins={[]}
+    componentViewTrackingThreshold={2000}
+    requestTimeout={5000}
+    locale="en-US"
+    url="https://experience.ninetailed.co"
+    useSDKEvaluation={true}
+  >
     <Layout headerData={headerData} footerData={footerData}>
       <Component {...restProps} />
     </Layout>
+    </NinetailedProvider>
   );
 }
