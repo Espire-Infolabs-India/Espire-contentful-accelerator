@@ -16,6 +16,7 @@ export interface ContentTypeProps {
         id: string;
       };
     };
+    id : string;
   };
 }
 
