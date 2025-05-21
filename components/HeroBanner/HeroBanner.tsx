@@ -8,9 +8,9 @@ const HeroBanner = ({ data }: ComponentDataProps) => {
   return (
     <>
       <Experience
-        {...data}
-        id={data.sys.contentType.sys.id}
+        id={data?.sys?.id}
         component={HeroBannerComponent}
+        {...data}
         experiences={parsedExperiences}
       />
     </>
