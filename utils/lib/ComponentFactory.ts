@@ -15,7 +15,6 @@ import SocialMedia from "@/components/SocialMedia/SocialMedia";
 import LinkListItems from "@/components/LinkList/LinkList";
 import CTA from "@/components/CTA/CTA";
 import HeadScriptComponent from "@/components/HeadScript/HeadScript";
-import GoogleAnalyticsComponent from "@/components/GoogleAnalytics/GoogleAnalytics";
 
 export const ComponentFactory: Record<
   string,
@@ -37,6 +36,5 @@ export const ComponentFactory: Record<
   componentLinkList: LinkListItems,
   cta: CTA,
   componentHeadScript: HeadScriptComponent,
-  componentGoogleAnalytics: GoogleAnalyticsComponent,
   // Add more components as needed
 };
