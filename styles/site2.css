@@ -31,10 +31,12 @@ body {
   h3 {
     @apply text-4xl font-bold;
   }
-  h4 {
+  h4,
+  .h4 {
     @apply text-3xl font-bold;
   }
-  h5 {
+  h5,
+  .h5 {
     @apply text-2xl font-bold;
   }
   main ul {
@@ -63,5 +65,13 @@ body {
 
   main ul:has(.link-list) {
     @apply list-none p-0;
+  }
+  
+  .no-found {
+    @apply bg-[var(--royalblue)] h-svh flex items-center justify-center;
+  }
+
+  .cover-not-found {
+    @apply w-4/5 h-auto md:w-1/2 bg-white flex flex-col items-center justify-center p-8;
   }
 }
