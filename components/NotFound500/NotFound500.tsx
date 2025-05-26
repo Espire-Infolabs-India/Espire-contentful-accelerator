@@ -106,16 +106,7 @@ const NotFound500 = (): JSX.Element => (
           </svg>
         </div>
         <h2 className="h5 my-2 text-center">
-          Sorry for the inconvenience. <br /> To contact us in the meantime,
-          please email{" "}
-          <a
-            href="mailto:inquiry@espire.com"
-            style={{
-              fontWeight: 300,
-            }}
-          >
-            inquiry@espire.com
-          </a>{" "}
+          Sorry for the inconvenience.
         </h2>
       </div>
       <div
