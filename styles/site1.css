@@ -18,7 +18,7 @@
 
 body {
   color: var(--foreground);
-  background: var(--royalblue);
+  background: var(--background);
 }
 
 @layer base {
@@ -65,4 +65,3 @@ body {
     @apply list-none p-0;
   }
 }
-
