@@ -11,12 +11,6 @@ const NotFound500 = (): JSX.Element => (
     <a href="/" className="navbar-brand"></a>
     <div
       className="no-found"
-      // style={{
-      //   padding: 10,
-      //   textAlign: "center",
-      //   fontFamily: "Roboto, sans-serif",
-      //   fontWeight: 100,
-      // }}
     >
       <div className="construction-message cover-not-found">
         <h1 className="h4 my-2 text-center">
