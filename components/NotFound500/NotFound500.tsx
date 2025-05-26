@@ -9,9 +9,7 @@ const NotFound500 = (): JSX.Element => (
       <title>Espire</title>
     </Head>
     <a href="/" className="navbar-brand"></a>
-    <div
-      className="no-found"
-    >
+    <div className="no-found">
       <div className="construction-message cover-not-found">
         <h1 className="h4 my-2 text-center">
           Our website is under maintenance currently
@@ -99,9 +97,7 @@ const NotFound500 = (): JSX.Element => (
             </svg>
           </svg>
         </div>
-        <h2 className="h5 my-2 text-center">
-          Sorry for the inconvenience.
-        </h2>
+        <h2 className="h5 my-2 text-center">Sorry for the inconvenience.</h2>
       </div>
       <div
         className="footer"
