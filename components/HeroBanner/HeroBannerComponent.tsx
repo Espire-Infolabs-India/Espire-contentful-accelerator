@@ -9,7 +9,7 @@ const HeroBannerComponent = (props: ComponentProps) => {
       className="hero-banner relative  bg-cover bg-no-repeat p-12 text-center"
       style={{
         backgroundImage: `url(${
-          props?.fields?.images?.[0]?.original_secure_url ||
+          //props?.fields?.images?.[0]?.original_secure_url ||
           props?.fields?.image?.fields?.file?.url
         })`,
         height: "400px",
