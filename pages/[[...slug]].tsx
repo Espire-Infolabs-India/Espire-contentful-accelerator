@@ -101,7 +101,7 @@ export const getStaticProps: GetStaticProps<PageProps> = async ({
 
   const item = contentResponse?.items[0];
   const componentContainer = item?.fields?.componentContainer ?? [];
-  const seoData = item.fields?.seo ?? ({} as ComponentProps); // ✅ single object
+  const seoData = item.fields?.seo ?? ({} as ComponentProps);
 
   const headerResult = await getHeaderData();
   const footerResult = await getFooterData();

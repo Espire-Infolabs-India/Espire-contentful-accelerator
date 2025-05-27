@@ -37,10 +37,6 @@ export default function Layout({
 
     fetchAnalytics();
   }, []);
-
-  useEffect(() => {}, [seoData]);
-
-  const seoComponent = seoData;
   return (
     <>
       <GoogleAnalyticsComponent
@@ -48,7 +44,7 @@ export default function Layout({
       />
 
       <div className={`${PoppinFont.variable} font-poppin`}>
-        {seoComponent && <SEO {...seoComponent} />}
+        {seoData && <SEO {...seoData} />}
         <header>
           <Header data={headerData} />
         </header>
