@@ -4,7 +4,6 @@ import { Document } from "@contentful/rich-text-types";
 import { ComponentProps } from "@/utils/lib/CommonProps";
 
 const HeroBannerComponent = (props: ComponentProps) => {
-  console.log("Props in HeroBannerComponent", props);
   return (
     <div
       className="hero-banner relative  bg-cover bg-no-repeat p-12 text-center"
