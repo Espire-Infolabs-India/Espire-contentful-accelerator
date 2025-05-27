@@ -1,51 +1,28 @@
-import { getEntriesByContentType } from "@/utils/utilityFunctions/getEntriesByContentType";
-import React, { useEffect, useState, memo } from "react";
 import Head from "next/head";
 import { ComponentProps } from "@/utils/lib/CommonProps";
 
-const SEO = () => {
-  const [seoData, setSeoData] = useState<ComponentProps["fields"] | null>(null);
-  const [currentUrl, setCurrentUrl] = useState("");
-
-  useEffect(() => {
-    setCurrentUrl(window.location.origin + window.location.pathname);
-
-    const fetchSeoData = async () => {
-      try {
-        const response = await getEntriesByContentType("seo");
-        if (
-          response &&
-          response.items &&
-          response.items[0] &&
-          response.items[0].fields
-        ) {
-          setSeoData(
-            response.items[0].fields as unknown as ComponentProps["fields"]
-          );
-        }
-      } catch (error) {
-        console.error("Failed to fetch SEO data:", error);
-      }
-    };
-
-    fetchSeoData();
-  }, []);
-
-  if (!seoData) return null;
+const SEO = (props: ComponentProps) => {
+  const { fields } = props;
+  if (!fields) return null;
 
   const {
     pageTitle,
-    metaKeyword,
-    metaDescription,
-    twitterTitle,
-    twitterDescription,
+    metaKeyword = "",
+    metaDescription = "",
+    twitterTitle = "",
+    twitterDescription = "",
     twitterImage,
-    openGraphTitle,
-    openGraphDescription,
+    openGraphTitle = "",
+    openGraphDescription = "",
     openGraphImage,
-    nofollow,
-    noindex,
-  } = seoData;
+    nofollow = false,
+    noindex = false,
+  } = fields;
+
+  const currentUrl =
+    typeof window !== "undefined"
+      ? window.location.origin + window.location.pathname
+      : "";
 
   const robotsContent = `${nofollow ? "nofollow" : "follow"}, ${
     noindex ? "noindex" : "index"
@@ -78,4 +55,4 @@ const SEO = () => {
   );
 };
 
-export default memo(SEO);
+export default SEO;

@@ -10,6 +10,7 @@ import { useRouter } from "next/router";
 type ContentfulItem = {
   fields: {
     componentContainer: ComponentProps[];
+    seo: ComponentProps;
   };
 };
 
@@ -21,15 +22,25 @@ type PageProps = {
   content: ComponentProps[];
   headerData: ComponentProps;
   footerData: ComponentProps;
+  seoContent: ComponentProps;
 };
 
-const DynamicPage = ({ content, headerData, footerData }: PageProps) => {
+const DynamicPage = ({
+  content,
+  headerData,
+  footerData,
+  seoContent,
+}: PageProps) => {
   const router = useRouter();
 
   if (router.isFallback) return <div>Loading...</div>;
 
   return (
-    <Layout headerData={headerData} footerData={footerData}>
+    <Layout
+      headerData={headerData}
+      footerData={footerData}
+      seoData={seoContent}
+    >
       {content.map((data, index) => {
         const componentType = data.sys?.contentType?.sys?.id as string;
         const Component = ComponentFactory[componentType];
@@ -79,6 +90,7 @@ export const getStaticProps: GetStaticProps<PageProps> = async ({
     locale,
     domain
   )) as unknown as ContentfulEntryResponse;
+
   if (
     !contentResponse ||
     !Array.isArray(contentResponse.items) ||
@@ -87,8 +99,9 @@ export const getStaticProps: GetStaticProps<PageProps> = async ({
     return { notFound: true };
   }
 
-  const componentContainer =
-    contentResponse.items[0].fields?.componentContainer ?? [];
+  const item = contentResponse?.items[0];
+  const componentContainer = item?.fields?.componentContainer ?? [];
+  const seoData = item.fields?.seo ?? ({} as ComponentProps);
 
   const headerResult = await getHeaderData();
   const footerResult = await getFooterData();
@@ -106,6 +119,7 @@ export const getStaticProps: GetStaticProps<PageProps> = async ({
   return {
     props: {
       content: Array.isArray(componentContainer) ? componentContainer : [],
+      seoContent: seoData,
       headerData,
       footerData,
     },

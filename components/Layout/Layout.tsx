@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import SEO from "../SEO/SEO";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import { ComponentProps } from "@/utils/lib/CommonProps";
@@ -8,15 +7,18 @@ import CookieConfig from "@/utils/lib/CookieConfig";
 import Script from "next/script";
 import GoogleAnalyticsComponent from "../GoogleAnalytics/GoogleAnalytics";
 import { getGoogleAnalyticsData } from "@/common/getGoogleAnalyticsData/getGoogleAnalyticsData";
+import SEO from "../SEO/SEO";
 
 export default function Layout({
   children,
   headerData,
   footerData,
+  seoData,
 }: {
   children: React.ReactNode;
   headerData: ComponentProps;
   footerData: ComponentProps;
+  seoData: ComponentProps;
 }) {
   const [fetchedAnalyticsData, setFetchedAnalyticsData] =
     useState<ComponentProps | null>(null);
@@ -35,7 +37,6 @@ export default function Layout({
 
     fetchAnalytics();
   }, []);
-
   return (
     <>
       <GoogleAnalyticsComponent
@@ -43,7 +44,7 @@ export default function Layout({
       />
 
       <div className={`${PoppinFont.variable} font-poppin`}>
-        <SEO />
+        {seoData && <SEO {...seoData} />}
         <header>
           <Header data={headerData} />
         </header>

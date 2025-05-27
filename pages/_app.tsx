@@ -27,7 +27,7 @@ export default function App({ Component, pageProps }: AppProps) {
     loadLocaleStyles();
   }, []);
 
-  const { headerData, footerData, ...restProps } = pageProps;
+  const { headerData, footerData, seoData, ...restProps } = pageProps;
   if (!cssLoaded) return null;
 
   return (
@@ -36,7 +36,7 @@ export default function App({ Component, pageProps }: AppProps) {
       environment={process.env.NEXT_PUBLIC_NINETAILED_ENVIRONMENT || ""}
       useSDKEvaluation={true}
     >
-      <Layout headerData={headerData} footerData={footerData}>
+      <Layout headerData={headerData} footerData={footerData} seoData={seoData}>
         <Component {...restProps} />
       </Layout>
     </NinetailedProvider>
