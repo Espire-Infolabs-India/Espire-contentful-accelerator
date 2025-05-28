@@ -46,7 +46,7 @@ const DynamicPage = ({
         const Component = ComponentFactory[componentType];
 
         if (!Component) {
-          console.warn(`Unknown component type: ${componentType}`);
+        // console.warn(`Unknown component type: ${componentType}`);
           return null;
         }
 
