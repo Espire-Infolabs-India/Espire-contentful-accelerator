@@ -15,6 +15,7 @@ import SocialMedia from "@/components/SocialMedia/SocialMedia";
 import LinkListItems from "@/components/LinkList/LinkList";
 import CTA from "@/components/CTA/CTA";
 import HeadScriptComponent from "@/components/HeadScript/HeadScript";
+import Separator from "@/components/Separator/Separator";
 
 export const ComponentFactory: Record<
   string,
@@ -36,5 +37,6 @@ export const ComponentFactory: Record<
   componentLinkList: LinkListItems,
   cta: CTA,
   componentHeadScript: HeadScriptComponent,
+  componentSeparator :Separator
   // Add more components as needed
 };
