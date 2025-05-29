@@ -16,6 +16,7 @@ import LinkListItems from "@/components/LinkList/LinkList";
 import CTA from "@/components/CTA/CTA";
 import HeadScriptComponent from "@/components/HeadScript/HeadScript";
 import Separator from "@/components/Separator/Separator";
+import PlainHtml from "@/components/Plain Html/PlainHtml";
 import GraphQLListing from "@/components/GraphQLListing/GraphQLListing";
 
 export const ComponentFactory: Record<
@@ -39,6 +40,7 @@ export const ComponentFactory: Record<
   cta: CTA,
   componentHeadScript: HeadScriptComponent,
   componentSeparator :Separator,
+  componentPlainHtml: PlainHtml,
   componentGraphQlListing: GraphQLListing
   // Add more components as needed
 };
