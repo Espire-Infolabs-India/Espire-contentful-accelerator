@@ -16,6 +16,7 @@ import LinkListItems from "@/components/LinkList/LinkList";
 import CTA from "@/components/CTA/CTA";
 import HeadScriptComponent from "@/components/HeadScript/HeadScript";
 import Separator from "@/components/Separator/Separator";
+import PlainHtml from "@/components/Plain Html/PlainHtml";
 
 export const ComponentFactory: Record<
   string,
@@ -37,6 +38,8 @@ export const ComponentFactory: Record<
   componentLinkList: LinkListItems,
   cta: CTA,
   componentHeadScript: HeadScriptComponent,
-  componentSeparator :Separator
+  componentSeparator :Separator,
+  componentPlainHtml: PlainHtml,
+
   // Add more components as needed
 };
