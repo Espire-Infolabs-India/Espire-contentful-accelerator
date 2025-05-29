@@ -15,6 +15,7 @@ import SocialMedia from "@/components/SocialMedia/SocialMedia";
 import LinkListItems from "@/components/LinkList/LinkList";
 import CTA from "@/components/CTA/CTA";
 import HeadScriptComponent from "@/components/HeadScript/HeadScript";
+import Separator from "@/components/Separator/Separator";
 import GraphQLListing from "@/components/GraphQLListing/GraphQLListing";
 
 export const ComponentFactory: Record<
@@ -37,6 +38,7 @@ export const ComponentFactory: Record<
   componentLinkList: LinkListItems,
   cta: CTA,
   componentHeadScript: HeadScriptComponent,
+  componentSeparator :Separator,
   componentGraphQlListing: GraphQLListing
   // Add more components as needed
 };
