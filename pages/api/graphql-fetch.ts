@@ -24,7 +24,7 @@ export default async function handler(
       .json({ error: "Missing contentType in request body." });
   }
 
-  let fragmentFields = `
+  let  landigPagefields = `
     sys { id }
     title
     url
@@ -32,7 +32,7 @@ export default async function handler(
 
   const withImage = ["blogLandingPage"];
   if (withImage.includes(contentType)) {
-    fragmentFields += `
+    landigPagefields += `
       image {
         url
       }
@@ -43,7 +43,7 @@ export default async function handler(
     query ($limit: Int!) {
       ${contentType}Collection(limit: $limit) {
         items {
-          ${fragmentFields}
+          ${landigPagefields}
         }
       }
     }

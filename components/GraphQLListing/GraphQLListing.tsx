@@ -28,7 +28,6 @@ const GraphQLListing = ({ data }: ComponentDataProps) => {
       });
       const result = await res.json();
       setEntries(result.entries || []);
-      console.log("");
     };
 
     if (scope) fetchData();
