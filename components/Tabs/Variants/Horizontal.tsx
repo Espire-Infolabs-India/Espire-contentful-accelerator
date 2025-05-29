@@ -95,7 +95,7 @@ export default function Horizontal({ data }: ComponentDataProps) {
     });
 
   return (
-    <div className="container m-auto my-10">
+    <div className="container m-auto my-10 px-4 md:px-0">
     <Box sx={{ width: "100%" }}>
       <Typography
         variant="h5"
@@ -106,7 +106,9 @@ export default function Horizontal({ data }: ComponentDataProps) {
       </Typography>
 
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-        <Tabs value={value} onChange={handleChange} aria-label="dynamic tabs">
+        <Tabs value={value} onChange={handleChange} variant="scrollable"
+      scrollButtons="auto"
+      aria-label="responsive tabs">
           {renderTabs()}
         </Tabs>
       </Box>

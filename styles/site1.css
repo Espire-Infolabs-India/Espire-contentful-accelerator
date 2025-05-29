@@ -8,6 +8,10 @@
   --royalblue: #203b72;
 }
 
+* {
+  outline: none !important;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -73,5 +77,15 @@ body {
 
   .cover-not-found {
     @apply w-4/5 h-auto md:w-1/2 bg-white flex flex-col items-center justify-center p-8;
+  }
+
+  .top-menu > ul > li:last-child > a {
+    @apply px-2;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1279px) {
+  .container {
+    max-width: 1068px;
   }
 }

@@ -76,7 +76,7 @@ const Header = ({ data }: ComponentDataProps) => {
             <div className="flex items-center justify-evenly gap-8">
               <SearchBox />
 
-              <nav className={`hidden relative lg:block header-menu-font-size`}>
+              <nav className={`hidden relative lg:block header-menu-font-size top-menu`}>
                 <ul className={`flex [&_a]:px-6`}>
                   {primarycomponents?.map((component: ComponentProps) => {
                     if (!component?.sys?.contentType?.sys?.id) return null;
