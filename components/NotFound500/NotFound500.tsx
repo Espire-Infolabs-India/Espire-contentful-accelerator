@@ -1,14 +1,26 @@
 import Head from "next/head";
 import React from "react";
+import Header from "../Header/Header";
+import { ComponentProps } from "@/utils/lib/CommonProps";
+import Footer from "../Footer/Footer";
 /**
  * Rendered in case if we have a 500 error
  */
-const NotFound500 = (): JSX.Element => (
+const NotFound500 = ({
+  headerData,
+  footerData,
+}: {
+  headerData: ComponentProps;
+  footerData: ComponentProps;
+}): JSX.Element => (
   <>
     <Head>
       <title>Espire</title>
     </Head>
-    <a href="/" className="navbar-brand"></a>
+    <header>
+      <Header data={headerData} />
+    </header>
+   
     <div className="no-found">
       <div className="construction-message cover-not-found">
         <h1 className="h4 my-2 text-center">
@@ -106,6 +118,9 @@ const NotFound500 = (): JSX.Element => (
         {/* Your footer content */}
       </div>
     </div>
+     <footer>
+      <Footer data={footerData} />
+    </footer>
   </>
 );
 

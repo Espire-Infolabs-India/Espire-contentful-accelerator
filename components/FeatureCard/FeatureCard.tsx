@@ -15,7 +15,7 @@ const FeatureCard = ({ data }: ComponentDataProps) => {
 
   return (
     <>
-      <div className="container m-auto my-10">
+      <div className="container m-auto my-10 px-4 md:px-0">
         <Typography
           variant="h4"
           component="h2"

@@ -8,7 +8,7 @@ import { ComponentDataProps } from "@/utils/lib/CommonProps";
 const Default = ({ data }: ComponentDataProps) => {
   return (
     <div className="py-10 font-sans">
-      <div className="container mx-auto flex flex-col md:flex-row justify-between items-center gap-x-6 gap-y-8">
+      <div className="container mx-auto px-4 md:px-0 flex flex-col md:flex-row justify-between items-center gap-x-6 gap-y-8">
         <div className="md:w-full">
           <Image
             className="mb-5"
@@ -22,7 +22,7 @@ const Default = ({ data }: ComponentDataProps) => {
             alt={""}
             unoptimized
           />
-          <h2 className={`text-5xl mb-4 font-poppin`}>{data?.fields?.title}</h2>
+          <h2 className={`text-2xl sm:text-5xl mb-4 font-poppin`}>{data?.fields?.title}</h2>
           <div className="text-base font-poppin">
             {documentToReactComponents(
               data.fields.description as unknown as Document,
