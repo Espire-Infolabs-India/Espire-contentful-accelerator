@@ -4,6 +4,7 @@ import Header from "../Header/Header";
 import { ComponentProps } from "@/utils/lib/CommonProps";
 import { PoppinFont } from "@/utils/fonts";
 import SEO from "../SEO/SEO";
+import GlobalScripts from "../GlobalScripts/GlobalScripts";
 
 export default function Layout({
   children,
@@ -18,6 +19,7 @@ export default function Layout({
 }) {
   return (
     <>
+      <GlobalScripts />
       <div className={`${PoppinFont.variable} font-poppin`}>
         {seoData && <SEO {...seoData} />}
         <header>
