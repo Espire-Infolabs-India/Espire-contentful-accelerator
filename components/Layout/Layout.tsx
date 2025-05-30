@@ -1,12 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import { ComponentProps } from "@/utils/lib/CommonProps";
 import { PoppinFont } from "@/utils/fonts";
-// import CookieConfig from "@/utils/lib/CookieConfig";
-import Script from "next/script";
-import GoogleAnalyticsComponent from "../GoogleAnalytics/GoogleAnalytics";
-import { getGoogleAnalyticsData } from "@/common/getGoogleAnalyticsData/getGoogleAnalyticsData";
 import SEO from "../SEO/SEO";
 
 export default function Layout({
@@ -20,39 +16,8 @@ export default function Layout({
   footerData: ComponentProps;
   seoData: ComponentProps;
 }) {
-  const [fetchedAnalyticsData, setFetchedAnalyticsData] =
-    useState<ComponentProps | null>(null);
-
-  useEffect(() => {
-    const fetchAnalytics = async () => {
-      try {
-        const result = await getGoogleAnalyticsData();
-        if (Array.isArray(result.data) && result.data.length > 0) {
-          setFetchedAnalyticsData(result?.data[0] as ComponentProps);
-        }
-      } catch (error) {
-        console.error("Error fetching Google Analytics data:", error);
-      }
-    };
-
-    fetchAnalytics();
-  }, []);
   return (
     <>
-      <Script
-        src="https://web.cmp.usercentrics.eu/modules/autoblocker.js"
-        strategy="afterInteractive"
-      ></Script>
-      <Script
-        id="usercentrics-cmp"
-        src="https://web.cmp.usercentrics.eu/ui/loader.js"
-        data-settings-id="FGlgmtieO9LIKd"
-        strategy="afterInteractive"
-      ></Script>
-      <GoogleAnalyticsComponent
-        data={fetchedAnalyticsData ?? ({ fields: {} } as ComponentProps)}
-      />
-
       <div className={`${PoppinFont.variable} font-poppin`}>
         {seoData && <SEO {...seoData} />}
         <header>
@@ -62,13 +27,6 @@ export default function Layout({
         <footer>
           <Footer data={footerData} />
         </footer>
-
-        {/* Enable this for CIVIC UK Implementation */}
-        {/* <Script
-          src="https://cc.cdn.civiccomputing.com/9/cookieControl-9.x.min.js"
-          strategy={"beforeInteractive"}
-        />
-        <CookieConfig /> */}
       </div>
     </>
   );
