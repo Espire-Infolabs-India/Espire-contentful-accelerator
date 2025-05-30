@@ -18,6 +18,8 @@ import HeadScriptComponent from "@/components/HeadScript/HeadScript";
 import Separator from "@/components/Separator/Separator";
 import PlainHtml from "@/components/Plain Html/PlainHtml";
 import GraphQLListing from "@/components/GraphQLListing/GraphQLListing";
+import ExternalApiResults from "@/components/ExternalApiResults/ExternalApiReslts";
+
 
 export const ComponentFactory: Record<
   string,
@@ -41,6 +43,7 @@ export const ComponentFactory: Record<
   componentHeadScript: HeadScriptComponent,
   componentSeparator :Separator,
   componentPlainHtml: PlainHtml,
-  componentGraphQlListing: GraphQLListing
+  componentGraphQlListing: GraphQLListing,
+  componentExternalApiResults: ExternalApiResults,
   // Add more components as needed
 };
