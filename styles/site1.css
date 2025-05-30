@@ -88,4 +88,14 @@ body {
   .container {
     max-width: 1068px;
   }
+
+  .top-menu > ul > li:last-child > a {
+    @apply px-2;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1279px) {
+  .container {
+    max-width: 1068px;
+  }
 }

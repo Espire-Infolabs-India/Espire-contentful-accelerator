@@ -9,7 +9,7 @@ const RichText = ({ data }: ComponentDataProps) => {
     if (!data?.fields?.content) return null;
     return (
       <section className="mt-10">
-      <div className="rich-text container m-auto">
+      <div className="rich-text container m-auto px-4 md:px-0">
         {documentToReactComponents(
           data.fields.content as unknown as Document,
           RichtextRenderOptions
