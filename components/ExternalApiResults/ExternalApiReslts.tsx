@@ -102,8 +102,8 @@ const ExternalApiResults = ({ data }: ComponentDataProps) => {
                     py: 1,
                   }}
                 >
-                  <strong>User ID:</strong> {post.userId} |{" "}
-                  <strong>Post ID:</strong> {post.id}
+                  <strong>User ID:</strong> {post?.userId}
+                  <strong>Post ID:</strong> {post?.id}
                 </Box>
               </Card>
             </Grid>
