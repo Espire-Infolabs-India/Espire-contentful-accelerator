@@ -4,7 +4,6 @@ import type { AppProps } from "next/app";
 import Layout from "@/components/Layout/Layout";
 import { useEffect, useState } from "react";
 import { NinetailedProvider } from "@ninetailed/experience.js-next";
-import GlobalScripts from "@/components/GlobalScripts/GlobalScripts";
 
 export default function App({ Component, pageProps }: AppProps) {
   const [cssLoaded, setCssLoaded] = useState(false);
@@ -33,7 +32,6 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <GlobalScripts />
       <NinetailedProvider
         clientId={process.env.NEXT_PUBLIC_NINETAILED_CLIENT_ID || ""}
         environment={process.env.NEXT_PUBLIC_NINETAILED_ENVIRONMENT || ""}
