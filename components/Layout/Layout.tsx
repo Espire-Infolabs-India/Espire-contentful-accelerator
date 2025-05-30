@@ -3,7 +3,7 @@ import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import { ComponentProps } from "@/utils/lib/CommonProps";
 import { PoppinFont } from "@/utils/fonts";
-import CookieConfig from "@/utils/lib/CookieConfig";
+// import CookieConfig from "@/utils/lib/CookieConfig";
 import Script from "next/script";
 import GoogleAnalyticsComponent from "../GoogleAnalytics/GoogleAnalytics";
 import { getGoogleAnalyticsData } from "@/common/getGoogleAnalyticsData/getGoogleAnalyticsData";
@@ -39,6 +39,16 @@ export default function Layout({
   }, []);
   return (
     <>
+      <Script
+        src="https://web.cmp.usercentrics.eu/modules/autoblocker.js"
+        strategy="afterInteractive"
+      ></Script>
+      <Script
+        id="usercentrics-cmp"
+        src="https://web.cmp.usercentrics.eu/ui/loader.js"
+        data-settings-id="FGlgmtieO9LIKd"
+        strategy="afterInteractive"
+      ></Script>
       <GoogleAnalyticsComponent
         data={fetchedAnalyticsData ?? ({ fields: {} } as ComponentProps)}
       />
@@ -52,11 +62,13 @@ export default function Layout({
         <footer>
           <Footer data={footerData} />
         </footer>
-        <Script
+
+        {/* Enable this for CIVIC UK Implementation */}
+        {/* <Script
           src="https://cc.cdn.civiccomputing.com/9/cookieControl-9.x.min.js"
           strategy={"beforeInteractive"}
         />
-        <CookieConfig />
+        <CookieConfig /> */}
       </div>
     </>
   );
