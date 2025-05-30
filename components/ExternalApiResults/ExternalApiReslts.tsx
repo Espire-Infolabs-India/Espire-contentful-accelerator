@@ -1,6 +1,15 @@
 import { ComponentDataProps } from "@/utils/lib/CommonProps";
 import React, { useEffect, useState, startTransition } from "react";
-import {Container,Grid,Card,CardContent,Typography,CircularProgress,Alert,Box,} from "@mui/material";
+import {
+  Container,
+  Grid,
+  Card,
+  CardContent,
+  Typography,
+  CircularProgress,
+  Alert,
+  Box,
+} from "@mui/material";
 
 interface Post {
   userId: number;
@@ -49,7 +58,7 @@ const ExternalApiResults = ({ data }: ComponentDataProps) => {
       };
       fetchPosts();
     });
-  }, [hydrated]);
+  }, [hydrated,api]);
   if (!hydrated) return null;
   return (
     <Container sx={{ py: 5, bgcolor: "#f8f9fa", borderRadius: "8px" }}>
@@ -102,7 +111,7 @@ const ExternalApiResults = ({ data }: ComponentDataProps) => {
                     py: 1,
                   }}
                 >
-                  <strong>User ID:</strong> {post?.userId}
+                  <strong>User ID:</strong> {post?.userId}{" "}
                   <strong>Post ID:</strong> {post?.id}
                 </Box>
               </Card>
