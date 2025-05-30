@@ -1,4 +1,3 @@
-import Script from "next/script";
 import GoogleAnalyticsComponent from "../GoogleAnalytics/GoogleAnalytics";
 import { useEffect, useState } from "react";
 import { getGoogleAnalyticsData } from "@/common/getGoogleAnalyticsData/getGoogleAnalyticsData";
@@ -25,16 +24,6 @@ const GlobalScripts = () => {
   }, []);
   return (
     <>
-      <Script
-        src="https://web.cmp.usercentrics.eu/modules/autoblocker.js"
-        strategy="afterInteractive"
-      ></Script>
-      <Script
-        id="usercentrics-cmp"
-        src="https://web.cmp.usercentrics.eu/ui/loader.js"
-        data-settings-id="FGlgmtieO9LIKd"
-        strategy="afterInteractive"
-      ></Script>
       <GoogleAnalyticsComponent
         data={fetchedAnalyticsData ?? ({ fields: {} } as ComponentProps)}
       />
