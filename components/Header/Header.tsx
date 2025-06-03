@@ -88,13 +88,13 @@ const Header = ({ data }: ComponentDataProps) => {
 
                     if (!ComponentType) return null;
 
-                    const DropdownActive = component?.fields?.subLinks
+                    const dropdownActive = component?.fields?.subLinks
                       ? "hover:bg-white hover:text-gray-600"
                       : "";
 
                     return (
                       <li
-                        className={`group cursor-pointer py-2 rounded-t-[5px] text-white ${DropdownActive}`}
+                        className={`group cursor-pointer py-2 rounded-t-[5px] text-white ${dropdownActive}`}
                         key={component?.sys?.contentType?.sys?.id}
                       >
                         {component?.fields && (
