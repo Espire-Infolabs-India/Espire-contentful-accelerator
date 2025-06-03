@@ -8,7 +8,7 @@ const Container = ({ data }: ComponentDataProps) => {
   return (
     <React.Fragment>
       <CssBaseline />
-      <MuiContainer className="container m-auto py-4 px-0">
+      <MuiContainer className="container m-auto py-4 px-0" disableGutters={true}>
         {data?.fields?.container?.map((item: ComponentProps, index: number) => {
           const componentType = item.sys.contentType.sys.id;
           const Component = ComponentFactory[
