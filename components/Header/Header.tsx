@@ -76,7 +76,9 @@ const Header = ({ data }: ComponentDataProps) => {
             <div className="flex items-center justify-evenly gap-8">
               <SearchBox />
 
-              <nav className={`hidden relative lg:block header-menu-font-size top-menu`}>
+              <nav
+                className={`hidden relative lg:block header-menu-font-size top-menu`}
+              >
                 <ul className={`flex [&_a]:px-6`}>
                   {primarycomponents?.map((component: ComponentProps) => {
                     if (!component?.sys?.contentType?.sys?.id) return null;
@@ -86,9 +88,13 @@ const Header = ({ data }: ComponentDataProps) => {
 
                     if (!ComponentType) return null;
 
+                    const dropdownActive = component?.fields?.subLinks
+                      ? "hover:bg-white hover:text-gray-600"
+                      : "";
+
                     return (
                       <li
-                        className="group cursor-pointer py-2 rounded-t-[5px] hover:bg-white first:hover:bg-opacity-0 text-white first:hover:text-white hover:text-gray-600"
+                        className={`group cursor-pointer py-2 rounded-t-[5px] text-white ${dropdownActive}`}
                         key={component?.sys?.contentType?.sys?.id}
                       >
                         {component?.fields && (

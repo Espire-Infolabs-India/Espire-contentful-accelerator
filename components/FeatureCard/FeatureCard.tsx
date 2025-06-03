@@ -43,6 +43,7 @@ const FeatureCard = ({ data }: ComponentDataProps) => {
                   borderRadius: 2,
                   boxShadow: 3,
                 }}
+                className={ index % 2 === 0 ? 'blue-box' : 'gray-box'}
               >
                 <CardActionArea
                   onClick={() => setSelectedCard(index)}

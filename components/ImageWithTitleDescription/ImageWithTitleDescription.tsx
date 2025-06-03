@@ -18,7 +18,7 @@ const ImageWithTitleDescription = ({
   const variant = data?.fields?.variants?.[0];
   const Component = VARIANTS[variant] || Default;
 
-  return <Component data={data} />;
+  return <div className="container m-auto"><Component data={data} /></div>;
 };
 
 export default ImageWithTitleDescription;

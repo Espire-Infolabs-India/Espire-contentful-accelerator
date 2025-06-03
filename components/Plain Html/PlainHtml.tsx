@@ -3,7 +3,7 @@ import { ComponentDataProps } from "@/utils/lib/CommonProps";
 
 const PlainHtml = ({ data }: ComponentDataProps) => {
   return (
-    <div dangerouslySetInnerHTML={{ __html: data?.fields?.plainHtmlCode }} />
+    <div className="container m-auto py-5 px-5 md:px-0" dangerouslySetInnerHTML={{ __html: data?.fields?.plainHtmlCode }} />
   );
 };
 

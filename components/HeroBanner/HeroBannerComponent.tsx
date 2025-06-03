@@ -24,7 +24,7 @@ const HeroBannerComponent = (props: ComponentProps) => {
             <h2 className="mb-4 text-2xl sm:text-4xl font-semibold">
               {props?.fields?.title}
             </h2>
-            <h4 className="mb-6 text-lg sm:text-xl font-semibold">
+            <h4 className="mb-6 text-lg sm:text-xl font-semibold px-5">
               {documentToReactComponents(
                 props?.fields?.description as unknown as Document,
                 RichtextRenderOptions

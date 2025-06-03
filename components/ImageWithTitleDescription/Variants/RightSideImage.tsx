@@ -7,8 +7,8 @@ import { ComponentDataProps } from "@/utils/lib/CommonProps";
 
 const RightSideImage = ({ data }: ComponentDataProps) => {
   return (
-    <div className="flex flex-col md:flex-row items-center bg-slate-100">
-      <div className="md:w-1/2 p-4 md:p-10">
+    <div className="flex flex-col md:flex-row items-center pt-2 pb-4 bg-slate-100">
+      <div className="md:w-1/2 p-6">
         <h2 className="text-3xl font-semibold mb-4 font-poppins ">
           {data?.fields?.title}
         </h2>
