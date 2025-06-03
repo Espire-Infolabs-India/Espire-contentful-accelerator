@@ -5,7 +5,7 @@ import { makeRelativeURL } from "@/utils/utilityFunctions/makeRelativeURL";
 const LinkListItems = ({ data }: ComponentDataProps) => {
   const linkListItems = data?.fields?.url;
   return (
-    <div className="flex flex-col lg:flex-row gap-10">
+    <div className="flex flex-col lg:flex-row gap-10 mx-5 md:mx-0">
       {linkListItems?.map((linklistitems: ComponentProps, index: number) => {
         return (
           <div key={index}>

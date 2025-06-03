@@ -61,7 +61,7 @@ const ExternalApiResults = ({ data }: ComponentDataProps) => {
   }, [hydrated,api]);
   if (!hydrated) return null;
   return (
-    <Container sx={{ py: 5, bgcolor: "#f8f9fa", borderRadius: "8px" }}>
+    <Container className="container mb-5" sx={{ borderRadius: "8px" }}>
       <Typography
         variant="h4"
         align="center"

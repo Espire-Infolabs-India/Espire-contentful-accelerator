@@ -8,7 +8,7 @@ const CTA = ({ data }: ComponentDataProps) => {
   const isExternal = target === "blank";
   return (
     <>
-      <div className="container my-10 m-auto">
+      <div className="container my-10 m-auto px-5 md:px-0">
         <Link
           href={url}
           target={"_" + target}

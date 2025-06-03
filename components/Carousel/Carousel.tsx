@@ -27,7 +27,7 @@ const Carousel: React.FC<ComponentDataProps> = ({ data }) => {
     setIsAutoPlaying(false);
   };
   return (
-    <div className="w-full bg-gray-100">
+    <div className="w-full py-5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <h1 className="text-4xl font-bold text-gray-900 mb-8 text-center">
           {data?.fields?.title}

@@ -6,7 +6,6 @@
   --background: #ffffff;
   --foreground: #171717;
   --royalblue: #203b72;
-  --black: #000000;
 }
 
 * {
@@ -17,20 +16,21 @@
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --royalblue: #203b72;
   }
 }
 
 body {
   color: var(--foreground);
-  background: var(--black);
+  background: var(--background);
 }
 
 @layer base {
   h1 {
-    @apply text-6xl font-bold;
+    @apply text-6xl font-extrabold;
   }
   h2 {
-    @apply text-5xl font-bold;
+    @apply text-5xl font-extrabold;
   }
   h3 {
     @apply text-4xl font-bold;
@@ -50,10 +50,13 @@ body {
     @apply list-decimal pl-5;
   }
   main p {
-    @apply text-[16px];
+    @apply text-[14px];
   }
   main a {
     @apply text-[var(--royalblue)] hover:underline;
+  }
+  footer{
+    @apply mt-0
   }
 }
 
@@ -82,6 +85,11 @@ body {
   .top-menu > ul > li:last-child > a {
     @apply px-2;
   }
+
+  main .blue-box a{
+    color: white;
+  }
+
 }
 
 @media (min-width: 992px) and (max-width: 1279px) {
