@@ -34,9 +34,9 @@ const HeroBannerComponent = ({ fields }: ComponentProps) => {
       <div className="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center px-4 md:px-0 text-center">
         <div className="text-white z-10 max-w-3xl">
           <h2 className="mb-4 text-2xl sm:text-4xl font-semibold">{title}</h2>
-          <h4 className="mb-6 text-lg sm:text-xl font-semibold px-5">
+          <h3 className="mb-6 text-lg sm:text-xl font-semibold px-5">
             {documentToReactComponents(description, RichtextRenderOptions)}
-          </h4>
+          </h3>
           <button
             type="button"
             className="rounded border-2 border-neutral-50 px-7 pb-[8px] pt-[10px] text-sm font-medium uppercase leading-normal text-neutral-50 transition duration-150 ease-in-out hover:border-neutral-100 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-neutral-100 focus:border-neutral-100 focus:text-neutral-100 focus:outline-none focus:ring-0 active:border-neutral-200 active:text-neutral-200"
