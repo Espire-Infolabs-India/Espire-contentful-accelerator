@@ -5,13 +5,14 @@ import { Document } from "@contentful/rich-text-types";
 import { ComponentProps } from "@/utils/lib/CommonProps";
 
 const HeroBannerComponent = ({ fields }: ComponentProps) => {
+  const imageAsset = fields?.images?.[0] || fields?.image;
   const rawImageUrl =
-    fields?.images?.[0]?.original_secure_url ||
-    fields?.image?.fields?.file?.url;
+    imageAsset?.original_secure_url || imageAsset?.fields?.file?.url;
   const imageUrl = rawImageUrl?.startsWith("http")
     ? rawImageUrl
     : `https:${rawImageUrl}`;
 
+  const altText = fields?.title || "Hero banner image";
   const title = fields?.title || "";
   const description = fields?.description as unknown as Document;
   const ctaTitle = fields?.cta?.fields?.ctaTitle || "Learn More";
@@ -22,11 +23,12 @@ const HeroBannerComponent = ({ fields }: ComponentProps) => {
       {imageUrl && (
         <Image
           src={imageUrl}
-          alt="Hero Banner"
+          alt={altText}
           fill
           priority
           className="object-cover"
           sizes="100vw"
+          quality={80}
         />
       )}
       <div className="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center px-4 md:px-0 text-center">
