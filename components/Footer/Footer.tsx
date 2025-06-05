@@ -36,12 +36,12 @@ const Footer = ({ data }: ComponentDataProps) => {
               <Link href="/" aria-label="Home">
                 <Image
                   className="w-24"
-                  src={`https://${data.fields.image.fields.file.url}`}
+                  src={`https://${data?.fields?.image?.fields?.file?.url}`}
                   width={90}
                   height={69}
                   alt={
-                    data.fields.image.fields.title ||
-                    data.fields.image.fields.description ||
+                    data?.fields?.image?.fields?.title ||
+                    data?.fields?.image?.fields?.description ||
                     "Logo"
                   }
                   loading="lazy"
@@ -74,7 +74,7 @@ const Footer = ({ data }: ComponentDataProps) => {
           <div className="text-sm text-white text-center lg:text-left mb-5 lg:mb-0">
             {data.fields.address &&
               documentToReactComponents(
-                data.fields.address as unknown as Document,
+                data?.fields?.address as unknown as Document,
                 RichtextRenderOptions
               )}
           </div>
@@ -86,7 +86,7 @@ const Footer = ({ data }: ComponentDataProps) => {
 
                 const MiddleLayersComponent =
                   MiddleLayerFooterComponents[
-                    middlelayercomponent.sys.contentType.sys.id
+                    middlelayercomponent?.sys?.contentType?.sys?.id
                   ];
                 if (!MiddleLayersComponent) return null;
 
@@ -100,9 +100,9 @@ const Footer = ({ data }: ComponentDataProps) => {
             )}
           </div>
         </div>
-        {data.fields.copyrightText && (
+        {data?.fields?.copyrightText && (
           <p className="text-center lg:text-left text-sm border-t border-gray-500 mt-4 pt-2">
-            {data.fields.copyrightText}
+            {data?.fields?.copyrightText}
           </p>
         )}
       </div>
