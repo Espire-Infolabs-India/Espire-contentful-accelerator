@@ -33,9 +33,6 @@ export default function App({ Component, pageProps }: AppProps) {
     };
     loadLocaleStyles();
   }, []);
-  if (!cssLoaded) {
-    return <div>Loading styles...</div>; // or a spinner/skeleton
-  }
   const { headerData, footerData, seoData, ...restProps } = pageProps;
   const ninetailedClientId = process.env.NEXT_PUBLIC_NINETAILED_CLIENT_ID || "";
   const ninetailedEnvironment =
