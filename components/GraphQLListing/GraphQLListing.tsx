@@ -55,16 +55,18 @@ const GraphQLListing = ({ data }: ComponentDataProps) => {
   const renderedEntries = entries?.slice(0, visibleCount);
 
   return (
-    <section className={`container m-auto listing-component variant-${variant} py-8 px-4`}>
+    <section
+      className={`container m-auto listing-component variant-${variant} py-8 px-4`}
+    >
       {dataSourceName && (
         <h2 className="text-3xl font-bold mb-6">{dataSourceName}</h2>
       )}
 
-      <div className="flex flex-col md:flex-row gap-y-6 gap-x-0 md:gap-6">
+      <div className="flex flex-col md:flex-row md:flex-wrap gap-y-2 gap-x-2">
         {renderedEntries.map((entry, index) => (
           <div
             key={entry?.id}
-            className="w-full md:w-1/3 h-96 md:h-[400px] rounded-xl overflow-hidden relative shadow-md flex items-end bg-cover bg-center"
+            className="w-full md:w-[32%] h-96 md:h-[400px] rounded-xl overflow-hidden relative shadow-md flex items-end bg-cover bg-center"
             style={{
               backgroundImage: `url(${
                 entry?.image || `https://picsum.photos/seed/${index}/600/400`

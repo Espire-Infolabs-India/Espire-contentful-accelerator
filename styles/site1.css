@@ -55,8 +55,8 @@ body {
   main a {
     @apply text-[var(--royalblue)] hover:underline;
   }
-  footer{
-    @apply mt-0
+  footer {
+    @apply mt-0;
   }
 }
 
@@ -86,10 +86,9 @@ body {
     @apply px-2;
   }
 
-  main .blue-box a{
+  main .blue-box a {
     color: white;
   }
-
 }
 
 @media (min-width: 992px) and (max-width: 1279px) {
@@ -102,8 +101,8 @@ body {
   }
 }
 
-@media (min-width: 992px) and (max-width: 1279px) {
+@media (min-width: 1536px) {
   .container {
-    max-width: 1068px;
+    max-width: 1280px;
   }
 }
