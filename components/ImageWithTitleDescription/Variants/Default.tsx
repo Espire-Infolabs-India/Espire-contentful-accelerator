@@ -44,5 +44,4 @@ const Default = ({ data }: ComponentDataProps) => {
     </div>
   );
 };
-
 export default Default;

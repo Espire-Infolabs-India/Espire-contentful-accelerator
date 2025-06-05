@@ -35,5 +35,4 @@ const LeftSideImage = ({ data }: ComponentDataProps) => {
     </div>
   );
 };
-
 export default LeftSideImage;

@@ -58,5 +58,4 @@ const HeroBannerComponent = ({ fields }: ComponentProps) => {
     </section>
   );
 };
-
 export default HeroBannerComponent;

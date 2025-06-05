@@ -35,5 +35,4 @@ const RightSideImage = ({ data }: ComponentDataProps) => {
     </div>
   );
 };
-
 export default RightSideImage;

@@ -159,5 +159,4 @@ const Header = ({ data }: ComponentDataProps) => {
     </div>
   );
 };
-
 export default Header;
