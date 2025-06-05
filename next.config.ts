@@ -1,12 +1,9 @@
 import type { NextConfig } from "next";
 import secuityHeadersConfig from "./config/headers";
 
-const withBundleAnalyzer = require("@next/bundle-analyzer")({
-  enabled: process.env.ANALYZE === "true",
-});
 const nextConfig: NextConfig = {
+  /* config options here */
   reactStrictMode: true,
-  compress: true,
   images: {
     remotePatterns: [
       {
@@ -29,12 +26,9 @@ const nextConfig: NextConfig = {
         source: "/robots.txt",
         destination: "/api/robots",
       },
-      {
-        source: "/sitemap.xml",
-        destination: "/api/sitemap",
-      },
+      { source: "/sitemap.xml", destination: "/api/sitemap" },
     ];
   },
 };
 
-export default withBundleAnalyzer(nextConfig);
+export default nextConfig;
