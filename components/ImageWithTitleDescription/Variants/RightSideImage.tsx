@@ -28,8 +28,7 @@ const RightSideImage = ({ data }: ComponentDataProps) => {
           }`}
           width={600}
           height={400}
-          alt={""}
-          unoptimized
+          alt={""}  
         />
       </div>
     </div>

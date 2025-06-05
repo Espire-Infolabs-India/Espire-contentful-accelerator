@@ -17,8 +17,7 @@ const LeftSideImage = ({ data }: ComponentDataProps) => {
           }`}
           width={600}
           height={400}
-          alt={""}
-          unoptimized
+          alt={""}          
         />
       </div>
       <div className="md:w-1/2 p-6">

@@ -1,31 +1,38 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ComponentDataProps, ComponentProps } from "@/utils/lib/CommonProps";
+
 const SocialMedia = ({ data }: ComponentDataProps) => {
   const SocialMediaData = data.fields.listOfSocialMedia;
   return (
     <div className="flex items-center justify-center w-full">
-      {SocialMediaData?.map(
-        (SocialMediaDatacomponent: ComponentProps, index: number) => {
-          const image = SocialMediaDatacomponent?.fields?.image ?? "";
-          const url = SocialMediaDatacomponent?.fields?.url ?? "";
-          return (
-            <div className="px-4" key={index}>
-              <Link href={url} className="text-white hover:text-gray-300">
-                <Image
-                  src={`https://${image.fields?.file?.url}`}
-                  className="h-6 w-6"
-                  alt={""}
-                  width={24}
-                  height={24}
-                  unoptimized
-                />
-              </Link>
-            </div>
-          );
-        }
-      )}
+      {SocialMediaData?.map((item: ComponentProps, index: number) => {
+        const image = item?.fields?.image ?? null;
+        const url = item?.fields?.url ?? "#";
+        const imageUrl = image?.fields?.file?.url
+          ? `https://${image.fields.file.url}`
+          : null;
+
+        const platformName = image?.fields?.title || `Social media link ${index + 1}`;
+        const altText = `Visit our ${platformName}`;
+        const ariaLabel = `Link to our ${platformName} profile`;
+
+        return (
+          <div className="px-4" key={url + index}>
+            <Link
+              href={url}
+              className="text-white hover:text-gray-300"
+              aria-label={ariaLabel}
+            >
+              {imageUrl && (
+                <Image src={imageUrl} alt={altText} width={24} height={24} />
+              )}
+            </Link>
+          </div>
+        );
+      })}
     </div>
   );
 };
+
 export default SocialMedia;

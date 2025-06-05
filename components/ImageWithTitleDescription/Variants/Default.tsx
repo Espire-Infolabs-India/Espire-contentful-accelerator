@@ -20,7 +20,6 @@ const Default = ({ data }: ComponentDataProps) => {
             width={400}
             height={101}
             alt={""}
-            unoptimized
           />
           <h2 className={`text-2xl sm:text-5xl mb-4 font-poppin`}>{data?.fields?.title}</h2>
           <div className="text-base font-poppin">
