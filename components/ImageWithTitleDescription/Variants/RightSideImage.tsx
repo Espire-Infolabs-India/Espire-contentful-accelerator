@@ -6,10 +6,18 @@ import { Document } from "@contentful/rich-text-types";
 import { ComponentDataProps } from "@/utils/lib/CommonProps";
 
 const RightSideImage = ({ data }: ComponentDataProps) => {
+  const imageAsset = data?.fields?.images?.[0] || data?.fields?.image;
+  const rawImageUrl =
+    imageAsset?.original_secure_url || imageAsset?.fields?.file?.url;
+  const imageUrl = rawImageUrl?.startsWith("http")
+    ? rawImageUrl
+    : `https:${rawImageUrl?.startsWith("/") ? rawImageUrl : `/${rawImageUrl}`}`;
+  const altText =
+    imageAsset?.fields?.title || data?.fields?.title || "Right section image";
   return (
     <div className="flex flex-col md:flex-row items-center pt-2 pb-4 bg-slate-100">
       <div className="md:w-1/2 p-6">
-        <h2 className="text-3xl font-semibold mb-4 font-poppins ">
+        <h2 className="text-3xl font-semibold mb-4 font-poppins">
           {data?.fields?.title}
         </h2>
         <div className="mt-4 text-base font-poppins">
@@ -20,16 +28,9 @@ const RightSideImage = ({ data }: ComponentDataProps) => {
         </div>
       </div>
       <div className="md:w-1/2 flex justify-center">
-        <Image
-          src={`${
-            data?.fields?.images?.[0]?.original_secure_url?.startsWith("http")
-              ? data?.fields?.images[0]?.original_secure_url
-              : `https://${data?.fields?.image?.fields?.file?.url}`
-          }`}
-          width={600}
-          height={400}
-          alt={""}  
-        />
+        {imageUrl && (
+          <Image src={imageUrl} width={600} height={400} alt={altText} />
+        )}
       </div>
     </div>
   );

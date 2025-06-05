@@ -57,12 +57,12 @@ const Header = ({ data }: ComponentDataProps) => {
               <Link href="/" aria-label="Home">
                 <Image
                   className="mr-4"
-                  src={`https://${data.fields.image.fields.file.url}`}
+                  src={`https://${data?.fields?.image?.fields?.file?.url}`}
                   width={100}
                   height={70}
                   alt={
-                    data.fields.image.fields.alt ||
-                    data.fields.image.fields.title ||
+                    data?.fields?.image?.fields?.alt ||
+                    data?.fields?.image?.fields?.title ||
                     "Logo"
                   }
                   loading="eager"

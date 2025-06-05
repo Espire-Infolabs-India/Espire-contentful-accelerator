@@ -6,24 +6,27 @@ import { ComponentProps } from "@/utils/lib/CommonProps";
 
 const HeroBannerComponent = ({ fields }: ComponentProps) => {
   const imageAsset = fields?.images?.[0] || fields?.image;
+
   const rawImageUrl =
     imageAsset?.original_secure_url || imageAsset?.fields?.file?.url;
+
   const baseImageUrl = rawImageUrl?.startsWith("http")
     ? rawImageUrl
     : `https:${rawImageUrl?.startsWith("/") ? rawImageUrl : `/${rawImageUrl}`}`;
-  const optimizedImageUrl = `${baseImageUrl}?fm=webp&fit=fill&w=1920&q=75`;
+
   const altText = fields?.title || "Hero banner image";
   const title = fields?.title || "";
   const description = fields?.description as unknown as Document;
   const ctaTitle = fields?.cta?.fields?.ctaTitle || "Learn More";
   const ctaUrl = fields?.cta?.fields?.url || "#";
+
   return (
     <section className="relative w-full bg-black">
       <div className="max-w-screen-xl mx-auto relative overflow-hidden">
         {/* Hero Image */}
-        {optimizedImageUrl && (
+        {baseImageUrl && (
           <Image
-            src={optimizedImageUrl}
+            src={baseImageUrl}
             alt={altText}
             width={1920}
             height={720}
