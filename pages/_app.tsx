@@ -4,7 +4,6 @@ import type { AppProps } from "next/app";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import Script from "next/script";
-
 const Layout = dynamic(() => import("@/components/Layout/Layout"), {
   ssr: false,
 });
