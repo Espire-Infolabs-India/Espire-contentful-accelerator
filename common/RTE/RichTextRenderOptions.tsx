@@ -23,7 +23,7 @@ const Heading2 = ({ children }: { children: ReactNode }) => (
   </div>
 );
 const Paragraph = ({ children }: { children: ReactNode }) => (
-  <div className="mb-4 ">
+  <div className="mb-0">
     <p className=""> {children} </p>
   </div>
 );
