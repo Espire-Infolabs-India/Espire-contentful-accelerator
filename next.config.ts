@@ -4,13 +4,8 @@ import secuityHeadersConfig from "./config/headers";
 const nextConfig: NextConfig = {
   /* config options here */
   reactStrictMode: true,
-  images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "images.ctfassets.net",
-      },
-    ],
+    images: {
+    domains: ['images.ctfassets.net'],
   },
   i18n: {
     locales: ["en-US", "fr", "de"],

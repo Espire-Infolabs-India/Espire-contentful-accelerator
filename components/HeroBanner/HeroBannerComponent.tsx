@@ -31,7 +31,7 @@ const HeroBannerComponent = ({ fields }: ComponentProps) => {
             width={1920}
             height={720}
             priority
-            className="object-cover w-full h-80 md:h-auto"
+            className="object-cover w-full h-96"
             sizes="(max-width: 768px) 100vw, 1920px"
             quality={80}
           />
