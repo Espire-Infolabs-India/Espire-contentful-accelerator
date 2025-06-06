@@ -29,6 +29,9 @@ const Footer = ({ data }: ComponentDataProps) => {
   const toplayercomponents = data?.fields?.topLayerContainer ?? [];
   const middlelayercomponents = data?.fields?.middleLayerContainer ?? [];
 
+  // Get alt text for the logo image (fall back to "logo" if not available)
+  const logoAltText = data?.fields?.image?.fields?.title || "logo";
+
   return (
     <footer className="bg-[var(--royalblue)] text-white pt-[20px] pb-[80px]">
       <div className="container mx-auto px-6">
@@ -43,7 +46,7 @@ const Footer = ({ data }: ComponentDataProps) => {
                   src={`https://${data?.fields?.image?.fields?.file?.url}`}
                   width={90}
                   height={69}
-                  alt="logo"
+                  alt={logoAltText} // Dynamically set alt text here
                   loading="lazy"
                   unoptimized
                 />
