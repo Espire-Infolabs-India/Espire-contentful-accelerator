@@ -22,7 +22,7 @@ const Accordion = ({ data }: ComponentDataProps) => {
 
       {data?.fields?.accordionItemsList?.map(
         (item: ComponentProps, index: number) => (
-          <MUIAccordion key={index}>
+          <MUIAccordion key={index} defaultExpanded={false}>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls={`panel${index}-content`}

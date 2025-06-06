@@ -16,7 +16,7 @@ const SocialMedia = ({ data }: ComponentDataProps) => {
           const altText = `Visit our ${platformName}`;
           return (
             <div className="px-4" key={index}>
-              <Link href={url} className="text-white hover:text-gray-300">
+              <Link href={url} className="text-white hover:text-gray-300" target="_blank">
                 <Image
                   src={`https://${image?.fields?.file?.url}`}
                   className="h-6 w-6"

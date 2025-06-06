@@ -15,9 +15,9 @@ const RightSideImage = ({ data }: ComponentDataProps) => {
   const altText =
     imageAsset?.fields?.title || data?.fields?.title || "Right section image";
   return (
-    <div className="flex flex-col md:flex-row items-center pt-2 pb-4 bg-slate-100">
-      <div className="md:w-1/2 p-6">
-        <h2 className="text-3xl font-semibold mb-4 font-poppins">
+    <div className="flex flex-col md:flex-row items-center py-2 md:pt-6 md:pb-2 px-0 md:px-4 bg-gray-100">
+      <div className="md:w-1/2 p-4 md:p-6">
+        <h2 className="text-3xl font-semibold mb-4 font-poppins ">
           {data?.fields?.title}
         </h2>
         <div className="mt-4 text-base font-poppins">

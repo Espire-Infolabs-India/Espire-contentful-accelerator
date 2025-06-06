@@ -21,8 +21,8 @@ const HeroBannerComponent = ({ fields }: ComponentProps) => {
   const ctaUrl = fields?.cta?.fields?.url || "#";
 
   return (
-    <section className="relative w-full bg-black">
-      <div className="max-w-screen-xl mx-auto relative overflow-hidden">
+    <section className="relative w-full bg-black overflow-hidden">
+     
         {/* Hero Image */}
         {baseImageUrl && (
           <Image
@@ -31,8 +31,8 @@ const HeroBannerComponent = ({ fields }: ComponentProps) => {
             width={1920}
             height={720}
             priority
-            className="object-cover w-full h-auto"
-            sizes="100vw"
+            className="object-cover w-full h-96"
+            sizes="(max-width: 768px) 100vw, 1920px"
             quality={80}
           />
         )}
@@ -54,7 +54,7 @@ const HeroBannerComponent = ({ fields }: ComponentProps) => {
             </button>
           </div>
         </div>
-      </div>
+      
     </section>
   );
 };

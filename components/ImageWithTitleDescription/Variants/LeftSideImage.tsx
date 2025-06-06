@@ -21,7 +21,7 @@ const LeftSideImage = ({ data }: ComponentDataProps) => {
           <Image src={imageUrl} width={600} height={400} alt={altText} />
         )}
       </div>
-      <div className="md:w-1/2 p-6">
+      <div className="md:w-1/2 p-4 md:p-6">
         <h2 className="text-3xl font-semibold mb-4 font-poppins">
           {data?.fields?.title}
         </h2>
