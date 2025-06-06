@@ -29,14 +29,6 @@ const Footer = ({ data }: ComponentDataProps) => {
   const toplayercomponents = data?.fields?.topLayerContainer ?? [];
   const middlelayercomponents = data?.fields?.middleLayerContainer ?? [];
 
-  // Function to dynamically generate alt text for images
-  const generateAltText = (imageData: any, defaultText: string) => {
-    if (imageData?.fields?.title) {
-      return imageData?.fields?.title; // Use title if available
-    }
-    return defaultText; // Default alt text if no title is found
-  };
-
   return (
     <footer className="bg-[var(--royalblue)] text-white pt-[20px] pb-[80px]">
       <div className="container mx-auto px-6">
@@ -51,7 +43,7 @@ const Footer = ({ data }: ComponentDataProps) => {
                   src={`https://${data?.fields?.image?.fields?.file?.url}`}
                   width={90}
                   height={69}
-                  alt={generateAltText(data.fields.image, "Footer Logo")} // Dynamic alt text
+                  alt="logo"
                   loading="lazy"
                   unoptimized
                 />

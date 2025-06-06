@@ -69,8 +69,6 @@ const Header = ({ data }: ComponentDataProps) => {
                 />
               </Link>
             )}
-
-            {/* Center Section - Search Box & Navigation */}
             <div className="flex items-center justify-evenly gap-8">
               <SearchBox />
 

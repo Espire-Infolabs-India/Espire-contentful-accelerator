@@ -14,7 +14,6 @@ const SocialMedia = ({ data }: ComponentDataProps) => {
             SocialMediaDatacomponent?.fields?.title ||
             `Social Media ${index + 1}`;
           const altText = `Visit our ${platformName}`;
-
           return (
             <div className="px-4" key={index}>
               <Link href={url} className="text-white hover:text-gray-300">
