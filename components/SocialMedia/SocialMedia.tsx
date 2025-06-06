@@ -6,30 +6,31 @@ const SocialMedia = ({ data }: ComponentDataProps) => {
   const SocialMediaData = data?.fields?.listOfSocialMedia;
   return (
     <div className="flex items-center justify-center w-full">
-      {SocialMediaData?.map((item: ComponentProps, index: number) => {
-        const image = item?.fields?.image ?? null;
-        const url = item?.fields?.url ?? "#";
-        const imageUrl = image?.fields?.file?.url
-          ? `https://${image?.fields?.file?.url}`
-          : null;
-        const platformName =
-          image?.fields?.title || `Social media link ${index + 1}`;
-        const altText = `Visit our ${platformName}`;
-        const ariaLabel = `Link to our ${platformName} profile`;
-        return (
-          <div className="px-4" key={url + index}>
-            <Link
-              href={url}
-              className="text-white hover:text-gray-300"
-              aria-label={ariaLabel}
-            >
-              {imageUrl && (
-                <Image src={imageUrl} alt={altText} width={24} height={24} />
-              )}
-            </Link>
-          </div>
-        );
-      })}
+      {SocialMediaData?.map(
+        (SocialMediaDatacomponent: ComponentProps, index: number) => {
+          const image = SocialMediaDatacomponent?.fields?.image ?? "";
+          const url = SocialMediaDatacomponent?.fields?.url ?? "";
+          const platformName =
+            SocialMediaDatacomponent?.fields?.title ||
+            `Social Media ${index + 1}`;
+          const altText = `Visit our ${platformName}`;
+          return (
+            <div className="px-4" key={index}>
+              <Link href={url} className="text-white hover:text-gray-300">
+                <Image
+                  src={`https://${image?.fields?.file?.url}`}
+                  className="h-6 w-6"
+                  alt={altText}
+                  width={24}
+                  height={24}
+                  loading="lazy"
+                  unoptimized
+                />
+              </Link>
+            </div>
+          );
+        }
+      )}
     </div>
   );
 };
