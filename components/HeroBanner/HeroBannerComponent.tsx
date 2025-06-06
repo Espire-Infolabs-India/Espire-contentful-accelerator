@@ -19,10 +19,10 @@ const HeroBannerComponent = ({ fields }: ComponentProps) => {
   const description = fields?.description as unknown as Document;
   const ctaTitle = fields?.cta?.fields?.ctaTitle || "Learn More";
   const ctaUrl = fields?.cta?.fields?.url || "#";
-
+  const externalLoader = ({ src }: { src: string }) => src;
   return (
     <section className="relative w-full bg-black">
-      <div className="max-w-screen-xl mx-auto relative overflow-hidden">
+      <div className="overflow-hidden">
         {/* Hero Image */}
         {baseImageUrl && (
           <Image
@@ -31,9 +31,10 @@ const HeroBannerComponent = ({ fields }: ComponentProps) => {
             width={1920}
             height={720}
             priority
-            className="object-cover w-full h-auto"
+            className="object-cover w-full h-80 md:h-auto"
             sizes="100vw"
             quality={80}
+            loader={externalLoader}
           />
         )}
         {/* Overlay */}
