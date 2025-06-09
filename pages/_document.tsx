@@ -19,7 +19,7 @@ export default function Document() {
         {/* Preload the LCP image (Optional) */}
         <link
           rel="preload"
-          href="https://images.ctfassets.net/p4eo7hggs5be/4Z4T9..." // Use your actual LCP image URL here
+          href="http://res.cloudinary.com/drq9dq7az/image/upload/f_auto/q_auto/v1749446075/Contenful_Banner_n7qn6u.webp"
           as="image"
           type="image/webp"
           sizes="(max-width: 1920px) 100vw, 1920px"

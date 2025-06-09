@@ -1,5 +1,8 @@
 import React, { useState } from "react";
-import { Tabs, Tab, Box, Typography } from "@mui/material";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 import { ComponentFactory } from "@/utils/lib/ComponentFactory";
 import { ComponentDataProps, ComponentProps } from "@/utils/lib/CommonProps";
 

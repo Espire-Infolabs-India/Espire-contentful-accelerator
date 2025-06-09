@@ -8,6 +8,7 @@ import Link from "next/link";
 import { ComponentDataProps, ComponentProps } from "@/utils/lib/CommonProps";
 import SearchIcon from "@mui/icons-material/Search";
 import IconButton from "@mui/material/IconButton";
+import { Key } from "react";
 
 const FooterComponents: Record<
   string,
@@ -28,16 +29,15 @@ const Footer = ({ data }: ComponentDataProps) => {
 
   const toplayercomponents = data?.fields?.topLayerContainer ?? [];
   const middlelayercomponents = data?.fields?.middleLayerContainer ?? [];
-
-  // Get alt text for the logo image (fall back to "logo" if not available)
   const logoAltText = data?.fields?.image?.fields?.title || "logo";
 
   return (
-    <footer className="bg-[var(--royalblue)] text-white pt-[20px] pb-[80px]">
+    <footer
+      className="bg-[var(--royalblue)] text-white pt-[20px] pb-[80px]"
+      style={{ minHeight: 300 }}
+    >
       <div className="container mx-auto px-6">
-        {/* Logo & Navigation */}
         <div className="flex flex-col md:flex-row justify-between items-center">
-          {/* Logo */}
           <div className="mb-6 md:mb-0">
             {data.fields.image?.fields?.file?.url && (
               <Link href="/" title="Home">
@@ -46,33 +46,31 @@ const Footer = ({ data }: ComponentDataProps) => {
                   src={`https://${data?.fields?.image?.fields?.file?.url}`}
                   width={90}
                   height={69}
-                  alt={logoAltText} // Dynamically set alt text here
-                  loading="lazy"
+                  alt={logoAltText}
+                  loading="eager"
+                  priority
                   unoptimized
                 />
               </Link>
             )}
           </div>
+          <div
+            className="flex flex-col lg:flex-row items-center gap-12 text-[16px]"
+            style={{ minHeight: 80 }}
+          >
+            {toplayercomponents?.map((toplayercomponent: ComponentProps, index: Key | null | undefined) => {
+              if (!toplayercomponent?.sys?.contentType?.sys?.id) return null;
 
-          {/* Navigation Links */}
-          <div className="flex flex-col lg:flex-row items-center gap-12 text-[16px]">
-            {toplayercomponents?.map(
-              (toplayercomponent: ComponentProps, index: number) => {
-                if (!toplayercomponent?.sys?.contentType?.sys?.id) return null;
+              const Component =
+                FooterComponents[toplayercomponent?.sys?.contentType?.sys?.id];
+              if (!Component) return null;
 
-                const Component =
-                  FooterComponents[
-                    toplayercomponent?.sys?.contentType?.sys?.id
-                  ];
-                if (!Component) return null;
-
-                return (
-                  <div className="px-4" key={index}>
-                    <Component key={index} data={toplayercomponent} />
-                  </div>
-                );
-              }
-            )}
+              return (
+                <div className="px-4" key={index}>
+                  <Component data={toplayercomponent} />
+                </div>
+              );
+            })}
             <span className="hidden lg:block">
               <IconButton size="large">
                 <SearchIcon className="text-white" />
@@ -90,32 +88,26 @@ const Footer = ({ data }: ComponentDataProps) => {
                 RichtextRenderOptions
               )}
           </div>
-
           {/* Social Links */}
-          <div className="flex flex-col gap-12 mb-5 lg:mb-0">
-            {middlelayercomponents?.map(
-              (middlelayercomponent: ComponentProps, index: number) => {
-                if (!middlelayercomponent?.sys?.contentType?.sys?.id)
-                  return null;
-                const MiddleLayersComponent =
-                  MiddleLayerFooterComponents[
-                    middlelayercomponent?.sys?.contentType?.sys?.id
-                  ];
-                if (!MiddleLayersComponent) return null;
-
-                return (
-                  <div key={index}>
-                    <MiddleLayersComponent
-                      key={index}
-                      data={middlelayercomponent}
-                    />
-                  </div>
-                );
-              }
-            )}
+          <div
+            className="flex flex-col gap-12 mb-5 lg:mb-0"
+            style={{ minHeight: 100 }}
+          >
+            {middlelayercomponents?.map((middlelayercomponent: ComponentProps, index: Key | null | undefined) => {
+              if (!middlelayercomponent?.sys?.contentType?.sys?.id) return null;
+              const MiddleLayersComponent =
+                MiddleLayerFooterComponents[
+                  middlelayercomponent?.sys?.contentType?.sys?.id
+                ];
+              if (!MiddleLayersComponent) return null;
+              return (
+                <div key={index}>
+                  <MiddleLayersComponent data={middlelayercomponent} />
+                </div>
+              );
+            })}
           </div>
         </div>
-
         {/* Copyright */}
         {data?.fields?.copyrightText && (
           <p className="text-center lg:text-left text-sm border-t border-gray-500 mt-4 pt-2">
