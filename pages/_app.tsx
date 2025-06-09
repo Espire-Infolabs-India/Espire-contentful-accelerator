@@ -3,7 +3,6 @@ import "@/components/Footer/footer.css";
 import type { AppProps } from "next/app";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
-import Script from "next/script";
 
 const Layout = dynamic(() => import("@/components/Layout/Layout"), {
   ssr: false,
@@ -46,10 +45,6 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <Script
-        src="https://www.googletagmanager.com/gtag/js?id=G-5PK2TXF4GB"
-        strategy="afterInteractive"
-      />
       {ninetailedClientId && ninetailedEnvironment ? (
         <NinetailedProvider
           clientId={ninetailedClientId}
