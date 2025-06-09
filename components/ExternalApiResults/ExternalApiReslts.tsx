@@ -1,15 +1,13 @@
 import { ComponentDataProps } from "@/utils/lib/CommonProps";
 import React, { useEffect, useState, startTransition } from "react";
-import {
-  Container,
-  Grid,
-  Card,
-  CardContent,
-  Typography,
-  CircularProgress,
-  Alert,
-  Box,
-} from "@mui/material";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
+import CircularProgress from "@mui/material/CircularProgress";
+import Alert from "@mui/material/Alert";
+import Box from "@mui/material/Box";
 
 interface Post {
   userId: number;

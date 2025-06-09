@@ -6,6 +6,7 @@ import { getFooterData } from "@/common/getFooterData/getFooterData";
 import { ComponentFactory } from "@/utils/lib/ComponentFactory";
 import { ComponentProps } from "@/utils/lib/CommonProps";
 import { useRouter } from "next/router";
+import React from "react";
 
 type ContentfulItem = {
   fields: {
@@ -35,13 +36,30 @@ const DynamicPage = ({
 
   if (router.isFallback) return <div>Loading...</div>;
 
+  // Extract Contact Us component by title or other identifying field
+  const contactUsComponent = content.find(
+    (c) => c.fields?.title?.toLowerCase() === "contact us"
+  );
+
+  // Filter out contact us from the other components
+  const otherComponents = content.filter(
+    (c) => c !== contactUsComponent
+  );
+
   return (
-    <Layout
-      headerData={headerData}
-      footerData={footerData}
-      seoData={seoContent}
-    >
-      {content.map((data, index) => {
+    <Layout headerData={headerData} footerData={footerData} seoData={seoContent}>
+      {/* Render Contact Us first, without Suspense */}
+      {contactUsComponent && (() => {
+        const Component =
+          ComponentFactory[
+            contactUsComponent.sys?.contentType?.sys?.id as string
+          ];
+        if (!Component) return null;
+        return <Component key="contact-us" data={contactUsComponent} />;
+      })()}
+
+      {/* Render all other components with Suspense fallback */}
+      {otherComponents.map((data, index) => {
         const componentType = data.sys?.contentType?.sys?.id as string;
         const Component = ComponentFactory[componentType];
 
@@ -50,7 +68,11 @@ const DynamicPage = ({
           return null;
         }
 
-        return <Component key={index} data={data} />;
+        return (
+          <React.Suspense fallback={<div>Loading component...</div>} key={index}>
+            <Component data={data} />
+          </React.Suspense>
+        );
       })}
     </Layout>
   );

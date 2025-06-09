@@ -48,7 +48,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <Script
         src="https://www.googletagmanager.com/gtag/js?id=G-5PK2TXF4GB"
-        strategy="afterInteractive"
+        strategy="lazyOnload"
       />
       {ninetailedClientId && ninetailedEnvironment ? (
         <NinetailedProvider

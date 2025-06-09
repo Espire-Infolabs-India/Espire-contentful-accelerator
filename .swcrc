@@ -1,0 +1,26 @@
+{
+  "jsc": {
+    "target": "es2022",
+    "parser": {
+      "syntax": "typescript",
+      "tsx": true,
+      "dynamicImport": true,
+      "decorators": true
+    },
+    "transform": {
+      "react": {
+        "runtime": "automatic",
+        "refresh": true
+      },
+      "optimizer": {
+        "globals": {
+          "vars": {
+            "__DEV__": "true"
+          }
+        }
+      }
+    }
+  },
+  "minify": true,
+  "sourceMaps": true
+}
