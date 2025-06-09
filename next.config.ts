@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
   /* config options here */
   reactStrictMode: true,
     images: {
-    domains: ['images.ctfassets.net'],
+    domains: ["images.ctfassets.net","res.cloudinary.com"],
   },
   i18n: {
     locales: ["en-US", "fr", "de"],
