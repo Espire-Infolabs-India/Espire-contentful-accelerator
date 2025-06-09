@@ -1,28 +1,49 @@
-import dynamic from "next/dynamic";
+import HeroBanner from "@/components/HeroBanner/HeroBanner";
+import ImageWithTitleDescription from "@/components/ImageWithTitleDescription/ImageWithTitleDescription";
+import RichText from "@/components/RichText/RichText";
+import FeatureBlocks from "@/components/FeatureBlocks/FeatureBlocks";
+import Carousel from "@/components/Carousel/Carousel";
 import { ComponentProps } from "./CommonProps";
+import Accordion from "@/components/Accordion/Accordion";
+import Tabs from "@/components/Tabs/Tabs";
+import Map from "@/components/Map/Map";
+import FeatureCard from "@/components/FeatureCard/FeatureCard";
+import Container from "@/components/Container/Container";
+import ListingComponent from "@/components/Lisiting/Lisitng";
+import SocialMediaFeeds from "@/components/SocialMedia/SocialMediaFeeds";
+import SocialMedia from "@/components/SocialMedia/SocialMedia";
+import LinkListItems from "@/components/LinkList/LinkList";
+import CTA from "@/components/CTA/CTA";
+import HeadScriptComponent from "@/components/HeadScript/HeadScript";
+import Separator from "@/components/Separator/Separator";
+import PlainHtml from "@/components/Plain Html/PlainHtml";
+import GraphQLListing from "@/components/GraphQLListing/GraphQLListing";
+import ExternalApiResults from "@/components/ExternalApiResults/ExternalApiReslts";
+
 
 export const ComponentFactory: Record<
   string,
-  React.ComponentType<{ data: ComponentProps }>
+  React.FC<{ data: ComponentProps }>
 > = {
-  heroBanner: dynamic(() => import("@/components/HeroBanner/HeroBanner")),
-  imageWithTitleDescription: dynamic(() => import("@/components/ImageWithTitleDescription/ImageWithTitleDescription")),
-  richText: dynamic(() => import("@/components/RichText/RichText")),
-  componentFeatureBlocks: dynamic(() => import("@/components/FeatureBlocks/FeatureBlocks")),
-  componentCarousel: dynamic(() => import("@/components/Carousel/Carousel")),
-  componentAccordion: dynamic(() => import("@/components/Accordion/Accordion")),
-  componentTabs: dynamic(() => import("@/components/Tabs/Tabs")),
-  componentMap: dynamic(() => import("@/components/Map/Map")),
-  componentFeatureCard: dynamic(() => import("@/components/FeatureCard/FeatureCard")),
-  componentContainer: dynamic(() => import("@/components/Container/Container")),
-  componentLisiting: dynamic(() => import("@/components/Lisiting/Lisitng")),
-  componentSocialMediaFeeds: dynamic(() => import("@/components/SocialMedia/SocialMediaFeeds")),
-  componentSocialMedia: dynamic(() => import("@/components/SocialMedia/SocialMedia")),
-  componentLinkList: dynamic(() => import("@/components/LinkList/LinkList")),
-  cta: dynamic(() => import("@/components/CTA/CTA")),
-  componentHeadScript: dynamic(() => import("@/components/HeadScript/HeadScript")),
-  componentSeparator: dynamic(() => import("@/components/Separator/Separator")),
-  componentPlainHtml: dynamic(() => import("@/components/Plain Html/PlainHtml")),
-  componentGraphQlListing: dynamic(() => import("@/components/GraphQLListing/GraphQLListing")),
-  componentExternalApiResults: dynamic(() => import("@/components/ExternalApiResults/ExternalApiReslts")),
+  heroBanner: HeroBanner,
+  imageWithTitleDescription: ImageWithTitleDescription,
+  richText: RichText,
+  componentFeatureBlocks: FeatureBlocks,
+  componentCarousel: Carousel,
+  componentAccordion: Accordion,
+  componentTabs: Tabs,
+  componentMap: Map,
+  componentFeatureCard: FeatureCard,
+  componentContainer: Container,
+  componentLisiting: ListingComponent,
+  componentSocialMediaFeeds: SocialMediaFeeds,
+  componentSocialMedia: SocialMedia,
+  componentLinkList: LinkListItems,
+  cta: CTA,
+  componentHeadScript: HeadScriptComponent,
+  componentSeparator :Separator,
+  componentPlainHtml: PlainHtml,
+  componentGraphQlListing: GraphQLListing,
+  componentExternalApiResults: ExternalApiResults,
+  // Add more components as needed
 };
