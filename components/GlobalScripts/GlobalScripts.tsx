@@ -20,14 +20,13 @@ const GlobalScripts = () => {
         console.error("Error fetching Google Analytics data:", error);
       }
     };
-
     fetchAnalytics();
   }, []);
   return (
     <>
-      <GoogleAnalyticsComponent
+      {/* <GoogleAnalyticsComponent
         data={fetchedAnalyticsData ?? ({ fields: {} } as ComponentProps)}
-      />
+      /> */}
       <Script
         src="https://web.cmp.usercentrics.eu/modules/autoblocker.js"
         strategy="afterInteractive"
