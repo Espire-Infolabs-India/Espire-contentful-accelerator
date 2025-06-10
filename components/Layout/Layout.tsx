@@ -19,7 +19,6 @@ export default function Layout({
 }) {
   return (
     <>
-      <GlobalScripts />
       <div className={`${PoppinFont.variable} font-poppin`}>
         {seoData && <SEO {...seoData} />}
         <header>
@@ -30,6 +29,7 @@ export default function Layout({
           <Footer data={footerData} />
         </footer>
       </div>
+      <GlobalScripts />
     </>
   );
 }
