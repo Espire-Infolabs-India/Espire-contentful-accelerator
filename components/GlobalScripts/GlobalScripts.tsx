@@ -1,5 +1,5 @@
 import GoogleAnalyticsComponent from "../GoogleAnalytics/GoogleAnalytics";
-import { useEffect, useState } from "react";
+import { useEffect , useState } from "react";
 import { getGoogleAnalyticsData } from "@/common/getGoogleAnalyticsData/getGoogleAnalyticsData";
 import { ComponentProps } from "@/utils/lib/CommonProps";
 import Script from "next/script";
@@ -20,9 +20,9 @@ const GlobalScripts = () => {
         console.error("Error fetching Google Analytics data:", error);
       }
     };
-
     fetchAnalytics();
   }, []);
+
   return (
     <>
       <GoogleAnalyticsComponent
@@ -31,13 +31,13 @@ const GlobalScripts = () => {
       <Script
         src="https://web.cmp.usercentrics.eu/modules/autoblocker.js"
         strategy="afterInteractive"
-      ></Script>
+      />
       <Script
         id="usercentrics-cmp"
         src="https://web.cmp.usercentrics.eu/ui/loader.js"
         data-settings-id="FGlgmtieO9LIKd"
         strategy="afterInteractive"
-      ></Script>
+      />
       {/* Enable this for CIVIC UK Implementation */}
       {/* <Script
           src="https://cc.cdn.civiccomputing.com/9/cookieControl-9.x.min.js"
