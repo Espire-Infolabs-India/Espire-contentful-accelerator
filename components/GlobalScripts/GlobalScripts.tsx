@@ -1,8 +1,8 @@
 import GoogleAnalyticsComponent from "../GoogleAnalytics/GoogleAnalytics";
-import { useEffect , useState } from "react";
+import { useEffect, useState } from "react";
 import { getGoogleAnalyticsData } from "@/common/getGoogleAnalyticsData/getGoogleAnalyticsData";
 import { ComponentProps } from "@/utils/lib/CommonProps";
-import Script from "next/script";
+//import Script from "next/script";
 // import CookieConfig from "@/utils/lib/CookieConfig";
 
 const GlobalScripts = () => {
@@ -28,7 +28,7 @@ const GlobalScripts = () => {
       <GoogleAnalyticsComponent
         data={fetchedAnalyticsData ?? ({ fields: {} } as ComponentProps)}
       />
-      <Script
+      {/* <Script
         src="https://web.cmp.usercentrics.eu/modules/autoblocker.js"
         strategy="afterInteractive"
       />
@@ -37,7 +37,7 @@ const GlobalScripts = () => {
         src="https://web.cmp.usercentrics.eu/ui/loader.js"
         data-settings-id="FGlgmtieO9LIKd"
         strategy="afterInteractive"
-      />
+      /> */}
       {/* Enable this for CIVIC UK Implementation */}
       {/* <Script
           src="https://cc.cdn.civiccomputing.com/9/cookieControl-9.x.min.js"
