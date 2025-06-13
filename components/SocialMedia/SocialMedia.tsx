@@ -16,7 +16,11 @@ const SocialMedia = ({ data }: ComponentDataProps) => {
           const altText = `Visit our ${platformName}`;
           return (
             <div className="px-4" key={index}>
-              <Link href={url} className="text-white hover:text-gray-300" target="_blank">
+              <Link
+                href={url}
+                className="text-white hover:text-gray-300"
+                target="_blank"
+              >
                 <Image
                   src={`https://${image?.fields?.file?.url}`}
                   className="h-6 w-6"
@@ -24,7 +28,6 @@ const SocialMedia = ({ data }: ComponentDataProps) => {
                   width={24}
                   height={24}
                   loading="lazy"
-                  unoptimized
                 />
               </Link>
             </div>
