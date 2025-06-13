@@ -43,7 +43,11 @@ const Footer = ({ data }: ComponentDataProps) => {
               <Link href="/" title="Home">
                 <Image
                   className="w-24"
-                  src={`https://${data?.fields?.image?.fields?.file?.url}`}
+                  src={
+                    data?.fields?.image?.fields?.file?.url?.startsWith("//")
+                      ? `https:${data.fields.image.fields.file.url}`
+                      : data?.fields?.image?.fields?.file?.url ?? ""
+                  }
                   width={90}
                   height={69}
                   alt={logoAltText}

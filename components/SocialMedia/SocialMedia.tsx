@@ -22,7 +22,11 @@ const SocialMedia = ({ data }: ComponentDataProps) => {
                 target="_blank"
               >
                 <Image
-                  src={`https://${image?.fields?.file?.url}`}
+                  src={
+                    image?.fields?.file?.url?.startsWith("//")
+                      ? `https:${image.fields.file.url}`
+                      : image?.fields?.file?.url ?? ""
+                  }
                   className="h-6 w-6"
                   alt={altText}
                   width={24}
