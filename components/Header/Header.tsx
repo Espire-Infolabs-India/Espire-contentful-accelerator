@@ -66,7 +66,12 @@ const Header = ({ data }: ComponentDataProps) => {
               <Link href={"/"}>
                 <Image
                   className="mr-4"
-                  src={`https://${data?.fields?.image?.fields?.file?.url}`}
+                  // src={`https://${data?.fields?.image?.fields?.file?.url}`}
+                  src={
+                    data?.fields?.image?.fields?.file?.url?.startsWith("//")
+                      ? `https:${data.fields.image.fields.file.url}`
+                      : data?.fields?.image?.fields?.file?.url ?? ""
+                  }
                   width={100}
                   height={70}
                   alt={logoAltText}
