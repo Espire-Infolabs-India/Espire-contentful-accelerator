@@ -46,9 +46,8 @@ const Footer = ({ data }: ComponentDataProps) => {
                   src={`https://${data?.fields?.image?.fields?.file?.url}`}
                   width={90}
                   height={69}
-                  alt={logoAltText} // Dynamically set alt text here
+                  alt={logoAltText}
                   loading="lazy"
-                  unoptimized
                 />
               </Link>
             )}

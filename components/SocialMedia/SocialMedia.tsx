@@ -27,7 +27,6 @@ const SocialMedia = ({ data }: ComponentDataProps) => {
                   alt={altText}
                   width={24}
                   height={24}
-                  loading="lazy"
                 />
               </Link>
             </div>
