@@ -14,7 +14,7 @@ export default function Document() {
         <link rel="dns-prefetch" href="https://images.ctfassets.net" />
         
         {/* Preload critical CSS (Optional) */}
-        <link rel="preload" href="/styles/critical-styles.css" as="style" />
+        {/* <link rel="preload" href="/styles/critical-styles.css" as="style" /> */}
 
         {/* Preload the LCP image (Optional) */}
         <link
