@@ -10,7 +10,13 @@ const HeroBannerComponent = ({ fields }: ComponentProps) => {
   const rawImageUrl =
     imageAsset?.original_secure_url || imageAsset?.fields?.file?.url;
 
-  const baseImageUrl = rawImageUrl?.startsWith("http")
+  // const baseImageUrl = rawImageUrl?.startsWith("http")
+  //   ? rawImageUrl
+  //   : `https:${rawImageUrl?.startsWith("/") ? rawImageUrl : `/${rawImageUrl}`}`;
+
+  const baseImageUrl = rawImageUrl?.includes("res.cloudinary.com")
+    ? rawImageUrl.replace("/upload/", "/upload/f_auto,q_auto,w_1920,h_720/")
+    : rawImageUrl?.startsWith("http")
     ? rawImageUrl
     : `https:${rawImageUrl?.startsWith("/") ? rawImageUrl : `/${rawImageUrl}`}`;
 
@@ -30,10 +36,10 @@ const HeroBannerComponent = ({ fields }: ComponentProps) => {
           width={1920}
           height={720}
           priority
+          fetchPriority="high"
           className="object-cover w-full h-96"
           sizes="(max-width: 768px) 100vw, 1920px"
           quality={80}
-          loading="eager"
         />
       )}
       {/* Overlay */}
