@@ -46,14 +46,17 @@ const Header = ({ data }: ComponentDataProps) => {
         <div className="flex justify-center lg:block">
           <div className="hidden lg:flex items-center lg:justify-end mb-1">
             <div className="flex items-center gap-6 header-menu-font-size">
-              {secondarycomponents?.map((component: ComponentProps, index: number) => {
-                if (!component?.sys?.contentType?.sys?.id) return null;
+              {secondarycomponents?.map(
+                (component: ComponentProps, index: number) => {
+                  if (!component?.sys?.contentType?.sys?.id) return null;
 
-                const Component = HeaderComponents[component?.sys?.contentType?.sys?.id];
-                if (!Component) return null;
+                  const Component =
+                    HeaderComponents[component?.sys?.contentType?.sys?.id];
+                  if (!Component) return null;
 
-                return <Component key={index} data={component} />;
-              })}
+                  return <Component key={index} data={component} />;
+                }
+              )}
             </div>
           </div>
 
@@ -66,8 +69,7 @@ const Header = ({ data }: ComponentDataProps) => {
                   src={`https://${data?.fields?.image?.fields?.file?.url}`}
                   width={100}
                   height={70}
-                  alt={logoAltText}  // Use dynamic alt text here
-                  unoptimized
+                  alt={logoAltText}
                 />
               </Link>
             )}
@@ -79,7 +81,8 @@ const Header = ({ data }: ComponentDataProps) => {
                   {primarycomponents?.map((component: ComponentProps) => {
                     if (!component?.sys?.contentType?.sys?.id) return null;
 
-                    const ComponentType = HeaderComponents[component?.sys?.contentType?.sys?.id];
+                    const ComponentType =
+                      HeaderComponents[component?.sys?.contentType?.sys?.id];
 
                     if (!ComponentType) return null;
 
@@ -91,7 +94,9 @@ const Header = ({ data }: ComponentDataProps) => {
                         className={`group cursor-pointer py-2 rounded-t-[5px] text-white ${dropdownActive}`}
                         key={component?.sys?.contentType?.sys?.id}
                       >
-                        {component?.fields && <NavigationItems data={component} />}
+                        {component?.fields && (
+                          <NavigationItems data={component} />
+                        )}
                       </li>
                     );
                   })}
@@ -100,7 +105,11 @@ const Header = ({ data }: ComponentDataProps) => {
 
               <div className="flex lg:hidden relative">
                 <Button onClick={HumbargarOpen}>
-                  <Image src={HumbargarBG} className="w-[20] h-[20]" alt="Menu Icon" />
+                  <Image
+                    src={HumbargarBG}
+                    className="w-[20] h-[20]"
+                    alt="Menu Icon"
+                  />
                 </Button>
                 {ActiveValue == true ? (
                   <div className="bg-[var(--royalblue)] w-full h-full shadow fixed top-0 right-0 z-30 p-4 overflow-y-auto">
@@ -126,7 +135,10 @@ const Header = ({ data }: ComponentDataProps) => {
                       {primarycomponents?.map((component: ComponentProps) => {
                         if (!component?.sys?.contentType?.sys?.id) return null;
 
-                        const ComponentType = HeaderComponents[component?.sys?.contentType?.sys?.id];
+                        const ComponentType =
+                          HeaderComponents[
+                            component?.sys?.contentType?.sys?.id
+                          ];
 
                         if (!ComponentType) return null;
 
@@ -135,7 +147,9 @@ const Header = ({ data }: ComponentDataProps) => {
                             className="cursor-pointer text-1xl py-2 rounded-t-[5px] lg:hover:bg-white text-white"
                             key={component?.sys?.contentType?.sys?.id}
                           >
-                            {component?.fields && <NavigationItems data={component} />}
+                            {component?.fields && (
+                              <NavigationItems data={component} />
+                            )}
                           </li>
                         );
                       })}
