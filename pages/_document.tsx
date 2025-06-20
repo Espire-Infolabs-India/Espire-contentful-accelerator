@@ -24,14 +24,6 @@ export default function Document() {
         {/* Preload critical CSS (Optional) */}
         {/* <link rel="preload" href="/styles/critical-styles.css" as="style" /> */}
 
-        {/* Preload the LCP image (Optional) */}
-        <link
-          rel="preload"
-          as="image"
-          href="https://res.cloudinary.com/drq9dq7az/image/upload/v1749726584/Contenful_Banner_o1ztif.webp"
-          type="image/webp"
-        />
-
         {/* Optional: Preload Google Fonts (If you're using Google Fonts) */}
         <link
           rel="preload"
