@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import RichtextRenderOptions from "@/common/RTE/RichTextRenderOptions";
 import { Document } from "@contentful/rich-text-types";
@@ -24,15 +23,13 @@ const HeroBannerComponent = ({ fields }: ComponentProps) => {
     <section className="relative w-full bg-black overflow-hidden">
       {/* Hero Image */}
       {baseImageUrl && (
-        <Image
+        <img
           src={baseImageUrl}
           alt={altText}
+          className="object-cover w-full h-96"
           width={1920}
           height={720}
-          priority
-          className="object-cover w-full h-96"
-          sizes="(max-width: 768px) 100vw, 1920px"
-          quality={80}
+          loading="eager"
         />
       )}
       {/* Overlay */}
@@ -56,4 +53,5 @@ const HeroBannerComponent = ({ fields }: ComponentProps) => {
     </section>
   );
 };
+
 export default HeroBannerComponent;
