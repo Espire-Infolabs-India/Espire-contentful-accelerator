@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Head from "next/head";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import RichtextRenderOptions from "@/common/RTE/RichTextRenderOptions";
 import { Document } from "@contentful/rich-text-types";
@@ -22,19 +22,30 @@ const HeroBannerComponent = ({ fields }: ComponentProps) => {
 
   return (
     <section className="relative w-full bg-black overflow-hidden">
+      {/* ✅ Preload LCP image */}
+      {baseImageUrl && (
+        <Head>
+          <link
+            rel="preload"
+            as="image"
+            href={baseImageUrl}
+            type="image/webp"
+          />
+        </Head>
+      )}
+
       {/* Hero Image */}
       {baseImageUrl && (
-        <Image
+        <img
           src={baseImageUrl}
           alt={altText}
+          className="object-cover w-full h-96"
           width={1920}
           height={720}
-          priority
-          className="object-cover w-full h-96"
-          sizes="(max-width: 768px) 100vw, 1920px"
-          quality={80}
+          loading="eager"
         />
       )}
+
       {/* Overlay */}
       <div className="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center px-4 md:px-0 text-center">
         <div className="text-white z-10 max-w-3xl">
@@ -56,4 +67,5 @@ const HeroBannerComponent = ({ fields }: ComponentProps) => {
     </section>
   );
 };
+
 export default HeroBannerComponent;
