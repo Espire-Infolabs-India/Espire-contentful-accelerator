@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import NavigationLinks from "../NavigationItems/NavigationItems";
 import SearchBox from "../SearchBox/SearchBox";
 import LanguageSelector from "../LanguageSelector/LanguageSelector";
@@ -10,6 +9,7 @@ import { Button } from "@mui/material";
 import HumbargarBG from "../../public/menu-mobile.svg";
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const HeaderComponents: Record<
   string,
@@ -23,60 +23,51 @@ const HeaderComponents: Record<
 
 const Header = ({ data }: ComponentDataProps) => {
   const [ActiveValue, setActiveValue] = useState(false);
-  if (!data || !data.fields) return null; // Prevents errors if `data` is undefined
+  if (!data || !data.fields) return null;
 
   const primarycomponents = data.fields.primaryNavigation ?? [];
   const secondarycomponents = data.fields.secondaryNavigation ?? [];
 
-  const HumbargarOpen = () => {
-    setActiveValue(true);
-  };
+  const HumbargarOpen = () => setActiveValue(true);
+  const HumbargarClose = () => setActiveValue(false);
 
-  const HumbargarClose = () => {
-    setActiveValue(false);
-  };
-
-  // Dynamically setting alt text
-  const logoAltText = data.fields.image?.fields?.title || "Website Logo"; // Fallback alt text if title is unavailable
+  // Optimized logo path
+  const resolvedLogoUrl = "/logo.webp";
+  const logoAltText = data.fields.image?.fields?.title || "Website Logo";
 
   return (
     <div className="header-bg">
       <header className="pt-4 pl-2 pr-2 pb-2 container m-auto">
-        {/* Right Section - Secondary Navigation & Language Selector */}
         <div className="flex justify-center lg:block">
           <div className="hidden lg:flex items-center lg:justify-end mb-1">
             <div className="flex items-center gap-6 header-menu-font-size">
               {secondarycomponents?.map(
                 (component: ComponentProps, index: number) => {
                   if (!component?.sys?.contentType?.sys?.id) return null;
-
                   const Component =
                     HeaderComponents[component?.sys?.contentType?.sys?.id];
                   if (!Component) return null;
-
                   return <Component key={index} data={component} />;
                 }
               )}
             </div>
           </div>
 
-          {/* Left Section - Logo */}
           <div className="flex items-center justify-between">
-            {data.fields.image?.fields?.file?.url && (
-              <Link href={"/"}>
+            {/* Logo */}
+            <Link href="/" legacyBehavior>
+              <a role="img" aria-label={logoAltText}>
                 <Image
                   className="mr-4"
-                  src={
-                    data?.fields?.image?.fields?.file?.url?.startsWith("//")
-                      ? `https:${data.fields.image.fields.file.url}`
-                      : data?.fields?.image?.fields?.file?.url ?? ""
-                  }
+                  src={resolvedLogoUrl}
+                  alt={logoAltText}
                   width={100}
                   height={70}
-                  alt={logoAltText}
+                  priority
                 />
-              </Link>
-            )}
+              </a>
+            </Link>
+
             <div className="flex items-center justify-evenly gap-8">
               <SearchBox />
 
@@ -87,12 +78,12 @@ const Header = ({ data }: ComponentDataProps) => {
 
                     const ComponentType =
                       HeaderComponents[component?.sys?.contentType?.sys?.id];
-
                     if (!ComponentType) return null;
 
                     const dropdownActive = component?.fields?.subLinks
                       ? "hover:bg-white hover:text-gray-600"
                       : "";
+
                     return (
                       <li
                         className={`group cursor-pointer py-2 rounded-t-[5px] text-white ${dropdownActive}`}
@@ -107,15 +98,18 @@ const Header = ({ data }: ComponentDataProps) => {
                 </ul>
               </nav>
 
+              {/* Mobile Menu (Hamburger) */}
               <div className="flex lg:hidden relative">
                 <Button onClick={HumbargarOpen}>
                   <Image
                     src={HumbargarBG}
-                    className="w-[20] h-[20]"
                     alt="Menu Icon"
+                    width={20}
+                    height={20}
                   />
                 </Button>
-                {ActiveValue == true ? (
+
+                {ActiveValue && (
                   <div className="bg-[var(--royalblue)] w-full h-full shadow fixed top-0 right-0 z-30 p-4 overflow-y-auto">
                     <div className="flex justify-end">
                       <Button onClick={HumbargarClose}>
@@ -123,18 +117,19 @@ const Header = ({ data }: ComponentDataProps) => {
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
                           viewBox="0 0 24 24"
-                          stroke-width="1.5"
+                          strokeWidth="1.5"
                           stroke="currentColor"
                           className="size-8 text-white"
                         >
                           <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
                             d="M6 18 18 6M6 6l12 12"
                           />
                         </svg>
                       </Button>
                     </div>
+
                     <ul className="flex flex-col">
                       {primarycomponents?.map((component: ComponentProps) => {
                         if (!component?.sys?.contentType?.sys?.id) return null;
@@ -143,7 +138,6 @@ const Header = ({ data }: ComponentDataProps) => {
                           HeaderComponents[
                             component?.sys?.contentType?.sys?.id
                           ];
-
                         if (!ComponentType) return null;
 
                         return (
@@ -159,8 +153,6 @@ const Header = ({ data }: ComponentDataProps) => {
                       })}
                     </ul>
                   </div>
-                ) : (
-                  ""
                 )}
               </div>
             </div>
