@@ -22,8 +22,11 @@ export const getEntriesByContentType = async (
         locale,
       };
 
-      if (url && domain) {
+      if (url) {
         params["fields.url"] = url;
+      }
+
+      if (domain) {
         params["fields.site"] = domain;
       }
 
