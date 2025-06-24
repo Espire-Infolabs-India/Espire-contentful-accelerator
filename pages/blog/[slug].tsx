@@ -6,14 +6,16 @@ import { ComponentProps } from "@/utils/lib/CommonProps";
 import { useRouter } from "next/router";
 import RichtextRenderOptions from "@/common/RTE/RichTextRenderOptions";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import { Document } from "@contentful/rich-text-types";
 import Image from "next/image";
 
 type ContentfulItem = {
   fields: {
+    url?: string;
     tags?: string[];
     title?: string;
-    description?: string;
-    content?: string;
+    description?: string | Document;
+    content?: string | Document;
     image?: {
       fields: {
         file: { url: string };
@@ -31,16 +33,15 @@ type ContentfulItem = {
 type ContentfulEntryResponse = {
   items: ContentfulItem[];
 };
-
 type PageProps = {
   headerData: ComponentProps;
   footerData: ComponentProps;
   title?: string;
-  description?: string;
+  description?: string | Document;
   imageUrl?: string;
   authorName?: string;
   publishDate?: string;
-  content?: string;
+  content?: string | Document;
   tags?: string[];
 };
 
@@ -105,6 +106,7 @@ const BlogDynamicPage = ({
           </div>
         </section>
       )}
+
       {(content || tags) && (
         <div className="max-w-4xl mx-auto px-4 py-12">
           {content && typeof content === "object" ? (
@@ -136,21 +138,23 @@ const BlogDynamicPage = ({
     </>
   );
 };
+
 export const getStaticProps: GetStaticProps<PageProps> = async ({
   params,
   locale,
 }) => {
-  const slugParts = params?.slug ? params.slug : [];
-  const slug = Array.isArray(slugParts) ? slugParts.join("/") : slugParts;
+  const slug = params?.slug as string;
 
-  if (slugParts.length === 1 && slugParts[0].toLowerCase() === "blog") {
+  if (slug.toLowerCase() === "blog") {
     return { notFound: true };
   }
 
+const domain = process.env.NEXT_PUBLIC_DOMAIN || "site1";
   const contentResponse = (await getEntriesByContentType(
     "blogLandingPage",
     slug,
-    locale
+    locale,
+    domain
   )) as unknown as ContentfulEntryResponse;
 
   if (!contentResponse?.items?.length) {
@@ -175,7 +179,6 @@ export const getStaticProps: GetStaticProps<PageProps> = async ({
     Array.isArray(headerResult?.data) && headerResult.data.length > 0
       ? headerResult.data[0]
       : ({} as ComponentProps);
-  console.log(headerResult.data);
 
   const footerData =
     Array.isArray(footerResult?.data) && footerResult.data.length > 0
@@ -197,10 +200,9 @@ export const getStaticProps: GetStaticProps<PageProps> = async ({
     revalidate: 10,
   };
 };
-
 export const getStaticPaths: GetStaticPaths = async (context) => {
   const locales = context.locales ?? [];
-  const paths: { params: { slug: string[] }; locale: string }[] = [];
+  const paths: { params: { slug: string }; locale: string }[] = [];
 
   const staticSlugs = ["blog"];
 
@@ -212,13 +214,16 @@ export const getStaticPaths: GetStaticPaths = async (context) => {
 
   for (const locale of locales) {
     for (const item of items) {
-      const rawSlug = item?.fields?.slug;
+      const rawSlug = item?.fields?.url;
 
       if (typeof rawSlug !== "string") continue;
       if (staticSlugs.includes(rawSlug.toLowerCase())) continue;
+      if (rawSlug.includes("/")) continue;
 
-      const slugParts = rawSlug.split("/").filter(Boolean);
-      paths.push({ params: { slug: slugParts }, locale });
+      paths.push({
+        params: { slug: rawSlug },
+        locale,
+      });
     }
   }
 
@@ -227,4 +232,5 @@ export const getStaticPaths: GetStaticPaths = async (context) => {
     fallback: "blocking",
   };
 };
+
 export default BlogDynamicPage;
