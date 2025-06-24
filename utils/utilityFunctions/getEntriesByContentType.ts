@@ -22,16 +22,13 @@ export const getEntriesByContentType = async (
         locale,
       };
 
-      if (url) {
+      console.log ("domain",domain)
+      if (url && domain) {
         params["fields.url"] = url;
-      }
-
-      if (domain) {
         params["fields.site"] = domain;
       }
-
+      //console.log("Fetching Contentful entries with params:", params);
       const entries = await client.getEntries(params);
-
       return { items: entries?.items };
     } else {
       console.log("No Data available");

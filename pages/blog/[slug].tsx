@@ -4,12 +4,11 @@ import { getHeaderData } from "@/common/getHeaderData/getHeaderData";
 import { getFooterData } from "@/common/getFooterData/getFooterData";
 import { ComponentProps } from "@/utils/lib/CommonProps";
 import { useRouter } from "next/router";
-import RichtextRenderOptions from "@/common/RTE/RichTextRenderOptions";
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import Image from "next/image";
 
 type ContentfulItem = {
   fields: {
+    url?: string;
     tags?: string[];
     title?: string;
     description?: string;
@@ -74,16 +73,10 @@ const BlogDynamicPage = ({
           <div className="absolute top-1/2 left-10 transform -translate-y-1/2 bg-white p-8 rounded-xl shadow-xl max-w-xl z-10">
             {title && <h1 className="text-4xl font-bold mb-4">{title}</h1>}
 
-            {description && typeof description === "object" ? (
-              <div className="text-base text-gray-800 mb-4 leading-relaxed">
-                {documentToReactComponents(description, RichtextRenderOptions)}
-              </div>
-            ) : (
-              description && (
-                <p className="text-base text-gray-800 mb-4 leading-relaxed">
-                  {description}
-                </p>
-              )
+            {description && (
+              <p className="text-base text-gray-800 mb-4 leading-relaxed">
+                {description}
+              </p>
             )}
 
             {(authorName || publishDate) && (
@@ -105,18 +98,11 @@ const BlogDynamicPage = ({
           </div>
         </section>
       )}
+
       {(content || tags) && (
         <div className="max-w-4xl mx-auto px-4 py-12">
-          {content && typeof content === "object" ? (
-            <div className="prose prose-lg max-w-none text-gray-800">
-              {documentToReactComponents(content, RichtextRenderOptions)}
-            </div>
-          ) : (
-            content && (
-              <p className="text-base text-gray-800 leading-relaxed">
-                {content}
-              </p>
-            )
+          {content && (
+            <p className="text-base text-gray-800 leading-relaxed">{content}</p>
           )}
 
           {tags && (
@@ -136,27 +122,28 @@ const BlogDynamicPage = ({
     </>
   );
 };
+
 export const getStaticProps: GetStaticProps<PageProps> = async ({
   params,
   locale,
 }) => {
-  const slugParts = params?.slug ? params.slug : [];
-  const slug = Array.isArray(slugParts) ? slugParts.join("/") : slugParts;
+  const slug = params?.slug as string;
 
-  if (slugParts.length === 1 && slugParts[0].toLowerCase() === "blog") {
+  if (slug.toLowerCase() === "blog") {
     return { notFound: true };
   }
+  const domain = process.env.NEXT_PUBLIC_DOMAIN;
 
   const contentResponse = (await getEntriesByContentType(
     "blogLandingPage",
     slug,
-    locale
+    locale,
+    domain
   )) as unknown as ContentfulEntryResponse;
 
   if (!contentResponse?.items?.length) {
     return { notFound: true };
   }
-
   const firstItem = contentResponse.items[0];
   const title = firstItem.fields?.title ?? "";
   const description = firstItem.fields?.description ?? "";
@@ -168,14 +155,12 @@ export const getStaticProps: GetStaticProps<PageProps> = async ({
     Array.isArray(firstItem.fields?.tags) && firstItem.fields.tags.length > 0
       ? firstItem.fields.tags
       : [];
-
   const headerResult = await getHeaderData();
   const footerResult = await getFooterData();
   const headerData =
     Array.isArray(headerResult?.data) && headerResult.data.length > 0
       ? headerResult.data[0]
       : ({} as ComponentProps);
-  console.log(headerResult.data);
 
   const footerData =
     Array.isArray(footerResult?.data) && footerResult.data.length > 0
@@ -197,13 +182,10 @@ export const getStaticProps: GetStaticProps<PageProps> = async ({
     revalidate: 10,
   };
 };
-
 export const getStaticPaths: GetStaticPaths = async (context) => {
   const locales = context.locales ?? [];
-  const paths: { params: { slug: string[] }; locale: string }[] = [];
-
+  const paths: { params: { slug: string }; locale: string }[] = [];
   const staticSlugs = ["blog"];
-
   const contentResponse = await getEntriesByContentType("blogLandingPage");
   const items =
     contentResponse && Array.isArray(contentResponse.items)
@@ -212,13 +194,16 @@ export const getStaticPaths: GetStaticPaths = async (context) => {
 
   for (const locale of locales) {
     for (const item of items) {
-      const rawSlug = item?.fields?.slug;
+      const rawSlug = item?.fields?.url;
 
       if (typeof rawSlug !== "string") continue;
       if (staticSlugs.includes(rawSlug.toLowerCase())) continue;
+      if (rawSlug.includes("/")) continue;
 
-      const slugParts = rawSlug.split("/").filter(Boolean);
-      paths.push({ params: { slug: slugParts }, locale });
+      paths.push({
+        params: { slug: rawSlug },
+        locale,
+      });
     }
   }
 
@@ -227,4 +212,5 @@ export const getStaticPaths: GetStaticPaths = async (context) => {
     fallback: "blocking",
   };
 };
+
 export default BlogDynamicPage;
