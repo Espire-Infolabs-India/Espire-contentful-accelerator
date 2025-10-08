@@ -19,8 +19,11 @@ import Separator from "@/components/Separator/Separator";
 import PlainHtml from "@/components/Plain Html/PlainHtml";
 import GraphQLListing from "@/components/GraphQLListing/GraphQLListing";
 import ExternalApiResults from "@/components/ExternalApiResults/ExternalApiReslts";
+import VideoComponent from "@/components/VedioBlock/Vedio";
+import ImageComponent from "@/components/VedioBlock/Image";
+import RightImageWithTitleDescription from "@/components/ImageWithTitleDescription copy/RightImageWithTitleDescription";
 
-
+import { Component } from "react";
 export const ComponentFactory: Record<
   string,
   React.FC<{ data: ComponentProps }>
@@ -45,5 +48,8 @@ export const ComponentFactory: Record<
   componentPlainHtml: PlainHtml,
   componentGraphQlListing: GraphQLListing,
   componentExternalApiResults: ExternalApiResults,
+  Vedio: VideoComponent,
+  componentImage: ImageComponent,
+componentRightImage:RightImageWithTitleDescription
   // Add more components as needed
 };
