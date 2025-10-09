@@ -33,7 +33,7 @@ const SearchBox = () => {
             type="text"
             placeholder="Type to search"
             aria-label="search bar"
-            className={`w-[150px] focus:outline-none placeholder-white sm:w-[250px] text-[14px] lg:w-[35cqw] p-[7px] bg-[var(--royalblue)] border-white text-white border-solid border-[1px]`}
+            className={`w-[150px] focus:outline-none placeholder-white sm:w-[250px] text-[14px] lg:w-[35cqw] p-[7px] bg-[var(--white)] border-white text-white border-solid border-[1px]`}
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
