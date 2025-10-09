@@ -71,8 +71,8 @@ const Header = ({ data }: ComponentDataProps) => {
                       ? `https:${data.fields.image.fields.file.url}`
                       : data?.fields?.image?.fields?.file?.url ?? ""
                   }
-                  width={100}
-                  height={70}
+                  width={120}
+                  height={180}
                   alt={logoAltText}
                 />
               </Link>

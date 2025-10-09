@@ -2,7 +2,7 @@
 
 @layer components {
   .header-bg {
-    background-color: var(--royalblue);
+    background-color: var(--white);
   }
   .header-menu-font-size {
     font-size: 14px;
